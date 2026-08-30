@@ -283,32 +283,26 @@
     <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.21s;"><div class="skill-icon" style="background:rgba(159,122,234,0.12);">🔍</div><div><div class="skill-name">Research &amp; Documentation</div><div class="skill-level">Advanced</div></div></div>
     <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.28s;"><div class="skill-icon" style="background:rgba(104,211,145,0.12);">💼</div><div><div class="skill-name">Microsoft Office Suite</div><div class="skill-level">Proficient</div></div></div>
     <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0s;"><div class="skill-icon" style="background:rgba(246,224,94,0.12);">🧩</div><div><div class="skill-name">Problem Solving</div><div class="skill-level">Strong</div></div></div>
-    <div class="skill-card fade-in" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">🤝</div><div><div class="skill-name">Team Collaboration</div><div class="skill-level">Strong</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">🤝</div><div><div class="skill-name">Team Collaboration</div><div class="skill-level">Strong</div></div></div>
   </div>
   <button class="btn-add-card" onclick="addSkill()">+ Tambah Skill</button>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-header fade-in" style="transition-delay: 0.14s;">
+  <div class="section-header fade-in visible" style="transition-delay: 0.14s;">
     <div class="section-tag">// Work History</div>
     <h2 class="section-title">Pengalaman <span>Kerja</span></h2>
   </div>
   <div class="timeline" id="expTimeline">
-    <div class="timeline-item fade-in" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.21s;">
+    <div class="timeline-item fade-in visible" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.21s;">
       <div class="exp-card">
-        <div class="exp-header"><div class="exp-role">Intern — Divisi P3TK</div><div class="exp-period">Nov 2025 – Juli 2026</div></div>
+        <div class="exp-header"><div class="exp-role">Intern — Divisi P3TK</div><div class="exp-period">Feb 2025 – Juni 2025</div></div>
         <div class="exp-company">Dinas Pendidikan Kota Bandung</div>
-        <ul class="exp-duties">
-          <li>Mendukung administrasi &amp; koordinasi program pengembangan kompetensi pendidik.</li>
-          <li>Penyusunan, pengelolaan, dan dokumentasi dokumen administrasi serta laporan kegiatan.</li>
-          <li>Kolaborasi tim dalam mendukung program peningkatan mutu layanan pendidikan.</li>
-          <li>Mengolah data dan informasi sebagai bahan pendukung pelaksanaan program.</li>
-          <li>Memanfaatkan teknologi digital untuk efisiensi pengelolaan dokumen &amp; administrasi.</li>
-        </ul>
+        <ul class="exp-duties"><li>Mendukung administrasi &amp; koordinasi program pengembangan kompetensi pendidik.</li><li>Penyusunan, pengelolaan, dan dokumentasi dokumen administrasi serta laporan kegiatan.</li><li>Kolaborasi tim dalam mendukung program peningkatan mutu layanan pendidikan.</li><li>Mengolah data dan informasi sebagai bahan pendukung pelaksanaan program.</li><li>Memanfaatkan teknologi digital untuk efisiensi pengelolaan dokumen &amp; administrasi.</li></ul>
       </div>
     </div>
-    <div class="timeline-item fade-in" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.28s;">
+    <div class="timeline-item fade-in visible" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.28s;">
       <div class="exp-card">
         <div class="exp-header"><div class="exp-role">Crew &amp; Social Media Management</div><div class="exp-period">Jun 2025 – Sekarang</div></div>
         <div class="exp-company">Captbooth</div>
@@ -454,10 +448,31 @@
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modalBox">
-    <h3><span id="modalIcon">📊</span> <span id="modalTitle">Edit Statistik</span></h3>
-    <div id="modalFields"><div class="field-group"><label>Angka / Nilai</label><input type="text" id="statVal" value="3+"></div><div class="field-group"><label>Label</label><input type="text" id="statLab" value="Pengalaman Kerja"></div></div>
+    <h3><span id="modalIcon">💼</span> <span id="modalTitle">Edit Pengalaman Kerja</span></h3>
+    <div id="modalFields"><div class="field-group"><label>Jabatan / Role</label><input type="text" id="expRole" value="Intern — Divisi P3TK"></div><div class="field-group"><label>Periode (e.g. Jan 2024 – Sekarang)</label><input type="text" id="expPeriod" value="Nov 2025 – Juli 2026"></div><div class="field-group"><label>Nama Perusahaan / Instansi</label><input type="text" id="expCompany" value="Dinas Pendidikan Kota Bandung"></div><div class="field-group"><label>Deskripsi Tugas</label><div id="expDutiesContainer">
+    <div class="list-editor-item">
+      <textarea id="expDuty0">Mendukung administrasi &amp; koordinasi program pengembangan kompetensi pendidik.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div>
+    <div class="list-editor-item">
+      <textarea id="expDuty1">Penyusunan, pengelolaan, dan dokumentasi dokumen administrasi serta laporan kegiatan.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div>
+    <div class="list-editor-item">
+      <textarea id="expDuty2">Kolaborasi tim dalam mendukung program peningkatan mutu layanan pendidikan.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div>
+    <div class="list-editor-item">
+      <textarea id="expDuty3">Mengolah data dan informasi sebagai bahan pendukung pelaksanaan program.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div>
+    <div class="list-editor-item">
+      <textarea id="expDuty4">Memanfaatkan teknologi digital untuk efisiensi pengelolaan dokumen &amp; administrasi.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div></div>
+    <button class="btn-add-item" onclick="addDutyField('expDutiesContainer','expDuty')">+ Tambah Tugas</button></div></div>
     <div class="modal-actions">
-      <button class="btn-danger" id="modalDeleteBtn" style="display:none" onclick="deleteCard()">Hapus</button>
+      <button class="btn-danger" id="modalDeleteBtn" style="display: inline-flex;" onclick="deleteCard()">Hapus</button>
       <button class="btn-cancel" onclick="closeModal()">Batal</button>
       <button class="btn-save" onclick="saveModal()">Simpan</button>
     </div>
