@@ -10,7 +10,7 @@
 :root{
   --bg:#06080f;--bg2:#0d1117;--bg3:#131a24;--card:#141c28;
   --border:rgba(99,179,237,0.12);--accent:#63b3ed;--accent2:#9f7aea;
-  --accent3:#68d391;--gold:#f6e05e;--text:#e2e8f0;--muted:#718096;--white:#fff;
+  --accent3:#68d391;--gold:#f6e05e;--text:#e2e8f0;--muted:#718096;
   --grad1:linear-gradient(135deg,#63b3ed 0%,#9f7aea 50%,#f687b3 100%);
 }
 html{scroll-behavior:smooth;}
@@ -18,8 +18,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 a{color:inherit;text-decoration:none;}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:#2d3748;border-radius:4px;}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;height:64px;background:rgba(6,8,15,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
 .nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .nav-links{display:flex;gap:18px;align-items:center;}
@@ -28,21 +26,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 @media(max-width:640px){.nav-links .hide-mobile{display:none;}}
 .edit-mode-badge{display:none;font-size:0.7rem;font-weight:700;color:var(--accent);background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:3px 10px;}
 body.owner-logged-in .edit-mode-badge.on{display:inline-flex;}
-
-/* NAV BUTTONS */
 #ownerLoginBtn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all 0.2s;}
 #ownerLoginBtn:hover{border-color:var(--accent);color:var(--accent);}
 body.owner-logged-in #ownerLoginBtn{display:none;}
 #editToggleBtn{display:none;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all 0.2s;}
 body.owner-logged-in #editToggleBtn{display:inline-flex;}
 #editToggleBtn.active{background:rgba(99,179,237,0.12);border-color:var(--accent);color:var(--accent);}
-
-/* EDIT HIGHLIGHT */
 body.edit-mode [data-ed]{position:relative;cursor:pointer;}
 body.edit-mode [data-ed]:hover{outline:2px dashed var(--accent);outline-offset:3px;border-radius:4px;}
 body.edit-mode [data-ed]:hover::after{content:'✏ Edit';position:absolute;top:4px;right:4px;background:var(--accent);color:#fff;font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:5px;pointer-events:none;z-index:50;white-space:nowrap;}
-
-/* LOGIN OVERLAY */
 #loginOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:2000;align-items:center;justify-content:center;padding:20px;}
 #loginOverlay.open{display:flex;}
 #loginBox{background:#111827;border:1px solid rgba(99,179,237,0.25);border-radius:20px;padding:36px;width:100%;max-width:360px;text-align:center;}
@@ -54,15 +46,13 @@ body.edit-mode [data-ed]:hover::after{content:'✏ Edit';position:absolute;top:4
 #loginSubmitBtn{width:100%;padding:11px;border-radius:9px;background:var(--grad1);border:none;color:#fff;font-size:0.88rem;font-weight:700;cursor:pointer;margin-bottom:10px;}
 #loginCancelBtn{background:transparent;border:none;color:var(--muted);font-size:0.8rem;cursor:pointer;}
 #loginCancelBtn:hover{color:var(--accent);}
-
-/* MODAL */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:20px;}
 .modal-backdrop.open{display:flex;}
 .modal{background:#111827;border:1px solid rgba(99,179,237,0.2);border-radius:18px;padding:28px 32px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;}
 .modal h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:20px;}
 .fg{margin-bottom:14px;}
 .fg label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
-.fg input,.fg textarea,.fg select{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:9px 13px;font-size:0.86rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;resize:vertical;}
+.fg input,.fg textarea{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:9px 13px;font-size:0.86rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;resize:vertical;}
 .fg input:focus,.fg textarea:focus{border-color:var(--accent);}
 .fg textarea{min-height:72px;}
 .modal-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end;}
@@ -77,8 +67,6 @@ body.edit-mode [data-ed]:hover::after{content:'✏ Edit';position:absolute;top:4
 .btn-add-card{display:none;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border:2px dashed rgba(99,179,237,0.2);border-radius:14px;background:transparent;color:var(--muted);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;margin-top:8px;}
 body.edit-mode .btn-add-card{display:flex;}
 .btn-add-card:hover{border-color:var(--accent);color:var(--accent);}
-
-/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 6vw 80px;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,0.12) 0%,transparent 70%);animation:pulse 6s ease-in-out infinite;}
 .hero::after{content:'';position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(159,122,234,0.10) 0%,transparent 70%);animation:pulse 8s ease-in-out infinite reverse;}
@@ -105,8 +93,6 @@ body.edit-mode .btn-add-card{display:flex;}
 .stat-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;color:#fff;}
 .stat-num span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .stat-label{font-size:0.77rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
-
-/* SECTIONS */
 section{padding:80px 6vw;}
 .section-header{margin-bottom:48px;}
 .section-tag{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
@@ -143,7 +129,7 @@ section{padding:80px 6vw;}
 .project-title{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px;flex:1;}
 .project-tag{display:inline-block;font-size:0.7rem;font-weight:600;background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.2);color:var(--accent3);border-radius:6px;padding:2px 10px;margin-top:12px;}
 #education{background:var(--bg);}
-.edu-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 40px;max-width:680px;position:relative;overflow:hidden;transition:all 0.25s;}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 40px;max-width:680px;transition:all 0.25s;}
 .edu-card:hover{border-color:rgba(99,179,237,0.3);box-shadow:0 8px 40px rgba(99,179,237,0.1);}
 .edu-university{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:6px;}
 .edu-degree{font-size:0.9rem;color:var(--accent2);font-weight:500;margin-bottom:6px;}
@@ -170,7 +156,7 @@ section{padding:80px 6vw;}
 .org-duties li{font-size:0.8rem;color:#90a0b7;padding-left:16px;position:relative;line-height:1.45;}
 .org-duties li::before{content:'·';position:absolute;left:0;color:var(--accent3);font-size:1.2rem;line-height:1.1;}
 #contact{background:var(--bg3);text-align:center;padding:80px 6vw;}
-.cta-box{max-width:600px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:52px 40px;position:relative;overflow:hidden;}
+.cta-box{max-width:600px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:52px 40px;}
 .cta-title{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:12px;}
 .cta-sub{font-size:0.9rem;color:var(--muted);margin-bottom:32px;}
 .cta-email{font-size:1.05rem;font-weight:600;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:28px;}
@@ -192,30 +178,29 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;
     <a href="#projects" class="hide-mobile">Projects</a>
     <a href="#contact" class="hide-mobile">Contact</a>
     <span class="edit-mode-badge" id="editBadge">✏ Edit Mode ON</span>
-    <button id="ownerLoginBtn" onclick="openLogin()">🔐 Owner</button>
-    <button id="editToggleBtn" onclick="toggleEdit()">✏ Edit Mode</button>
+    <button id="ownerLoginBtn">🔐 Owner</button>
+    <button id="editToggleBtn">✏ Edit Mode</button>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div id="heroTag" class="hero-tag" data-ed data-field="heroTag"></div>
-    <h1 class="hero-name" id="heroName" data-ed data-field="heroName"></h1>
-    <p class="hero-role" id="heroRole" data-ed data-field="heroRole"></p>
-    <p class="hero-desc" id="heroDesc" data-ed data-field="heroDesc"></p>
+    <div id="heroTag" class="hero-tag" data-ed></div>
+    <h1 class="hero-name" id="heroName" data-ed></h1>
+    <p class="hero-role" id="heroRole" data-ed></p>
+    <p class="hero-desc" id="heroDesc" data-ed></p>
     <div class="hero-contact">
-      <div class="contact-chip" id="heroPhone" data-ed data-field="heroPhone">
+      <div class="contact-chip" id="heroPhone" data-ed>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.07 6.07l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        <span></span>
+        <span id="heroPhoneSpan"></span>
       </div>
-      <div class="contact-chip" id="heroEmail" data-ed data-field="heroEmail">
+      <div class="contact-chip" id="heroEmail" data-ed>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <span></span>
+        <span id="heroEmailSpan"></span>
       </div>
-      <div class="contact-chip" id="heroCity" data-ed data-field="heroCity">
+      <div class="contact-chip" id="heroCity" data-ed>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span></span>
+        <span id="heroCitySpan"></span>
       </div>
     </div>
     <div class="hero-cta">
@@ -226,39 +211,35 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;
       <a href="#experience" class="btn-outline">Lihat Pengalaman</a>
     </div>
     <div class="hero-stats">
-      <div class="stat" data-ed data-field="stat1" id="stat1el"><div class="stat-num"><span id="stat1val"></span></div><div class="stat-label" id="stat1lab"></div></div>
-      <div class="stat" data-ed data-field="stat2" id="stat2el"><div class="stat-num"><span id="stat2val"></span></div><div class="stat-label" id="stat2lab"></div></div>
-      <div class="stat" data-ed data-field="stat3" id="stat3el"><div class="stat-num"><span id="stat3val"></span></div><div class="stat-label" id="stat3lab"></div></div>
-      <div class="stat" data-ed data-field="stat4" id="stat4el"><div class="stat-num"><span id="stat4val"></span></div><div class="stat-label" id="stat4lab"></div></div>
+      <div class="stat" id="stat1el" data-ed><div class="stat-num"><span id="stat1val"></span></div><div class="stat-label" id="stat1lab"></div></div>
+      <div class="stat" id="stat2el" data-ed><div class="stat-num"><span id="stat2val"></span></div><div class="stat-label" id="stat2lab"></div></div>
+      <div class="stat" id="stat3el" data-ed><div class="stat-num"><span id="stat3val"></span></div><div class="stat-label" id="stat3lab"></div></div>
+      <div class="stat" id="stat4el" data-ed><div class="stat-num"><span id="stat4val"></span></div><div class="stat-label" id="stat4lab"></div></div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <div class="section-header fade-in"><div class="section-tag">// Core Competencies</div><h2 class="section-title">Kemampuan <span>Utama</span></h2></div>
   <div class="skills-grid" id="skillsGrid"></div>
-  <button class="btn-add-card" onclick="addSkill()">+ Tambah Skill</button>
+  <button class="btn-add-card" id="addSkillBtn">+ Tambah Skill</button>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-header fade-in"><div class="section-tag">// Work History</div><h2 class="section-title">Pengalaman <span>Kerja</span></h2></div>
   <div class="timeline" id="expTimeline"></div>
-  <button class="btn-add-card" onclick="addExp()">+ Tambah Pengalaman</button>
+  <button class="btn-add-card" id="addExpBtn">+ Tambah Pengalaman</button>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="section-header fade-in"><div class="section-tag">// Academic Work</div><h2 class="section-title">Pengalaman <span>Projek</span></h2></div>
   <div class="projects-grid" id="projectsGrid"></div>
-  <button class="btn-add-card" onclick="addProject()">+ Tambah Projek</button>
+  <button class="btn-add-card" id="addProjectBtn">+ Tambah Projek</button>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
   <div class="section-header fade-in"><div class="section-tag">// Academic Background</div><h2 class="section-title">Pendidikan <span>Formal</span></h2></div>
-  <div class="edu-card fade-in" data-ed onclick="editEdu()">
+  <div class="edu-card fade-in" id="eduCard" data-ed>
     <div class="edu-university" id="eduUniversity"></div>
     <div class="edu-degree" id="eduDegree"></div>
     <div class="edu-period" id="eduPeriod"></div>
@@ -272,26 +253,23 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;
   </div>
 </section>
 
-<!-- CERTIFICATES -->
 <section id="certificates">
   <div class="section-header fade-in"><div class="section-tag">// Credentials</div><h2 class="section-title">Sertifikat &amp; <span>Pelatihan</span></h2></div>
   <div class="cert-grid" id="certGrid"></div>
-  <button class="btn-add-card" onclick="addCert()">+ Tambah Sertifikat</button>
+  <button class="btn-add-card" id="addCertBtn">+ Tambah Sertifikat</button>
 </section>
 
-<!-- ORGANISATIONS -->
 <section id="organisations">
   <div class="section-header fade-in"><div class="section-tag">// Leadership &amp; Volunteering</div><h2 class="section-title">Organisasi &amp; <span>Relawan</span></h2></div>
   <div class="org-grid" id="orgGrid"></div>
-  <button class="btn-add-card" onclick="addOrg()">+ Tambah Organisasi</button>
+  <button class="btn-add-card" id="addOrgBtn">+ Tambah Organisasi</button>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="cta-box fade-in">
-    <div class="cta-title" id="ctaTitle" data-ed data-field="ctaTitle"></div>
-    <p class="cta-sub" id="ctaSub" data-ed data-field="ctaSub"></p>
-    <span class="cta-email" id="ctaEmail" data-ed data-field="ctaEmail"></span>
+    <div class="cta-title" id="ctaTitle" data-ed></div>
+    <p class="cta-sub" id="ctaSub" data-ed></p>
+    <span class="cta-email" id="ctaEmail"></span>
     <div class="cta-actions">
       <a id="ctaMailBtn2" href="#" class="btn-primary">Kirim Email</a>
       <a id="ctaWaBtn" href="#" class="btn-outline">Hubungi via WA</a>
@@ -300,8 +278,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;
 </section>
 
 <footer>
-  <div class="footer-name" id="footerName" data-ed data-field="footerName"></div>
-  <div class="footer-note" id="footerNote" data-ed data-field="footerNote"></div>
+  <div class="footer-name" id="footerName" data-ed></div>
+  <div class="footer-note" id="footerNote" data-ed></div>
 </footer>
 
 <!-- LOGIN OVERLAY -->
@@ -309,571 +287,891 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;
   <div id="loginBox">
     <h3>🔐 Owner Login</h3>
     <p>Masukkan password untuk mengaktifkan mode edit</p>
-    <input type="password" id="loginInput" placeholder="Password..." onkeydown="if(event.key==='Enter')doLogin()"/>
+    <input type="password" id="loginInput" placeholder="Password..."/>
     <div id="loginError"></div>
-    <button id="loginSubmitBtn" onclick="doLogin()">Masuk</button><br/>
-    <button id="loginCancelBtn" onclick="closeLogin()">Batal</button>
+    <button id="loginSubmitBtn">Masuk</button><br/>
+    <button id="loginCancelBtn">Batal</button>
   </div>
 </div>
 
-<!-- EDITOR MODAL -->
+<!-- EDITOR MODAL — dibangun via DOM, bukan innerHTML agar tidak ada bug parsing -->
 <div class="modal-backdrop" id="modalBg">
-  <div class="modal">
+  <div class="modal" id="modalBox">
     <h3 id="modalTitle">Edit</h3>
     <div id="modalFields"></div>
     <div class="modal-actions">
-      <button class="btn-danger" id="modalDelBtn" style="display:none" onclick="doDelete()">Hapus</button>
-      <button class="btn-cancel" onclick="closeModal()">Batal</button>
-      <button class="btn-save" onclick="doSave()">Simpan &amp; Publish</button>
+      <button class="btn-danger" id="modalDelBtn">Hapus</button>
+      <button class="btn-cancel" id="modalCancelBtn">Batal</button>
+      <button class="btn-save" id="modalSaveBtn">Simpan &amp; Publish</button>
     </div>
   </div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════
+// ════════════════════════════════════════════════════
 // KONFIGURASI
-// ═══════════════════════════════════════════
-const REPO      = 'mohamadrasyasath-collab/portfolio';
-const DATA_FILE = 'data.json';
-// Hash SHA-256 dari password "RasyaAdmin2025"
+// ════════════════════════════════════════════════════
+const REPO       = 'mohamadrasyasath-collab/portfolio';
+const DATA_FILE  = 'data.json';
 const OWNER_HASH = '66379381072837118bb70c6ebacd120536732f7364000fc73459d9dd7bec190f';
 const SESSION_KEY = 'pf_session';
 const TOKEN_KEY   = 'pf_token';
+const GH_API      = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE;
+const GH_PAGES    = 'https://mohamadrasyasath-collab.github.io/portfolio/' + DATA_FILE;
 
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
-let D = {};           // data portfolio (dari data.json)
-let editMode = false;
-let currentIdx = null;
-let currentSection = null;
+// ════════════════════════════════════════════════════
+// STATE GLOBAL
+// ════════════════════════════════════════════════════
+let D = {};          // semua data portfolio (dari data.json)
+let editMode = false; // true = owner sedang edit
 
-// ═══════════════════════════════════════════
-// LOAD DATA DARI GITHUB data.json
-// ═══════════════════════════════════════════
+// ════════════════════════════════════════════════════
+// LOAD DATA
+// Fetch data.json dari GitHub Pages (cache-bust), populate D, lalu render.
+// ════════════════════════════════════════════════════
 async function loadData() {
-  // Tambah cache-busting agar selalu ambil data terbaru
-  const url = `https://mohamadrasyasath-collab.github.io/portfolio/data.json?t=${Date.now()}`;
-  const res = await fetch(url);
-  D = await res.json();
+  try {
+    const res = await fetch(GH_PAGES + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    D = await res.json();
+  } catch (err) {
+    console.error('loadData gagal:', err);
+    D = {};
+  }
   renderAll();
 }
 
-// ═══════════════════════════════════════════
-// SIMPAN DATA KE data.json DI GITHUB
-// ═══════════════════════════════════════════
+// ════════════════════════════════════════════════════
+// SAVE DATA
+// Ambil SHA terbaru dari GitHub API lalu PUT data.json baru.
+// Retry 3x jika SHA conflict (422).
+// ════════════════════════════════════════════════════
 async function saveData() {
-  // Ambil token dari localStorage, jika belum ada minta dari user
-  let liveToken = localStorage.getItem(TOKEN_KEY);
-  if (!liveToken) {
-    const t = prompt('🔑 Masukkan GitHub Token Anda (disimpan di browser):');
-    if (t && t.trim().length > 10) {
-      localStorage.setItem(TOKEN_KEY, t.trim());
-      liveToken = t.trim();
-    } else {
-      toast('⚠ Token diperlukan untuk menyimpan', 'error');
+  // 1. Pastikan token tersedia
+  let token = localStorage.getItem(TOKEN_KEY) || '';
+  if (!token) {
+    const input = prompt('🔑 Masukkan GitHub Personal Access Token\n(hanya tersimpan di browser Anda, tidak dikirim ke server lain):');
+    if (!input || input.trim().length < 10) {
+      showToast('⚠ Token diperlukan untuk menyimpan', 'error');
       return false;
     }
+    token = input.trim();
+    localStorage.setItem(TOKEN_KEY, token);
   }
 
-  toast('⏳ Menyimpan...', 'loading');
+  showToast('⏳ Menyimpan ke GitHub...', 'loading');
 
-  // Coba simpan maksimal 3 kali (retry jika SHA conflict)
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  // 2. Encode data ke base64 (JSON.stringify dulu)
+  let encoded;
+  try {
+    const jsonStr = JSON.stringify(D, null, 2);
+    // encodeURIComponent → unescape → btoa adalah cara safe untuk UTF-8 ke base64
+    encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+  } catch (e) {
+    showToast('⚠ Gagal encode data: ' + e.message, 'error');
+    return false;
+  }
+
+  // 3. Coba push, retry 3x jika SHA conflict
+  const MAX_ATTEMPTS = 3;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+
+    // 3a. Ambil SHA terbaru — WAJIB cache:no-store agar tidak dapat SHA stale
+    let sha;
     try {
-      // Selalu ambil SHA terbaru dengan cache-busting + no-cache agar tidak stale
-      const shaRes = await fetch(
-        `https://api.github.com/repos/${REPO}/contents/${DATA_FILE}?t=${Date.now()}`,
-        {
-          headers: {
-            Authorization: 'token ' + liveToken,
-            Accept: 'application/vnd.github.v3+json',
-            'Cache-Control': 'no-cache, no-store'
-          },
-          cache: 'no-store'
+      const shaRes = await fetch(GH_API + '?t=' + Date.now(), {
+        method: 'GET',
+        cache: 'no-store',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json',
+          'Cache-Control': 'no-cache'
         }
-      );
-      if (!shaRes.ok) {
-        const errBody = await shaRes.json().catch(() => ({}));
-        throw new Error(errBody.message || `HTTP ${shaRes.status}`);
+      });
+      if (shaRes.status === 401 || shaRes.status === 403) {
+        localStorage.removeItem(TOKEN_KEY);
+        showToast('⚠ Token tidak valid. Hapus & masukkan token baru.', 'error');
+        return false;
       }
-      const shaData = await shaRes.json();
-      if (!shaData.sha) throw new Error('SHA tidak ditemukan di response');
+      if (!shaRes.ok) {
+        const errJson = await shaRes.json().catch(() => ({}));
+        throw new Error((errJson.message || 'HTTP ' + shaRes.status) + ' (ambil SHA)');
+      }
+      const shaJson = await shaRes.json();
+      sha = shaJson.sha;
+      if (!sha) throw new Error('SHA tidak ada di respons API');
+    } catch (e) {
+      if (attempt === MAX_ATTEMPTS) {
+        showToast('⚠ Gagal ambil SHA: ' + e.message, 'error');
+        return false;
+      }
+      await delay(700 * attempt);
+      continue;
+    }
 
-      // Encode data ke base64
-      const content = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
+    // 3b. PUT data baru
+    try {
+      const putRes = await fetch(GH_API, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: 'Update portfolio data ' + new Date().toLocaleString('id-ID'),
+          content: encoded,
+          sha: sha
+        })
+      });
 
-      // Push data baru ke GitHub
-      const putRes = await fetch(
-        `https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`,
-        {
-          method: 'PUT',
-          headers: {
-            Authorization: 'token ' + liveToken,
-            Accept: 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: 'Update portfolio data — ' + new Date().toLocaleString('id-ID'),
-            content,
-            sha: shaData.sha
-          })
+      if (putRes.status === 422) {
+        // SHA conflict — tunggu lalu retry dengan SHA baru
+        if (attempt < MAX_ATTEMPTS) {
+          await delay(1000 * attempt);
+          continue;
         }
-      );
+        showToast('⚠ Konflik SHA setelah ' + MAX_ATTEMPTS + 'x percobaan. Coba lagi.', 'error');
+        return false;
+      }
 
-      if (putRes.status === 422 && attempt < 3) {
-        // SHA conflict — tunggu sebentar lalu retry
-        await new Promise(r => setTimeout(r, 800 * attempt));
-        continue;
+      if (putRes.status === 401 || putRes.status === 403) {
+        localStorage.removeItem(TOKEN_KEY);
+        showToast('⚠ Token tidak valid / kedaluwarsa. Coba lagi.', 'error');
+        return false;
       }
 
       if (!putRes.ok) {
-        const e = await putRes.json().catch(() => ({}));
-        // Jika token invalid/expired, hapus dari storage dan minta ulang
-        if (putRes.status === 401 || putRes.status === 403) {
-          localStorage.removeItem(TOKEN_KEY);
-          toast('⚠ Token tidak valid / kedaluwarsa, coba lagi.', 'error');
-          return false;
-        }
-        throw new Error(e.message || `HTTP ${putRes.status}`);
+        const errJson = await putRes.json().catch(() => ({}));
+        throw new Error(errJson.message || 'HTTP ' + putRes.status);
       }
 
-      toast('✅ Tersimpan! Data permanen, aman di-refresh.', 'success');
+      // Sukses
+      showToast('✅ Tersimpan! Data permanen — aman di-refresh.', 'success');
       return true;
 
-    } catch(e) {
-      if (attempt === 3) {
-        toast('⚠ Gagal simpan: ' + e.message, 'error');
+    } catch (e) {
+      if (attempt === MAX_ATTEMPTS) {
+        showToast('⚠ Gagal simpan: ' + e.message, 'error');
         return false;
       }
-      await new Promise(r => setTimeout(r, 600));
+      await delay(700 * attempt);
     }
   }
+
   return false;
 }
 
-// ═══════════════════════════════════════════
-// RENDER SEMUA SECTION DARI DATA
-// ═══════════════════════════════════════════
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ════════════════════════════════════════════════════
+// RENDER — isi semua elemen dari objek D
+// TIDAK menggunakan innerHTML pada container utama untuk
+// menghindari hilangnya event listener.
+// ════════════════════════════════════════════════════
 function renderAll() {
-  // Hero teks
-  setText('heroTag', D.heroTag);
-  document.getElementById('heroName').innerHTML = D.heroName1 + '<br/><span>' + D.heroName2 + '</span>';
-  setText('heroRole', D.heroRole);
-  setText('heroDesc', D.heroDesc);
-  document.getElementById('heroPhone').querySelector('span').textContent = D.heroPhone;
-  document.getElementById('heroEmail').querySelector('span').textContent = D.heroEmail;
-  document.getElementById('heroCity').querySelector('span').textContent  = D.heroCity;
-  document.getElementById('ctaMailBtn').href  = 'mailto:' + D.heroEmail;
-  document.getElementById('ctaMailBtn2').href = 'mailto:' + D.heroEmail;
-  document.getElementById('ctaWaBtn').href    = 'tel:' + D.heroPhone.replace(/\D/g,'');
+  // Hero
+  setTxt('heroTag',  D.heroTag);
+  // heroName: dua baris, baris 2 dengan gradient via <span>
+  const heroNameEl = document.getElementById('heroName');
+  heroNameEl.textContent = '';
+  heroNameEl.appendChild(document.createTextNode(D.heroName1 || ''));
+  heroNameEl.appendChild(document.createElement('br'));
+  const span = document.createElement('span');
+  span.textContent = D.heroName2 || '';
+  heroNameEl.appendChild(span);
+
+  setTxt('heroRole', D.heroRole);
+  setTxt('heroDesc', D.heroDesc);
+  setTxt('heroPhoneSpan', D.heroPhone);
+  setTxt('heroEmailSpan', D.heroEmail);
+  setTxt('heroCitySpan',  D.heroCity);
+
+  const mail = 'mailto:' + (D.heroEmail || '');
+  const wa   = 'tel:' + (D.heroPhone || '').replace(/\D/g, '');
+  document.getElementById('ctaMailBtn').href  = mail;
+  document.getElementById('ctaMailBtn2').href = mail;
+  document.getElementById('ctaWaBtn').href    = wa;
 
   // Stats
   ['1','2','3','4'].forEach(n => {
-    document.getElementById('stat'+n+'val').textContent = D['stat'+n+'val'];
-    document.getElementById('stat'+n+'lab').textContent = D['stat'+n+'lab'];
+    setTxt('stat' + n + 'val', D['stat' + n + 'val']);
+    setTxt('stat' + n + 'lab', D['stat' + n + 'lab']);
   });
 
   // Education
-  setText('eduUniversity', D.eduUniversity);
-  setText('eduDegree',     D.eduDegree);
-  setText('eduPeriod',     D.eduPeriod);
-  setText('eduGpa',        D.eduGpa);
-  setText('eduStatus',     D.eduStatus);
+  setTxt('eduUniversity', D.eduUniversity);
+  setTxt('eduDegree',     D.eduDegree);
+  setTxt('eduPeriod',     D.eduPeriod);
+  setTxt('eduGpa',        D.eduGpa);
+  setTxt('eduStatus',     D.eduStatus);
 
   // CTA + Footer
-  setText('ctaTitle',   D.ctaTitle);
-  setText('ctaSub',     D.ctaSub);
-  setText('ctaEmail',   D.heroEmail);
-  setText('footerName', D.footerName);
-  setText('footerNote', D.footerNote);
+  setTxt('ctaTitle',   D.ctaTitle);
+  setTxt('ctaSub',     D.ctaSub);
+  setTxt('ctaEmail',   D.heroEmail);
+  setTxt('footerName', D.footerName);
+  setTxt('footerNote', D.footerNote);
 
-  // Skills
+  // List sections
   renderSkills();
   renderExperiences();
   renderProjects();
   renderCerts();
   renderOrgs();
 
-  // Pasang onclick edit pada elemen data-ed
+  // Pasang onclick edit
   attachEditable();
 
-  // Fade-in
-  document.querySelectorAll('.fade-in').forEach((el,i) => {
-    el.style.transitionDelay = (i%5)*0.07+'s';
+  // Fade-in scroll observer
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = (i % 5) * 0.07 + 's';
     fadeObserver.observe(el);
   });
 }
 
-function setText(id, val) {
+// Helper: set textContent dengan null-check
+function setTxt(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = val || '';
 }
 
-// ───── RENDER SKILLS ─────
+// ─── RENDER SKILLS ───
 function renderSkills() {
-  const g = document.getElementById('skillsGrid');
-  g.innerHTML = '';
-  (D.skills||[]).forEach((sk,i) => {
-    const d = document.createElement('div');
-    d.className = 'skill-card fade-in';
-    d.setAttribute('data-ed','');
-    d.innerHTML = `<div class="skill-icon" style="background:rgba(99,179,237,0.12);">${sk.icon}</div><div><div class="skill-name">${sk.name}</div><div class="skill-level">${sk.level}</div></div>`;
-    d.onclick = () => editSkill(i);
-    g.appendChild(d);
+  const grid = document.getElementById('skillsGrid');
+  grid.innerHTML = '';
+  (D.skills || []).forEach(function(sk, i) {
+    const card = document.createElement('div');
+    card.className = 'skill-card fade-in';
+    card.setAttribute('data-ed', '');
+    // Isi via textContent (tidak innerHTML) agar emoji aman
+    const iconDiv = document.createElement('div');
+    iconDiv.className = 'skill-icon';
+    iconDiv.style.background = 'rgba(99,179,237,0.12)';
+    iconDiv.textContent = sk.icon || '';
+    const infoDiv = document.createElement('div');
+    const nameDiv = document.createElement('div');
+    nameDiv.className = 'skill-name';
+    nameDiv.textContent = sk.name || '';
+    const levelDiv = document.createElement('div');
+    levelDiv.className = 'skill-level';
+    levelDiv.textContent = sk.level || '';
+    infoDiv.appendChild(nameDiv);
+    infoDiv.appendChild(levelDiv);
+    card.appendChild(iconDiv);
+    card.appendChild(infoDiv);
+    card.addEventListener('click', (function(idx) {
+      return function() { editSkill(idx); };
+    })(i));
+    grid.appendChild(card);
   });
 }
 
-// ───── RENDER EXPERIENCES ─────
+// ─── RENDER EXPERIENCES ───
 function renderExperiences() {
-  const t = document.getElementById('expTimeline');
-  t.innerHTML = '';
-  (D.experiences||[]).forEach((ex,i) => {
-    const d = document.createElement('div');
-    d.className = 'timeline-item fade-in';
-    d.setAttribute('data-ed','');
-    const liHtml = (ex.duties||[]).map(du => `<li>${du}</li>`).join('');
-    d.innerHTML = `<div class="exp-card"><div class="exp-header"><div class="exp-role">${ex.role}</div><div class="exp-period">${ex.period}</div></div><div class="exp-company">${ex.company}</div><ul class="exp-duties">${liHtml}</ul></div>`;
-    d.onclick = () => editExp(i);
-    t.appendChild(d);
+  const timeline = document.getElementById('expTimeline');
+  timeline.innerHTML = '';
+  (D.experiences || []).forEach(function(ex, i) {
+    const item = document.createElement('div');
+    item.className = 'timeline-item fade-in';
+    item.setAttribute('data-ed', '');
+    const liItems = (ex.duties || []).map(function(du) {
+      return '<li>' + escHtml(du) + '</li>';
+    }).join('');
+    item.innerHTML =
+      '<div class="exp-card">' +
+        '<div class="exp-header">' +
+          '<div class="exp-role">' + escHtml(ex.role) + '</div>' +
+          '<div class="exp-period">' + escHtml(ex.period) + '</div>' +
+        '</div>' +
+        '<div class="exp-company">' + escHtml(ex.company) + '</div>' +
+        '<ul class="exp-duties">' + liItems + '</ul>' +
+      '</div>';
+    item.addEventListener('click', (function(idx) {
+      return function() { editExp(idx); };
+    })(i));
+    timeline.appendChild(item);
   });
 }
 
-// ───── RENDER PROJECTS ─────
+// ─── RENDER PROJECTS ───
 function renderProjects() {
-  const g = document.getElementById('projectsGrid');
-  g.innerHTML = '';
-  (D.projects||[]).forEach((pr,i) => {
-    const d = document.createElement('div');
-    d.className = 'project-card fade-in';
-    d.setAttribute('data-ed','');
-    d.innerHTML = `<div class="project-year">${pr.year}</div><div class="project-title">${pr.title}</div><div class="project-tag">${pr.tag}</div>`;
-    d.onclick = () => editProject(i);
-    g.appendChild(d);
+  const grid = document.getElementById('projectsGrid');
+  grid.innerHTML = '';
+  (D.projects || []).forEach(function(pr, i) {
+    const card = document.createElement('div');
+    card.className = 'project-card fade-in';
+    card.setAttribute('data-ed', '');
+    card.innerHTML =
+      '<div class="project-year">' + escHtml(pr.year) + '</div>' +
+      '<div class="project-title">' + escHtml(pr.title) + '</div>' +
+      '<div class="project-tag">' + escHtml(pr.tag) + '</div>';
+    card.addEventListener('click', (function(idx) {
+      return function() { editProject(idx); };
+    })(i));
+    grid.appendChild(card);
   });
 }
 
-// ───── RENDER CERTS ─────
+// ─── RENDER CERTS ───
 function renderCerts() {
-  const g = document.getElementById('certGrid');
-  g.innerHTML = '';
-  (D.certificates||[]).forEach((c,i) => {
-    const d = document.createElement('div');
-    d.className = 'cert-card fade-in';
-    d.setAttribute('data-ed','');
-    d.innerHTML = `<div class="cert-icon" style="background:rgba(99,179,237,0.12);">${c.icon}</div><div class="cert-body"><div class="cert-title">${c.title}</div><div class="cert-issuer">${c.issuer}</div></div>`;
-    d.onclick = () => editCert(i);
-    g.appendChild(d);
+  const grid = document.getElementById('certGrid');
+  grid.innerHTML = '';
+  (D.certificates || []).forEach(function(c, i) {
+    const card = document.createElement('div');
+    card.className = 'cert-card fade-in';
+    card.setAttribute('data-ed', '');
+    const iconDiv = document.createElement('div');
+    iconDiv.className = 'cert-icon';
+    iconDiv.style.background = 'rgba(159,122,234,0.12)';
+    iconDiv.textContent = c.icon || '';
+    const body = document.createElement('div');
+    body.className = 'cert-body';
+    body.innerHTML =
+      '<div class="cert-title">' + escHtml(c.title) + '</div>' +
+      '<div class="cert-issuer">' + escHtml(c.issuer) + '</div>';
+    card.appendChild(iconDiv);
+    card.appendChild(body);
+    card.addEventListener('click', (function(idx) {
+      return function() { editCert(idx); };
+    })(i));
+    grid.appendChild(card);
   });
 }
 
-// ───── RENDER ORGS ─────
+// ─── RENDER ORGS ───
 function renderOrgs() {
-  const g = document.getElementById('orgGrid');
-  g.innerHTML = '';
-  (D.organisations||[]).forEach((o,i) => {
-    const d = document.createElement('div');
-    d.className = 'org-card fade-in';
-    d.setAttribute('data-ed','');
-    const liHtml = (o.duties||[]).map(du => `<li>${du}</li>`).join('');
-    d.innerHTML = `<div class="org-role">${o.role}</div><div class="org-name">${o.name}</div><div class="org-period">${o.period}</div><ul class="org-duties">${liHtml}</ul>`;
-    d.onclick = () => editOrg(i);
-    g.appendChild(d);
+  const grid = document.getElementById('orgGrid');
+  grid.innerHTML = '';
+  (D.organisations || []).forEach(function(o, i) {
+    const card = document.createElement('div');
+    card.className = 'org-card fade-in';
+    card.setAttribute('data-ed', '');
+    const liItems = (o.duties || []).map(function(du) {
+      return '<li>' + escHtml(du) + '</li>';
+    }).join('');
+    card.innerHTML =
+      '<div class="org-role">' + escHtml(o.role) + '</div>' +
+      '<div class="org-name">' + escHtml(o.name) + '</div>' +
+      '<div class="org-period">' + escHtml(o.period) + '</div>' +
+      '<ul class="org-duties">' + liItems + '</ul>';
+    card.addEventListener('click', (function(idx) {
+      return function() { editOrg(idx); };
+    })(i));
+    grid.appendChild(card);
   });
 }
 
+// Escape HTML untuk rendering aman
+function escHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── ATTACH ONCLICK pada elemen statis (hero, stats, edu, footer) ───
 function attachEditable() {
-  // Hero chips & simple fields
-  const simpleMap = {
-    heroTag:'Tagline', heroRole:'Role', heroDesc:'Deskripsi Profil',
-    ctaTitle:'Judul CTA', ctaSub:'Sub Judul CTA',
-    footerName:'Footer Nama', footerNote:'Footer Catatan'
+  // Map field → label untuk editSimple
+  var simpleFields = {
+    heroTag:    'Tagline',
+    heroRole:   'Role / Jabatan',
+    heroDesc:   'Deskripsi Profil',
+    ctaTitle:   'Judul CTA',
+    ctaSub:     'Sub Judul CTA',
+    footerName: 'Footer Nama',
+    footerNote: 'Footer Catatan'
   };
-  Object.entries(simpleMap).forEach(([id, label]) => {
-    const el = document.getElementById(id);
-    if (el) el.onclick = () => editSimple(id, label);
+  Object.keys(simpleFields).forEach(function(field) {
+    var el = document.getElementById(field);
+    if (el) {
+      el.onclick = null; // hapus listener lama
+      el.addEventListener('click', (function(f, lbl) {
+        return function() { editSimple(f, lbl); };
+      })(field, simpleFields[field]));
+    }
   });
-  document.getElementById('heroName').onclick  = () => editHeroName();
-  document.getElementById('heroPhone').onclick = () => editSimpleChip('heroPhone','Nomor Telepon','heroPhone');
-  document.getElementById('heroEmail').onclick = () => editSimpleChip('heroEmail','Email','heroEmail');
-  document.getElementById('heroCity').onclick  = () => editSimpleChip('heroCity','Kota','heroCity');
-  ['1','2','3','4'].forEach(n => {
-    document.getElementById('stat'+n+'el').onclick = () => editStat(n);
+
+  // heroName
+  var heroNameEl = document.getElementById('heroName');
+  heroNameEl.onclick = null;
+  heroNameEl.addEventListener('click', function() { editHeroName(); });
+
+  // Contact chips — klik pada parent chip
+  document.getElementById('heroPhone').onclick = null;
+  document.getElementById('heroPhone').addEventListener('click', function() {
+    editField('heroPhone', 'Nomor Telepon', D.heroPhone);
   });
+  document.getElementById('heroEmail').onclick = null;
+  document.getElementById('heroEmail').addEventListener('click', function() {
+    editField('heroEmail', 'Email', D.heroEmail);
+  });
+  document.getElementById('heroCity').onclick = null;
+  document.getElementById('heroCity').addEventListener('click', function() {
+    editField('heroCity', 'Kota / Lokasi', D.heroCity);
+  });
+
+  // Stats
+  ['1','2','3','4'].forEach(function(n) {
+    var el = document.getElementById('stat' + n + 'el');
+    if (el) {
+      el.onclick = null;
+      el.addEventListener('click', (function(num) {
+        return function() { editStat(num); };
+      })(n));
+    }
+  });
+
+  // Edu card
+  var eduCard = document.getElementById('eduCard');
+  if (eduCard) {
+    eduCard.onclick = null;
+    eduCard.addEventListener('click', function() { editEdu(); });
+  }
 }
 
-// ═══════════════════════════════════════════
-// AUTHENTICATION
-// ═══════════════════════════════════════════
-async function hashPw(pw) {
+// ════════════════════════════════════════════════════
+// AUTENTIKASI
+// ════════════════════════════════════════════════════
+async function hashPassword(pw) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
-function checkSession() {
-  try { const s=JSON.parse(localStorage.getItem(SESSION_KEY)||'{}'); return Date.now()<(s.exp||0); } catch{return false;}
+function sessionValid() {
+  try {
+    const s = JSON.parse(localStorage.getItem(SESSION_KEY) || '{}');
+    return Date.now() < (s.exp || 0);
+  } catch { return false; }
 }
-function openLogin() {
-  document.getElementById('loginInput').value='';
-  document.getElementById('loginError').textContent='';
+
+document.getElementById('ownerLoginBtn').addEventListener('click', function() {
+  document.getElementById('loginInput').value = '';
+  document.getElementById('loginError').textContent = '';
   document.getElementById('loginOverlay').classList.add('open');
-  setTimeout(()=>document.getElementById('loginInput').focus(),80);
-}
-function closeLogin() { document.getElementById('loginOverlay').classList.remove('open'); }
+  setTimeout(function() { document.getElementById('loginInput').focus(); }, 80);
+});
+
+document.getElementById('loginCancelBtn').addEventListener('click', function() {
+  document.getElementById('loginOverlay').classList.remove('open');
+});
+
+document.getElementById('loginInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+
+document.getElementById('loginSubmitBtn').addEventListener('click', doLogin);
+
 async function doLogin() {
   const pw = document.getElementById('loginInput').value;
   if (!pw) return;
-  const h = await hashPw(pw);
+  const h = await hashPassword(pw);
   if (h === OWNER_HASH) {
-    localStorage.setItem(SESSION_KEY, JSON.stringify({exp: Date.now()+8*3600*1000}));
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ exp: Date.now() + 8 * 3600 * 1000 }));
     document.body.classList.add('owner-logged-in');
-    closeLogin();
+    document.getElementById('loginOverlay').classList.remove('open');
   } else {
     document.getElementById('loginError').textContent = '❌ Password salah';
     document.getElementById('loginInput').value = '';
   }
 }
 
-// ═══════════════════════════════════════════
-// EDIT MODE TOGGLE
-// ═══════════════════════════════════════════
-function toggleEdit() {
+// ════════════════════════════════════════════════════
+// EDIT MODE
+// ════════════════════════════════════════════════════
+document.getElementById('editToggleBtn').addEventListener('click', function() {
   editMode = !editMode;
   document.body.classList.toggle('edit-mode', editMode);
-  const btn = document.getElementById('editToggleBtn');
+  var btn = document.getElementById('editToggleBtn');
   btn.classList.toggle('active', editMode);
   btn.textContent = editMode ? '✕ Selesai Edit' : '✏ Edit Mode';
   document.getElementById('editBadge').classList.toggle('on', editMode);
+});
+
+// Tombol tambah (hanya aktif dalam edit mode)
+document.getElementById('addSkillBtn').addEventListener('click', function() {
+  if (!editMode) return;
+  D.skills = D.skills || [];
+  D.skills.push({ icon: '⭐', name: 'Skill Baru', level: 'Level' });
+  saveData().then(function() { renderAll(); syncEditModeUI(); });
+});
+document.getElementById('addExpBtn').addEventListener('click', function() {
+  if (!editMode) return;
+  D.experiences = D.experiences || [];
+  D.experiences.push({ role: 'Jabatan Baru', period: 'Periode', company: 'Perusahaan', duties: ['Deskripsi tugas'] });
+  saveData().then(function() { renderAll(); syncEditModeUI(); });
+});
+document.getElementById('addProjectBtn').addEventListener('click', function() {
+  if (!editMode) return;
+  D.projects = D.projects || [];
+  D.projects.push({ year: '2024', title: 'Judul Projek Baru', tag: 'Kategori' });
+  saveData().then(function() { renderAll(); syncEditModeUI(); });
+});
+document.getElementById('addCertBtn').addEventListener('click', function() {
+  if (!editMode) return;
+  D.certificates = D.certificates || [];
+  D.certificates.push({ icon: '📜', title: 'Sertifikat Baru', issuer: 'Penerbit' });
+  saveData().then(function() { renderAll(); syncEditModeUI(); });
+});
+document.getElementById('addOrgBtn').addEventListener('click', function() {
+  if (!editMode) return;
+  D.organisations = D.organisations || [];
+  D.organisations.push({ role: 'Jabatan Baru', name: 'Nama Organisasi', period: 'Periode', duties: ['Kegiatan'] });
+  saveData().then(function() { renderAll(); syncEditModeUI(); });
+});
+
+// Pastikan UI edit mode sinkron setelah renderAll()
+function syncEditModeUI() {
+  document.body.classList.toggle('edit-mode', editMode);
+  var btn = document.getElementById('editToggleBtn');
+  if (btn) {
+    btn.classList.toggle('active', editMode);
+    btn.textContent = editMode ? '✕ Selesai Edit' : '✏ Edit Mode';
+  }
+  var badge = document.getElementById('editBadge');
+  if (badge) badge.classList.toggle('on', editMode);
 }
 
-// ═══════════════════════════════════════════
+// ════════════════════════════════════════════════════
 // MODAL ENGINE
-// ═══════════════════════════════════════════
-let _onSave = null;
-let _onDelete = null;
+// Semua field dibuat via DOM API (bukan innerHTML)
+// agar value textarea/input tidak pernah hilang.
+// ════════════════════════════════════════════════════
+var _pendingSave   = null;  // fungsi yang dipanggil saat user klik Simpan
+var _pendingDelete = null;  // fungsi yang dipanggil saat user klik Hapus
 
-function openModal(title, fieldsHtml, onSave, onDelete) {
+function openModal(title, buildFields, onSave, onDelete) {
   if (!editMode) return;
+
   document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalFields').innerHTML = fieldsHtml;
-  document.getElementById('modalDelBtn').style.display = onDelete ? 'inline-flex' : 'none';
-  _onSave = onSave;
-  _onDelete = onDelete || null;
+
+  // Kosongkan modalFields lalu bangun ulang via DOM
+  var container = document.getElementById('modalFields');
+  container.innerHTML = '';
+  buildFields(container); // fungsi yang menerima container dan append field ke dalamnya
+
+  // Tampilkan / sembunyikan tombol Hapus
+  var delBtn = document.getElementById('modalDelBtn');
+  delBtn.style.display = onDelete ? 'inline-flex' : 'none';
+
+  // Simpan callback
+  _pendingSave   = onSave;
+  _pendingDelete = onDelete || null;
+
   document.getElementById('modalBg').classList.add('open');
 }
-function closeModal() { document.getElementById('modalBg').classList.remove('open'); }
-document.getElementById('modalBg').addEventListener('click', e => { if(e.target===document.getElementById('modalBg')) closeModal(); });
 
-async function doSave() {
-  if (_onSave) _onSave();  // Terapkan perubahan ke objek D
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+  // Reset callback agar tidak tertrigger secara tidak sengaja
+  _pendingSave   = null;
+  _pendingDelete = null;
+}
+
+// Klik backdrop (luar modal) = tutup
+document.getElementById('modalBg').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('modalBg')) closeModal();
+});
+
+document.getElementById('modalCancelBtn').addEventListener('click', closeModal);
+
+document.getElementById('modalSaveBtn').addEventListener('click', async function() {
+  // Kumpulkan nilai dari form SEBELUM modal ditutup
+  if (_pendingSave) _pendingSave();
   closeModal();
-  const ok = await saveData();
-  // Selalu render ulang agar UI sinkron dengan D, baik simpan sukses maupun gagal
+  await saveData();
   renderAll();
-  // Pastikan edit mode tetap aktif setelah render ulang
-  if (editMode) {
-    document.body.classList.add('edit-mode');
-    const btn = document.getElementById('editToggleBtn');
-    if (btn) { btn.classList.add('active'); btn.textContent = '✕ Selesai Edit'; }
-    const badge = document.getElementById('editBadge');
-    if (badge) badge.classList.add('on');
+  syncEditModeUI(); // pastikan edit mode tetap aktif setelah render ulang
+});
+
+document.getElementById('modalDelBtn').addEventListener('click', async function() {
+  if (!_pendingDelete) return;
+  if (!confirm('Hapus item ini?')) return;
+  _pendingDelete();
+  closeModal();
+  await saveData();
+  renderAll();
+  syncEditModeUI();
+});
+
+// ─── Helper: buat satu field input/textarea dalam container ───
+function addField(container, label, id, value, isTextarea) {
+  var wrap = document.createElement('div');
+  wrap.className = 'fg';
+  var lbl = document.createElement('label');
+  lbl.textContent = label;
+  wrap.appendChild(lbl);
+  var input;
+  if (isTextarea) {
+    input = document.createElement('textarea');
+  } else {
+    input = document.createElement('input');
+    input.type = 'text';
   }
-}
-async function doDelete() {
-  if (_onDelete && confirm('Hapus item ini?')) {
-    _onDelete();  // Terapkan penghapusan ke objek D
-    closeModal();
-    await saveData();
-    renderAll();
-    // Pastikan edit mode tetap aktif setelah render ulang
-    if (editMode) {
-      document.body.classList.add('edit-mode');
-      const btn = document.getElementById('editToggleBtn');
-      if (btn) { btn.classList.add('active'); btn.textContent = '✕ Selesai Edit'; }
-      const badge = document.getElementById('editBadge');
-      if (badge) badge.classList.add('on');
-    }
-  }
+  input.id    = id;
+  input.value = value || '';
+  wrap.appendChild(input);
+  container.appendChild(wrap);
+  return input;
 }
 
-// f() — buat field form HTML. Semua value di-escape agar aman dari karakter khusus.
-function f(label, id, val, type='text') {
-  const safe = (v) => (v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  if (type === 'textarea') {
-    // Untuk textarea, gunakan textContent agar aman terhadap HTML entities
-    const div = document.createElement('div');
-    div.className = 'fg';
-    div.innerHTML = `<label>${label}</label><textarea id="${id}"></textarea>`;
-    div.querySelector('textarea').value = val || '';
-    return div.outerHTML;
-  }
-  return `<div class="fg"><label>${label}</label><input type="text" id="${id}" value="${safe(val)}"/></div>`;
-}
-// g() — ambil nilai dari input/textarea berdasarkan id
-function g(id) {
-  const el = document.getElementById(id);
-  if (!el) return '';
-  return el.tagName === 'TEXTAREA' || el.tagName === 'INPUT' ? el.value : el.textContent.trim();
+// ─── Helper: baca nilai field ───
+function fieldVal(id) {
+  var el = document.getElementById(id);
+  return el ? el.value : '';
 }
 
-// ─── EDITOR: Simple text ───
+// ─── Helper: buat daftar tugas (li-row) dalam container ───
+function addDutiesSection(container, duties, prefix, labelText) {
+  var wrap = document.createElement('div');
+  wrap.className = 'fg';
+  var lbl = document.createElement('label');
+  lbl.textContent = labelText || 'Tugas / Kegiatan';
+  wrap.appendChild(lbl);
+
+  var listWrap = document.createElement('div');
+  listWrap.id = prefix + 'Wrap';
+  (duties || []).forEach(function(d, i) {
+    listWrap.appendChild(makeDutyRow(prefix, i, d));
+  });
+  wrap.appendChild(listWrap);
+
+  var addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'btn-add-li';
+  addBtn.textContent = '+ Tambah';
+  addBtn.addEventListener('click', function() {
+    var n = listWrap.querySelectorAll('textarea').length;
+    listWrap.appendChild(makeDutyRow(prefix, n, ''));
+  });
+  wrap.appendChild(addBtn);
+  container.appendChild(wrap);
+}
+
+function makeDutyRow(prefix, idx, value) {
+  var row = document.createElement('div');
+  row.className = 'li-row';
+  var ta = document.createElement('textarea');
+  ta.id    = prefix + idx;
+  ta.value = value || '';
+  var rm = document.createElement('button');
+  rm.type = 'button';
+  rm.className = 'btn-rm';
+  rm.textContent = '✕';
+  rm.addEventListener('click', function() { row.remove(); });
+  row.appendChild(ta);
+  row.appendChild(rm);
+  return row;
+}
+
+function collectDuties(prefix) {
+  return Array.from(document.querySelectorAll('[id^="' + prefix + '"]'))
+    .filter(function(el) { return el.tagName === 'TEXTAREA'; })
+    .map(function(el) { return el.value.trim(); })
+    .filter(Boolean);
+}
+
+// ════════════════════════════════════════════════════
+// EDITOR FUNCTIONS — masing-masing panggil openModal
+// ════════════════════════════════════════════════════
+
 function editSimple(field, label) {
   if (!editMode) return;
-  openModal('✏ '+label,
-    f(label,'val',D[field]||'','textarea'),
-    () => { D[field] = g('val'); }
+  openModal('✏ ' + label,
+    function(c) { addField(c, label, 'ef_val', D[field] || '', true); },
+    function()  { D[field] = fieldVal('ef_val'); }
   );
 }
-function editSimpleChip(elId, label, field) {
+
+function editField(field, label, currentVal) {
   if (!editMode) return;
-  const val = document.getElementById(elId).querySelector('span').textContent;
-  openModal('✏ '+label,
-    f(label,'val',val),
-    () => { D[field] = g('val'); }
+  openModal('✏ ' + label,
+    function(c) { addField(c, label, 'ef_val', currentVal || ''); },
+    function()  { D[field] = fieldVal('ef_val'); }
   );
 }
+
 function editHeroName() {
   if (!editMode) return;
   openModal('✏ Nama',
-    f('Baris 1','n1',D.heroName1) + f('Baris 2 (gradient)','n2',D.heroName2),
-    () => { D.heroName1=g('n1'); D.heroName2=g('n2'); }
+    function(c) {
+      addField(c, 'Baris 1 (putih)', 'hn_1', D.heroName1);
+      addField(c, 'Baris 2 (gradient warna)', 'hn_2', D.heroName2);
+    },
+    function() {
+      D.heroName1 = fieldVal('hn_1');
+      D.heroName2 = fieldVal('hn_2');
+    }
   );
 }
+
 function editStat(n) {
   if (!editMode) return;
-  openModal('✏ Statistik',
-    f('Angka','sv',D['stat'+n+'val']) + f('Label','sl',D['stat'+n+'lab']),
-    () => { D['stat'+n+'val']=g('sv'); D['stat'+n+'lab']=g('sl'); }
+  openModal('✏ Statistik #' + n,
+    function(c) {
+      addField(c, 'Angka / Nilai', 'st_v', D['stat' + n + 'val']);
+      addField(c, 'Label', 'st_l', D['stat' + n + 'lab']);
+    },
+    function() {
+      D['stat' + n + 'val'] = fieldVal('st_v');
+      D['stat' + n + 'lab'] = fieldVal('st_l');
+    }
   );
 }
+
 function editEdu() {
   if (!editMode) return;
   openModal('🎓 Edit Pendidikan',
-    f('Universitas','eu',D.eduUniversity) + f('Jurusan','ed',D.eduDegree) +
-    f('Tahun','ep',D.eduPeriod) + f('IPK','eg',D.eduGpa) +
-    f('Status (e.g. Lulus 🎓)','es',D.eduStatus),
-    () => { D.eduUniversity=g('eu'); D.eduDegree=g('ed'); D.eduPeriod=g('ep'); D.eduGpa=g('eg'); D.eduStatus=g('es'); }
+    function(c) {
+      addField(c, 'Nama Universitas', 'edu_u', D.eduUniversity);
+      addField(c, 'Jurusan / Program Studi', 'edu_d', D.eduDegree);
+      addField(c, 'Tahun (misal: 2022 – 2026)', 'edu_p', D.eduPeriod);
+      addField(c, 'IPK', 'edu_g', D.eduGpa);
+      addField(c, 'Status (misal: Lulus 🎓)', 'edu_s', D.eduStatus);
+    },
+    function() {
+      D.eduUniversity = fieldVal('edu_u');
+      D.eduDegree     = fieldVal('edu_d');
+      D.eduPeriod     = fieldVal('edu_p');
+      D.eduGpa        = fieldVal('edu_g');
+      D.eduStatus     = fieldVal('edu_s');
+    }
   );
 }
 
-// ─── EDITOR: Skill ───
 function editSkill(i) {
   if (!editMode) return;
-  const sk = D.skills[i];
+  var sk = D.skills[i];
   openModal('🛠 Edit Skill',
-    f('Emoji','si',sk.icon) + f('Nama Skill','sn',sk.name) + f('Level','sl',sk.level),
-    () => { D.skills[i] = {icon:g('si'),name:g('sn'),level:g('sl')}; },
-    () => { D.skills.splice(i,1); }
+    function(c) {
+      addField(c, 'Emoji / Icon', 'sk_ic', sk.icon);
+      addField(c, 'Nama Skill',   'sk_nm', sk.name);
+      addField(c, 'Level',        'sk_lv', sk.level);
+    },
+    function() {
+      D.skills[i] = { icon: fieldVal('sk_ic'), name: fieldVal('sk_nm'), level: fieldVal('sk_lv') };
+    },
+    function() { D.skills.splice(i, 1); }
   );
 }
-function addSkill() {
-  D.skills.push({icon:'⭐',name:'Skill Baru',level:'Level'});
-  saveData().then(()=>renderAll());
-}
 
-// ─── EDITOR: Experience ───
-function dutiesHtml(duties, prefix) {
-  return (duties||[]).map((d,i)=>`<div class="li-row"><textarea id="${prefix}${i}">${d}</textarea><button class="btn-rm" onclick="this.closest('.li-row').remove()">✕</button></div>`).join('');
-}
-function collectDuties(prefix) {
-  return Array.from(document.querySelectorAll(`[id^="${prefix}"]`)).map(t=>t.value.trim()).filter(Boolean);
-}
 function editExp(i) {
   if (!editMode) return;
-  const ex = D.experiences[i];
+  var ex = D.experiences[i];
   openModal('💼 Edit Pengalaman',
-    f('Jabatan','er',ex.role)+f('Periode','ep',ex.period)+f('Perusahaan','ec',ex.company)+
-    `<div class="fg"><label>Tugas</label><div id="dutiesWrap">${dutiesHtml(ex.duties,'du')}</div><button class="btn-add-li" onclick="addDutyRow('dutiesWrap','du')">+ Tambah Tugas</button></div>`,
-    () => { D.experiences[i]={role:g('er'),period:g('ep'),company:g('ec'),duties:collectDuties('du')}; },
-    () => { D.experiences.splice(i,1); }
+    function(c) {
+      addField(c, 'Jabatan / Posisi', 'ex_r', ex.role);
+      addField(c, 'Periode',          'ex_p', ex.period);
+      addField(c, 'Perusahaan / Instansi', 'ex_c', ex.company);
+      addDutiesSection(c, ex.duties, 'exd', 'Daftar Tugas');
+    },
+    function() {
+      D.experiences[i] = {
+        role:    fieldVal('ex_r'),
+        period:  fieldVal('ex_p'),
+        company: fieldVal('ex_c'),
+        duties:  collectDuties('exd')
+      };
+    },
+    function() { D.experiences.splice(i, 1); }
   );
 }
-function addExp() {
-  D.experiences.push({role:'Jabatan Baru',period:'Periode',company:'Perusahaan',duties:['Deskripsi tugas']});
-  saveData().then(()=>renderAll());
-}
 
-// ─── EDITOR: Project ───
 function editProject(i) {
   if (!editMode) return;
-  const pr = D.projects[i];
+  var pr = D.projects[i];
   openModal('📁 Edit Projek',
-    f('Tahun','py',pr.year) + f('Judul','pt',pr.title,'textarea') + f('Tag','ptg',pr.tag),
-    () => { D.projects[i]={year:g('py'),title:g('pt'),tag:g('ptg')}; },
-    () => { D.projects.splice(i,1); }
+    function(c) {
+      addField(c, 'Tahun',  'pr_y', pr.year);
+      addField(c, 'Judul',  'pr_t', pr.title, true);
+      addField(c, 'Tag / Kategori', 'pr_tg', pr.tag);
+    },
+    function() {
+      D.projects[i] = { year: fieldVal('pr_y'), title: fieldVal('pr_t'), tag: fieldVal('pr_tg') };
+    },
+    function() { D.projects.splice(i, 1); }
   );
 }
-function addProject() {
-  D.projects.push({year:'2024',title:'Judul Projek Baru',tag:'Kategori'});
-  saveData().then(()=>renderAll());
-}
 
-// ─── EDITOR: Certificate ───
 function editCert(i) {
   if (!editMode) return;
-  const c = D.certificates[i];
+  var c = D.certificates[i];
   openModal('🏅 Edit Sertifikat',
-    f('Emoji','ci',c.icon) + f('Nama','ct',c.title) + f('Penerbit','cis',c.issuer),
-    () => { D.certificates[i]={icon:g('ci'),title:g('ct'),issuer:g('cis')}; },
-    () => { D.certificates.splice(i,1); }
+    function(cont) {
+      addField(cont, 'Emoji / Icon', 'ct_ic', c.icon);
+      addField(cont, 'Nama Sertifikat', 'ct_t', c.title);
+      addField(cont, 'Penerbit / Issuer', 'ct_is', c.issuer);
+    },
+    function() {
+      D.certificates[i] = { icon: fieldVal('ct_ic'), title: fieldVal('ct_t'), issuer: fieldVal('ct_is') };
+    },
+    function() { D.certificates.splice(i, 1); }
   );
 }
-function addCert() {
-  D.certificates.push({icon:'📜',title:'Sertifikat Baru',issuer:'Penerbit'});
-  saveData().then(()=>renderAll());
-}
 
-// ─── EDITOR: Organisation ───
 function editOrg(i) {
   if (!editMode) return;
-  const o = D.organisations[i];
+  var o = D.organisations[i];
   openModal('🤝 Edit Organisasi',
-    f('Jabatan','or',o.role)+f('Nama Organisasi','on',o.name)+f('Periode','op',o.period)+
-    `<div class="fg"><label>Kegiatan</label><div id="orgDuWrap">${dutiesHtml(o.duties,'od')}</div><button class="btn-add-li" onclick="addDutyRow('orgDuWrap','od')">+ Tambah Kegiatan</button></div>`,
-    () => { D.organisations[i]={role:g('or'),name:g('on'),period:g('op'),duties:collectDuties('od')}; },
-    () => { D.organisations.splice(i,1); }
+    function(c) {
+      addField(c, 'Jabatan', 'og_r', o.role);
+      addField(c, 'Nama Organisasi', 'og_n', o.name);
+      addField(c, 'Periode', 'og_p', o.period);
+      addDutiesSection(c, o.duties, 'ogd', 'Daftar Kegiatan');
+    },
+    function() {
+      D.organisations[i] = {
+        role:   fieldVal('og_r'),
+        name:   fieldVal('og_n'),
+        period: fieldVal('og_p'),
+        duties: collectDuties('ogd')
+      };
+    },
+    function() { D.organisations.splice(i, 1); }
   );
 }
-function addOrg() {
-  D.organisations.push({role:'Jabatan Baru',name:'Nama Organisasi',period:'Periode',duties:['Kegiatan']});
-  saveData().then(()=>renderAll());
+
+// ════════════════════════════════════════════════════
+// TOAST NOTIFICATION
+// ════════════════════════════════════════════════════
+var _toast = null;
+function showToast(msg, type) {
+  if (_toast) { _toast.remove(); _toast = null; }
+  _toast = document.createElement('div');
+  var styles = {
+    loading: 'background:#1a2235;border:1px solid #3b82f6;color:#63b3ed;',
+    success: 'background:#1a3328;border:1px solid #22c55e;color:#68d391;',
+    error:   'background:#2d1515;border:1px solid #ef4444;color:#f87171;'
+  };
+  _toast.style.cssText =
+    'position:fixed;bottom:28px;right:28px;z-index:9999;' +
+    'padding:13px 20px;border-radius:10px;font-size:0.84rem;font-weight:600;' +
+    'box-shadow:0 8px 24px rgba(0,0,0,0.45);transition:opacity 0.4s;' +
+    (styles[type] || styles.loading);
+  _toast.textContent = msg;
+  document.body.appendChild(_toast);
+  if (type !== 'loading') {
+    var t = _toast;
+    setTimeout(function() {
+      t.style.opacity = '0';
+      setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 420);
+    }, 3500);
+  }
 }
 
-function addDutyRow(wrapperId, prefix) {
-  const w = document.getElementById(wrapperId);
-  const n = w.querySelectorAll('textarea').length;
-  const d = document.createElement('div');
-  d.className = 'li-row';
-  d.innerHTML = `<textarea id="${prefix}${n}"></textarea><button class="btn-rm" onclick="this.closest('.li-row').remove()">✕</button>`;
-  w.appendChild(d);
-}
-
-// ═══════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════
-let _toastEl = null;
-function toast(msg, type) {
-  if (_toastEl) _toastEl.remove();
-  _toastEl = document.createElement('div');
-  const c = {loading:'background:#1a2235;border:1px solid #3b82f6;color:#63b3ed;',success:'background:#1a3328;border:1px solid #22c55e;color:#68d391;',error:'background:#2d1515;border:1px solid #ef4444;color:#f87171;'};
-  _toastEl.style.cssText = `position:fixed;bottom:28px;right:28px;z-index:9999;padding:13px 20px;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,0.45);transition:opacity 0.4s;${c[type]||c.loading}`;
-  _toastEl.textContent = msg;
-  document.body.appendChild(_toastEl);
-  if (type !== 'loading') setTimeout(()=>{ _toastEl.style.opacity='0'; setTimeout(()=>_toastEl&&_toastEl.remove(),400); }, 3500);
-}
-
-// ═══════════════════════════════════════════
+// ════════════════════════════════════════════════════
 // FADE-IN OBSERVER
-// ═══════════════════════════════════════════
-const fadeObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');fadeObserver.unobserve(e.target);} });
-}, {threshold:0.1, rootMargin:'0px 0px -30px 0px'});
+// ════════════════════════════════════════════════════
+var fadeObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      fadeObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
-// ═══════════════════════════════════════════
+// ════════════════════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════════
-if (checkSession()) document.body.classList.add('owner-logged-in');
+// ════════════════════════════════════════════════════
+if (sessionValid()) document.body.classList.add('owner-logged-in');
 loadData();
 </script>
 </body>
 </html>
-
