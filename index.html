@@ -8,410 +8,425 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#06080f;--bg2:#0d1117;--bg3:#131a24;--card:#141c28;
-  --border:rgba(99,179,237,0.12);--accent:#63b3ed;--accent2:#9f7aea;
-  --accent3:#68d391;--gold:#f6e05e;--text:#e2e8f0;--muted:#718096;
+  --bg:#06080f;--bg2:#0d1117;--bg3:#131a24;--card:#0f1520;
+  --border:rgba(99,179,237,0.13);--accent:#63b3ed;--accent2:#9f7aea;
+  --accent3:#68d391;--gold:#f6e05e;--rose:#f687b3;
+  --text:#e2e8f0;--muted:#718096;
   --grad1:linear-gradient(135deg,#63b3ed 0%,#9f7aea 50%,#f687b3 100%);
 }
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
-::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:#2d3748;border-radius:4px;}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;height:64px;background:rgba(6,8,15,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
-.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.nav-links{display:flex;gap:18px;align-items:center;}
-.nav-links a{font-size:0.8rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;transition:color 0.2s;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;background:rgba(6,8,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:14px;align-items:center;}
+.nav-links a{font-size:0.75rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;transition:color .2s;}
 .nav-links a:hover{color:var(--accent);}
-@media(max-width:640px){.nav-links .hide-mobile{display:none;}}
-.edit-mode-badge{display:none;font-size:0.7rem;font-weight:700;color:var(--accent);background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:3px 10px;}
-body.owner-logged-in .edit-mode-badge.on{display:inline-flex;}
-#ownerLoginBtn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all 0.2s;}
+@media(max-width:640px){.nav-links .nm{display:none;}}
+#ownerLoginBtn{padding:5px 12px;border-radius:7px;font-size:0.74rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .2s;}
 #ownerLoginBtn:hover{border-color:var(--accent);color:var(--accent);}
 body.owner-logged-in #ownerLoginBtn{display:none;}
-#editToggleBtn{display:none;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all 0.2s;}
-body.owner-logged-in #editToggleBtn{display:inline-flex;}
-#editToggleBtn.active{background:rgba(99,179,237,0.12);border-color:var(--accent);color:var(--accent);}
-body.edit-mode [data-ed]{position:relative;cursor:pointer;}
-body.edit-mode [data-ed]:hover{outline:2px dashed var(--accent);outline-offset:3px;border-radius:4px;}
-body.edit-mode [data-ed]:hover::after{content:'✏ Edit';position:absolute;top:4px;right:4px;background:var(--accent);color:#fff;font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:5px;pointer-events:none;z-index:50;white-space:nowrap;}
-#loginOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:2000;align-items:center;justify-content:center;padding:20px;}
+#editToggleBtn{display:none;padding:5px 12px;border-radius:7px;font-size:0.74rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;}
+body.owner-logged-in #editToggleBtn{display:inline-flex;align-items:center;gap:5px;}
+#editToggleBtn.on{background:rgba(99,179,237,0.12);border-color:var(--accent);color:var(--accent);}
+.edit-badge{display:none;font-size:0.68rem;font-weight:700;color:var(--accent);background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:2px 9px;}
+body.owner-logged-in .edit-badge.on{display:inline-flex;}
+
+/* ── EDIT HIGHLIGHT ── */
+body.edit-mode [data-ed]{cursor:pointer;position:relative;}
+body.edit-mode [data-ed]:hover{outline:2px dashed var(--accent);outline-offset:3px;border-radius:6px;}
+body.edit-mode [data-ed]:hover::after{content:'✏';position:absolute;top:3px;right:3px;font-size:.7rem;background:var(--accent);color:#fff;padding:1px 6px;border-radius:4px;pointer-events:none;z-index:10;}
+
+/* ── LOGIN OVERLAY ── */
+#loginOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:3000;align-items:center;justify-content:center;padding:20px;}
 #loginOverlay.open{display:flex;}
-#loginBox{background:#111827;border:1px solid rgba(99,179,237,0.25);border-radius:20px;padding:36px;width:100%;max-width:360px;text-align:center;}
-#loginBox h3{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:6px;}
-#loginBox p{font-size:0.82rem;color:var(--muted);margin-bottom:22px;}
-#loginInput{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:10px 14px;font-size:0.9rem;color:var(--text);outline:none;text-align:center;letter-spacing:0.1em;margin-bottom:10px;transition:border-color 0.2s;}
-#loginInput:focus{border-color:var(--accent);}
-#loginError{font-size:0.78rem;color:#f87171;min-height:18px;margin-bottom:8px;}
-#loginSubmitBtn{width:100%;padding:11px;border-radius:9px;background:var(--grad1);border:none;color:#fff;font-size:0.88rem;font-weight:700;cursor:pointer;margin-bottom:10px;}
-#loginCancelBtn{background:transparent;border:none;color:var(--muted);font-size:0.8rem;cursor:pointer;}
-#loginCancelBtn:hover{color:var(--accent);}
-.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:20px;}
-.modal-backdrop.open{display:flex;}
-.modal{background:#111827;border:1px solid rgba(99,179,237,0.2);border-radius:18px;padding:28px 32px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;}
-.modal h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:20px;}
-.fg{margin-bottom:14px;}
-.fg label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
-.fg input,.fg textarea{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:9px 13px;font-size:0.86rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;resize:vertical;}
+#loginBox{background:#0d1117;border:1px solid rgba(99,179,237,0.25);border-radius:18px;padding:36px;width:100%;max-width:340px;text-align:center;}
+#loginBox h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:6px;}
+#loginBox p{font-size:0.8rem;color:var(--muted);margin-bottom:20px;}
+#loginPw{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:10px 14px;font-size:0.88rem;color:var(--text);outline:none;text-align:center;letter-spacing:.1em;margin-bottom:8px;transition:border-color .2s;}
+#loginPw:focus{border-color:var(--accent);}
+#loginErr{font-size:0.75rem;color:#f87171;min-height:16px;margin-bottom:6px;}
+#loginOkBtn{width:100%;padding:10px;border-radius:8px;background:var(--grad1);border:none;color:#fff;font-size:0.85rem;font-weight:700;cursor:pointer;margin-bottom:8px;}
+#loginCxBtn{background:transparent;border:none;color:var(--muted);font-size:0.78rem;cursor:pointer;}
+
+/* ── MODAL ── */
+.modal-wrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:2000;align-items:center;justify-content:center;padding:20px;}
+.modal-wrap.open{display:flex;}
+.modal-box{background:#0d1117;border:1px solid rgba(99,179,237,0.2);border-radius:16px;padding:26px 28px;width:100%;max-width:620px;max-height:88vh;overflow-y:auto;}
+.modal-box h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:18px;}
+.fg{margin-bottom:12px;}
+.fg label{display:block;font-size:0.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.fg input,.fg textarea{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:7px;padding:8px 12px;font-size:0.84rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;resize:vertical;}
 .fg input:focus,.fg textarea:focus{border-color:var(--accent);}
-.fg textarea{min-height:72px;}
-.modal-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end;}
-.btn-save{padding:9px 22px;border-radius:8px;background:var(--grad1);border:none;color:#fff;font-size:0.84rem;font-weight:600;cursor:pointer;}
-.btn-cancel{padding:9px 18px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:0.84rem;font-weight:600;cursor:pointer;}
-.btn-cancel:hover{border-color:var(--accent);color:var(--accent);}
-.btn-danger{padding:9px 18px;border-radius:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.84rem;font-weight:600;cursor:pointer;}
-.li-row{display:flex;gap:8px;margin-bottom:8px;}
-.li-row textarea{flex:1;min-height:50px;}
-.btn-rm{padding:5px 10px;border-radius:6px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.75rem;cursor:pointer;flex-shrink:0;}
-.btn-add-li{padding:6px 14px;border-radius:7px;background:rgba(104,211,145,0.08);border:1px solid rgba(104,211,145,0.25);color:var(--accent3);font-size:0.78rem;font-weight:600;cursor:pointer;margin-top:4px;}
-.btn-add-card{display:none;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border:2px dashed rgba(99,179,237,0.2);border-radius:14px;background:transparent;color:var(--muted);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.fg textarea{min-height:68px;}
+.modal-actions{display:flex;gap:8px;margin-top:18px;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary-sm{padding:8px 20px;border-radius:7px;background:var(--grad1);border:none;color:#fff;font-size:0.82rem;font-weight:600;cursor:pointer;}
+.btn-cancel-sm{padding:8px 16px;border-radius:7px;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:0.82rem;font-weight:600;cursor:pointer;}
+.btn-cancel-sm:hover{border-color:var(--accent);color:var(--accent);}
+.btn-del-sm{padding:8px 16px;border-radius:7px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.82rem;font-weight:600;cursor:pointer;}
+.duty-row{display:flex;gap:6px;margin-bottom:6px;}
+.duty-row textarea{flex:1;min-height:44px;}
+.btn-rm-duty{padding:4px 9px;border-radius:5px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.72rem;cursor:pointer;align-self:flex-start;margin-top:2px;}
+.btn-add-duty{padding:5px 12px;border-radius:6px;background:rgba(104,211,145,0.08);border:1px solid rgba(104,211,145,0.25);color:var(--accent3);font-size:0.74rem;font-weight:600;cursor:pointer;margin-top:2px;}
+.btn-add-card{display:none;align-items:center;justify-content:center;width:100%;padding:12px;border:2px dashed rgba(99,179,237,0.2);border-radius:12px;background:transparent;color:var(--muted);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:10px;}
 body.edit-mode .btn-add-card{display:flex;}
 .btn-add-card:hover{border-color:var(--accent);color:var(--accent);}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 6vw 80px;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,0.12) 0%,transparent 70%);animation:pulse 6s ease-in-out infinite;}
-.hero::after{content:'';position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(159,122,234,0.10) 0%,transparent 70%);animation:pulse 8s ease-in-out infinite reverse;}
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
-.hero-content{position:relative;z-index:1;max-width:780px;}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:5px 14px;font-size:0.75rem;font-weight:600;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:24px;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 6vw 60px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-180px;right:-180px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,0.1) 0%,transparent 70%);animation:glow 7s ease-in-out infinite;}
+.hero::after{content:'';position:absolute;bottom:-120px;left:-80px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(159,122,234,0.08) 0%,transparent 70%);animation:glow 9s ease-in-out infinite reverse;}
+@keyframes glow{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.hero-inner{position:relative;z-index:1;max-width:800px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(99,179,237,0.07);border:1px solid rgba(99,179,237,0.22);border-radius:100px;padding:5px 14px;font-size:0.72rem;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px;}
 .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.4s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-.hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:6px;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.4rem,7vw,4.8rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:8px;}
 .hero-name span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-role{font-size:clamp(1rem,2.5vw,1.35rem);font-weight:500;color:var(--muted);margin-bottom:24px;}
-.hero-desc{font-size:0.97rem;color:#a0aec0;max-width:620px;margin-bottom:36px;line-height:1.75;}
-.hero-contact{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;}
-.contact-chip{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:0.8rem;color:var(--muted);transition:all 0.2s;}
-.contact-chip:hover{border-color:var(--accent);color:var(--accent);}
-.contact-chip svg{width:14px;height:14px;flex-shrink:0;}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;background:var(--grad1);font-size:0.87rem;font-weight:600;color:#fff;transition:opacity 0.2s,transform 0.2s;border:none;cursor:pointer;}
-.btn-primary:hover{opacity:0.88;transform:translateY(-2px);}
-.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;background:transparent;border:1px solid var(--border);font-size:0.87rem;font-weight:600;color:var(--text);transition:all 0.2s;cursor:pointer;}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
-.hero-stats{display:flex;flex-wrap:wrap;gap:36px;margin-top:56px;padding-top:36px;border-top:1px solid var(--border);}
+.hero-role{font-size:clamp(0.95rem,2vw,1.2rem);font-weight:500;color:var(--muted);margin-bottom:20px;}
+.hero-desc{font-size:0.93rem;color:#a0aec0;max-width:640px;margin-bottom:32px;line-height:1.78;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:0.77rem;color:var(--muted);transition:all .2s;}
+.chip:hover{border-color:var(--accent);color:var(--accent);}
+.chip svg{width:13px;height:13px;flex-shrink:0;}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
+.btn-grad{display:inline-flex;align-items:center;gap:7px;padding:12px 26px;border-radius:9px;background:var(--grad1);font-size:0.85rem;font-weight:600;color:#fff;transition:opacity .2s,transform .2s;border:none;cursor:pointer;}
+.btn-grad:hover{opacity:.87;transform:translateY(-2px);}
+.btn-line{display:inline-flex;align-items:center;gap:7px;padding:12px 26px;border-radius:9px;background:transparent;border:1px solid var(--border);font-size:0.85rem;font-weight:600;color:var(--text);transition:all .2s;cursor:pointer;}
+.btn-line:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.hero-stats{display:flex;flex-wrap:wrap;gap:32px;padding-top:32px;border-top:1px solid var(--border);}
 .stat{display:flex;flex-direction:column;gap:2px;}
-.stat-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;color:#fff;}
-.stat-num span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.stat-label{font-size:0.77rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
-section{padding:80px 6vw;}
-.section-header{margin-bottom:48px;}
-.section-tag{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
-.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;color:#fff;line-height:1.15;}
-.section-title span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-val{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;font-weight:800;}
+.stat-val span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;}
+
+/* ── SECTIONS ── */
+section{padding:72px 6vw;}
+.sec-hd{margin-bottom:44px;}
+.sec-tag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.sec-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,3.5vw,2.3rem);font-weight:700;color:#fff;line-height:1.15;}
+.sec-title span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 #skills{background:var(--bg2);}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
-.skill-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:center;gap:14px;transition:all 0.25s;position:relative;overflow:hidden;}
-.skill-card::before{content:'';position:absolute;inset:0;background:var(--grad1);opacity:0;transition:opacity 0.25s;}
-.skill-card:hover{transform:translateY(-3px);border-color:transparent;box-shadow:0 8px 30px rgba(99,179,237,0.18);}
-.skill-card:hover::before{opacity:0.06;}
-.skill-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
-.skill-name{font-size:0.87rem;font-weight:600;color:var(--text);position:relative;z-index:1;}
-.skill-level{font-size:0.72rem;color:var(--muted);position:relative;z-index:1;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;align-items:center;gap:12px;transition:all .25s;position:relative;overflow:hidden;}
+.skill-card::before{content:'';position:absolute;inset:0;background:var(--grad1);opacity:0;transition:opacity .25s;}
+.skill-card:hover{transform:translateY(-3px);border-color:transparent;box-shadow:0 8px 28px rgba(99,179,237,0.15);}
+.skill-card:hover::before{opacity:0.05;}
+.sk-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;background:rgba(99,179,237,0.1);}
+.sk-name{font-size:0.84rem;font-weight:600;color:var(--text);position:relative;z-index:1;}
+.sk-level{font-size:0.7rem;color:var(--muted);position:relative;z-index:1;}
 #experience{background:var(--bg);}
-.timeline{position:relative;padding-left:28px;}
-.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);border-radius:2px;}
-.timeline-item{position:relative;margin-bottom:36px;}
-.timeline-item::before{content:'';position:absolute;left:-34px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(99,179,237,0.2);}
-.exp-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;transition:all 0.25s;}
-.exp-card:hover{border-color:rgba(99,179,237,0.3);box-shadow:0 4px 24px rgba(99,179,237,0.08);}
-.exp-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px;}
-.exp-role{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;}
-.exp-period{font-size:0.75rem;font-weight:600;color:var(--accent);background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.2);border-radius:100px;padding:3px 12px;white-space:nowrap;}
-.exp-company{font-size:0.85rem;color:var(--accent2);font-weight:500;margin-bottom:14px;}
-.exp-duties{list-style:none;display:flex;flex-direction:column;gap:7px;}
-.exp-duties li{font-size:0.84rem;color:#a0aec0;padding-left:18px;position:relative;line-height:1.55;}
-.exp-duties li::before{content:'→';position:absolute;left:0;color:var(--accent3);font-weight:700;}
+.timeline{position:relative;padding-left:26px;}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);border-radius:2px;}
+.tl-item{position:relative;margin-bottom:28px;}
+.tl-item::before{content:'';position:absolute;left:-32px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(99,179,237,0.18);}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 26px;transition:all .25s;}
+.exp-card:hover{border-color:rgba(99,179,237,0.28);box-shadow:0 4px 20px rgba(99,179,237,0.07);}
+.exp-top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px;}
+.exp-role{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;}
+.exp-period{font-size:0.72rem;font-weight:600;color:var(--accent);background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.18);border-radius:100px;padding:2px 10px;white-space:nowrap;}
+.exp-company{font-size:0.82rem;color:var(--accent2);font-weight:500;margin-bottom:12px;}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.exp-list li{font-size:0.82rem;color:#a0aec0;padding-left:16px;position:relative;line-height:1.55;}
+.exp-list li::before{content:'→';position:absolute;left:0;color:var(--accent3);font-weight:700;font-size:.8rem;}
 #projects{background:var(--bg2);}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
-.project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 24px 20px;transition:all 0.25s;display:flex;flex-direction:column;}
-.project-card:hover{transform:translateY(-4px);border-color:rgba(99,179,237,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.3);}
-.project-year{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--accent2);text-transform:uppercase;margin-bottom:10px;}
-.project-title{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px;flex:1;}
-.project-tag{display:inline-block;font-size:0.7rem;font-weight:600;background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.2);color:var(--accent3);border-radius:6px;padding:2px 10px;margin-top:12px;}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .25s;display:flex;flex-direction:column;}
+.proj-card:hover{transform:translateY(-4px);border-color:rgba(99,179,237,0.28);box-shadow:0 10px 36px rgba(0,0,0,0.28);}
+.proj-year{font-size:0.68rem;font-weight:700;letter-spacing:.12em;color:var(--accent2);text-transform:uppercase;margin-bottom:8px;}
+.proj-title{font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:700;color:#fff;line-height:1.45;flex:1;}
+.proj-tag{display:inline-block;font-size:0.68rem;font-weight:600;background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.2);color:var(--accent3);border-radius:5px;padding:2px 9px;margin-top:10px;}
 #education{background:var(--bg);}
-.edu-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 40px;max-width:680px;transition:all 0.25s;}
-.edu-card:hover{border-color:rgba(99,179,237,0.3);box-shadow:0 8px 40px rgba(99,179,237,0.1);}
-.edu-university{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:6px;}
-.edu-degree{font-size:0.9rem;color:var(--accent2);font-weight:500;margin-bottom:6px;}
-.edu-period{font-size:0.8rem;color:var(--muted);margin-bottom:20px;}
-.edu-gpa{display:inline-flex;align-items:center;gap:8px;background:rgba(246,224,94,0.08);border:1px solid rgba(246,224,94,0.25);border-radius:10px;padding:10px 18px;}
-.gpa-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:800;color:var(--gold);}
-.gpa-label{font-size:0.76rem;color:var(--muted);}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:32px 36px;max-width:660px;transition:all .25s;}
+.edu-card:hover{border-color:rgba(99,179,237,0.28);box-shadow:0 6px 32px rgba(99,179,237,0.08);}
+.edu-uni{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:5px;}
+.edu-deg{font-size:0.87rem;color:var(--accent2);font-weight:500;margin-bottom:5px;}
+.edu-yr{font-size:0.78rem;color:var(--muted);margin-bottom:18px;}
+.edu-meta{display:flex;align-items:center;gap:0;flex-wrap:wrap;}
+.edu-meta-item{display:flex;flex-direction:column;padding:8px 18px;}
+.edu-meta-item:first-child{padding-left:0;}
+.edu-meta-sep{width:1px;height:38px;background:rgba(255,255,255,0.08);}
+.edu-ipk{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:800;color:var(--gold);}
+.edu-meta-label{font-size:0.72rem;color:var(--muted);margin-bottom:2px;}
+.edu-meta-val{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:var(--text);}
 #certificates{background:var(--bg2);}
-.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
-.cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;transition:all 0.25s;}
-.cert-card:hover{border-color:rgba(159,122,234,0.35);transform:translateY(-2px);}
-.cert-icon{width:40px;height:40px;flex-shrink:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px;}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;align-items:flex-start;gap:12px;transition:all .25s;}
+.cert-card:hover{border-color:rgba(159,122,234,0.32);transform:translateY(-2px);}
+.cert-icon{width:38px;height:38px;flex-shrink:0;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:rgba(159,122,234,0.1);}
 .cert-body{flex:1;}
-.cert-title{font-size:0.84rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px;}
-.cert-issuer{font-size:0.73rem;color:var(--muted);}
+.cert-title{font-size:0.82rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:3px;}
+.cert-issuer{font-size:0.7rem;color:var(--muted);}
 #organisations{background:var(--bg);}
-.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
-.org-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 24px;transition:all 0.25s;}
-.org-card:hover{border-color:rgba(104,211,145,0.3);transform:translateY(-3px);}
-.org-role{font-family:'Space Grotesk',sans-serif;font-size:0.97rem;font-weight:700;color:#fff;margin-bottom:2px;}
-.org-name{font-size:0.82rem;color:var(--accent3);font-weight:500;margin-bottom:6px;}
-.org-period{font-size:0.72rem;color:var(--muted);margin-bottom:12px;}
-.org-duties{list-style:none;display:flex;flex-direction:column;gap:5px;}
-.org-duties li{font-size:0.8rem;color:#90a0b7;padding-left:16px;position:relative;line-height:1.45;}
-.org-duties li::before{content:'·';position:absolute;left:0;color:var(--accent3);font-size:1.2rem;line-height:1.1;}
-#contact{background:var(--bg3);text-align:center;padding:80px 6vw;}
-.cta-box{max-width:600px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:52px 40px;}
-.cta-title{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:12px;}
-.cta-sub{font-size:0.9rem;color:var(--muted);margin-bottom:32px;}
-.cta-email{font-size:1.05rem;font-weight:600;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:28px;}
-.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
-.footer-name{font-size:0.85rem;font-weight:600;color:var(--muted);}
-.footer-note{font-size:0.75rem;color:#3d4a5c;}
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.org-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;transition:all .25s;}
+.org-card:hover{border-color:rgba(104,211,145,0.28);transform:translateY(-3px);}
+.org-role{font-family:'Space Grotesk',sans-serif;font-size:0.93rem;font-weight:700;color:#fff;margin-bottom:2px;}
+.org-name{font-size:0.79rem;color:var(--accent3);font-weight:500;margin-bottom:4px;}
+.org-period{font-size:0.69rem;color:var(--muted);margin-bottom:10px;}
+.org-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.org-list li{font-size:0.77rem;color:#90a0b7;padding-left:14px;position:relative;line-height:1.45;}
+.org-list li::before{content:'·';position:absolute;left:0;color:var(--accent3);font-size:1.1rem;line-height:1.1;}
+#contact{background:var(--bg3);text-align:center;padding:72px 6vw;}
+.cta-wrap{max-width:560px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:22px;padding:48px 36px;}
+.cta-title{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:800;color:#fff;margin-bottom:10px;}
+.cta-sub{font-size:0.87rem;color:var(--muted);margin-bottom:26px;}
+.cta-email{font-size:1rem;font-weight:600;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:24px;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 6vw;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;}
+.ft-name{font-size:0.82rem;font-weight:600;color:var(--muted);}
+.ft-note{font-size:0.72rem;color:#3d4a5c;}
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .5s ease,transform .5s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;right:24px;z-index:9999;padding:12px 18px;border-radius:9px;font-size:0.82rem;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,0.4);display:none;transition:opacity .35s;}
+#toast.show{display:block;}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="nav-logo">MRS.</div>
   <div class="nav-links">
-    <a href="#skills" class="hide-mobile">Skills</a>
-    <a href="#experience" class="hide-mobile">Experience</a>
-    <a href="#projects" class="hide-mobile">Projects</a>
-    <a href="#contact" class="hide-mobile">Contact</a>
-    <span class="edit-mode-badge" id="editBadge">✏ Edit Mode ON</span>
+    <a class="nm" href="#skills">Skills</a>
+    <a class="nm" href="#experience">Experience</a>
+    <a class="nm" href="#projects">Projects</a>
+    <a class="nm" href="#contact">Contact</a>
+    <span class="edit-badge" id="editBadge">✏ Edit Mode</span>
     <button id="ownerLoginBtn">🔐 Owner</button>
-    <button id="editToggleBtn">✏ Edit Mode</button>
+    <button id="editToggleBtn">✏ Edit</button>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
-    <div id="heroTag" class="hero-tag" data-ed></div>
+  <div class="hero-inner">
+    <div class="hero-tag" id="heroTag" data-ed></div>
     <h1 class="hero-name" id="heroName" data-ed></h1>
     <p class="hero-role" id="heroRole" data-ed></p>
     <p class="hero-desc" id="heroDesc" data-ed></p>
-    <div class="hero-contact">
-      <div class="contact-chip" id="heroPhone" data-ed>
+    <div class="hero-chips">
+      <div class="chip" id="chipPhone" data-ed>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.07 6.07l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        <span id="heroPhoneSpan"></span>
+        <span id="chipPhoneTxt"></span>
       </div>
-      <div class="contact-chip" id="heroEmail" data-ed>
+      <div class="chip" id="chipEmail" data-ed>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <span id="heroEmailSpan"></span>
+        <span id="chipEmailTxt"></span>
       </div>
-      <div class="contact-chip" id="heroCity" data-ed>
+      <div class="chip" id="chipCity" data-ed>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span id="heroCitySpan"></span>
+        <span id="chipCityTxt"></span>
       </div>
     </div>
     <div class="hero-cta">
-      <a id="ctaMailBtn" href="#" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a id="btnMail" href="#" class="btn-grad">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         Hubungi Saya
       </a>
-      <a href="#experience" class="btn-outline">Lihat Pengalaman</a>
+      <a href="#experience" class="btn-line">Lihat Pengalaman</a>
     </div>
     <div class="hero-stats">
-      <div class="stat" id="stat1el" data-ed><div class="stat-num"><span id="stat1val"></span></div><div class="stat-label" id="stat1lab"></div></div>
-      <div class="stat" id="stat2el" data-ed><div class="stat-num"><span id="stat2val"></span></div><div class="stat-label" id="stat2lab"></div></div>
-      <div class="stat" id="stat3el" data-ed><div class="stat-num"><span id="stat3val"></span></div><div class="stat-label" id="stat3lab"></div></div>
-      <div class="stat" id="stat4el" data-ed><div class="stat-num"><span id="stat4val"></span></div><div class="stat-label" id="stat4lab"></div></div>
+      <div class="stat" id="stat1el" data-ed><div class="stat-val"><span id="stat1v"></span></div><div class="stat-lbl" id="stat1l"></div></div>
+      <div class="stat" id="stat2el" data-ed><div class="stat-val"><span id="stat2v"></span></div><div class="stat-lbl" id="stat2l"></div></div>
+      <div class="stat" id="stat3el" data-ed><div class="stat-val"><span id="stat3v"></span></div><div class="stat-lbl" id="stat3l"></div></div>
+      <div class="stat" id="stat4el" data-ed><div class="stat-val"><span id="stat4v"></span></div><div class="stat-lbl" id="stat4l"></div></div>
     </div>
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
-  <div class="section-header fade-in"><div class="section-tag">// Core Competencies</div><h2 class="section-title">Kemampuan <span>Utama</span></h2></div>
+  <div class="sec-hd fade-in"><div class="sec-tag">// Core Competencies</div><h2 class="sec-title">Kemampuan <span>Utama</span></h2></div>
   <div class="skills-grid" id="skillsGrid"></div>
-  <button class="btn-add-card" id="addSkillBtn">+ Tambah Skill</button>
+  <button class="btn-add-card" id="btnAddSkill">+ Tambah Skill</button>
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-header fade-in"><div class="section-tag">// Work History</div><h2 class="section-title">Pengalaman <span>Kerja</span></h2></div>
+  <div class="sec-hd fade-in"><div class="sec-tag">// Work History</div><h2 class="sec-title">Pengalaman <span>Kerja</span></h2></div>
   <div class="timeline" id="expTimeline"></div>
-  <button class="btn-add-card" id="addExpBtn">+ Tambah Pengalaman</button>
+  <button class="btn-add-card" id="btnAddExp">+ Tambah Pengalaman</button>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
-  <div class="section-header fade-in"><div class="section-tag">// Academic Work</div><h2 class="section-title">Pengalaman <span>Projek</span></h2></div>
-  <div class="projects-grid" id="projectsGrid"></div>
-  <button class="btn-add-card" id="addProjectBtn">+ Tambah Projek</button>
+  <div class="sec-hd fade-in"><div class="sec-tag">// Academic Work</div><h2 class="sec-title">Pengalaman <span>Projek</span></h2></div>
+  <div class="proj-grid" id="projGrid"></div>
+  <button class="btn-add-card" id="btnAddProj">+ Tambah Projek</button>
 </section>
 
+<!-- EDUCATION -->
 <section id="education">
-  <div class="section-header fade-in"><div class="section-tag">// Academic Background</div><h2 class="section-title">Pendidikan <span>Formal</span></h2></div>
+  <div class="sec-hd fade-in"><div class="sec-tag">// Academic Background</div><h2 class="sec-title">Pendidikan <span>Formal</span></h2></div>
   <div class="edu-card fade-in" id="eduCard" data-ed>
-    <div class="edu-university" id="eduUniversity"></div>
-    <div class="edu-degree" id="eduDegree"></div>
-    <div class="edu-period" id="eduPeriod"></div>
-    <div class="edu-gpa">
-      <div><div class="gpa-num" id="eduGpa"></div><div class="gpa-label">IPK</div></div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);margin:0 14px;"></div>
-      <div><div style="font-size:0.8rem;color:var(--muted)">Skala</div><div style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text)">4.00</div></div>
-      <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);margin:0 14px;"></div>
-      <div><div style="font-size:0.8rem;color:var(--muted)">Status</div><div id="eduStatus" style="font-size:0.9rem;font-weight:700;color:var(--accent3)"></div></div>
+    <div class="edu-uni" id="eduUni"></div>
+    <div class="edu-deg" id="eduDeg"></div>
+    <div class="edu-yr"  id="eduYr"></div>
+    <div class="edu-meta">
+      <div class="edu-meta-item"><div class="edu-meta-label">IPK</div><div class="edu-ipk" id="eduIpk"></div></div>
+      <div class="edu-meta-sep"></div>
+      <div class="edu-meta-item"><div class="edu-meta-label">Skala</div><div class="edu-meta-val">4.00</div></div>
+      <div class="edu-meta-sep"></div>
+      <div class="edu-meta-item"><div class="edu-meta-label">Status</div><div class="edu-meta-val" id="eduStatus" style="color:var(--accent3)"></div></div>
     </div>
   </div>
 </section>
 
+<!-- CERTIFICATES -->
 <section id="certificates">
-  <div class="section-header fade-in"><div class="section-tag">// Credentials</div><h2 class="section-title">Sertifikat &amp; <span>Pelatihan</span></h2></div>
+  <div class="sec-hd fade-in"><div class="sec-tag">// Credentials</div><h2 class="sec-title">Sertifikat &amp; <span>Pelatihan</span></h2></div>
   <div class="cert-grid" id="certGrid"></div>
-  <button class="btn-add-card" id="addCertBtn">+ Tambah Sertifikat</button>
+  <button class="btn-add-card" id="btnAddCert">+ Tambah Sertifikat</button>
 </section>
 
+<!-- ORGANISATIONS -->
 <section id="organisations">
-  <div class="section-header fade-in"><div class="section-tag">// Leadership &amp; Volunteering</div><h2 class="section-title">Organisasi &amp; <span>Relawan</span></h2></div>
+  <div class="sec-hd fade-in"><div class="sec-tag">// Leadership &amp; Volunteering</div><h2 class="sec-title">Organisasi &amp; <span>Relawan</span></h2></div>
   <div class="org-grid" id="orgGrid"></div>
-  <button class="btn-add-card" id="addOrgBtn">+ Tambah Organisasi</button>
+  <button class="btn-add-card" id="btnAddOrg">+ Tambah Organisasi</button>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
-  <div class="cta-box fade-in">
+  <div class="cta-wrap fade-in">
     <div class="cta-title" id="ctaTitle" data-ed></div>
     <p class="cta-sub" id="ctaSub" data-ed></p>
-    <span class="cta-email" id="ctaEmail"></span>
-    <div class="cta-actions">
-      <a id="ctaMailBtn2" href="#" class="btn-primary">Kirim Email</a>
-      <a id="ctaWaBtn" href="#" class="btn-outline">Hubungi via WA</a>
+    <span class="cta-email" id="ctaEmailEl"></span>
+    <div class="cta-btns">
+      <a id="btnMail2" href="#" class="btn-grad">Kirim Email</a>
+      <a id="btnWa" href="#" class="btn-line">WhatsApp</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-name" id="footerName" data-ed></div>
-  <div class="footer-note" id="footerNote" data-ed></div>
+  <div class="ft-name" id="ftName" data-ed></div>
+  <div class="ft-note" id="ftNote" data-ed></div>
 </footer>
 
-<!-- LOGIN OVERLAY -->
+<!-- LOGIN -->
 <div id="loginOverlay">
   <div id="loginBox">
     <h3>🔐 Owner Login</h3>
-    <p>Masukkan password untuk mengaktifkan mode edit</p>
-    <input type="password" id="loginInput" placeholder="Password..."/>
-    <div id="loginError"></div>
-    <button id="loginSubmitBtn">Masuk</button><br/>
-    <button id="loginCancelBtn">Batal</button>
+    <p>Masukkan password untuk mode edit</p>
+    <input type="password" id="loginPw" placeholder="Password..."/>
+    <div id="loginErr"></div>
+    <button id="loginOkBtn">Masuk</button><br/>
+    <button id="loginCxBtn">Batal</button>
   </div>
 </div>
 
-<!-- EDITOR MODAL — dibangun via DOM, bukan innerHTML agar tidak ada bug parsing -->
-<div class="modal-backdrop" id="modalBg">
-  <div class="modal" id="modalBox">
+<!-- MODAL -->
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal-box">
     <h3 id="modalTitle">Edit</h3>
-    <div id="modalFields"></div>
+    <div id="modalBody"></div>
     <div class="modal-actions">
-      <button class="btn-danger" id="modalDelBtn">Hapus</button>
-      <button class="btn-cancel" id="modalCancelBtn">Batal</button>
-      <button class="btn-save" id="modalSaveBtn">Simpan &amp; Publish</button>
+      <button class="btn-del-sm" id="modalDelBtn">Hapus</button>
+      <button class="btn-cancel-sm" id="modalCxBtn">Batal</button>
+      <button class="btn-primary-sm" id="modalOkBtn">Simpan &amp; Publish</button>
     </div>
   </div>
 </div>
 
+<!-- TOAST -->
+<div id="toast"></div>
+
 <script>
-// ════════════════════════════════════════════════════
-// KONFIGURASI
-// ════════════════════════════════════════════════════
-const REPO       = 'mohamadrasyasath-collab/portfolio';
-const DATA_FILE  = 'data.json';
-const OWNER_HASH = '66379381072837118bb70c6ebacd120536732f7364000fc73459d9dd7bec190f';
-const SESSION_KEY = 'pf_session';
-const TOKEN_KEY   = 'pf_token';
-const GH_API      = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE;
-const GH_PAGES    = 'https://mohamadrasyasath-collab.github.io/portfolio/' + DATA_FILE;
+// ═══════════════════════════════════════════════════════
+//  KONFIGURASI
+// ═══════════════════════════════════════════════════════
+var REPO      = 'mohamadrasyasath-collab/portfolio';
+var DATA_FILE = 'data.json';
+var GH_RAW    = 'https://mohamadrasyasath-collab.github.io/portfolio/data.json';
+var GH_API    = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE;
+var PWD_HASH  = '66379381072837118bb70c6ebacd120536732f7364000fc73459d9dd7bec190f';
+var SES_KEY   = 'pf_ses';
+var TOK_KEY   = 'pf_tok';
 
-// ════════════════════════════════════════════════════
-// STATE GLOBAL
-// ════════════════════════════════════════════════════
-let D = {};          // semua data portfolio (dari data.json)
-let editMode = false; // true = owner sedang edit
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
+var D = {};            // semua data portfolio
+var editMode = false;  // true = owner aktif edit
+var _cbSave = null;    // callback saat modal Simpan diklik
+var _cbDel  = null;    // callback saat modal Hapus diklik
 
-// ════════════════════════════════════════════════════
-// LOAD DATA
-// Fetch data.json dari GitHub Pages (cache-bust), populate D, lalu render.
-// ════════════════════════════════════════════════════
-async function loadData() {
-  try {
-    const res = await fetch(GH_PAGES + '?t=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    D = await res.json();
-  } catch (err) {
-    console.error('loadData gagal:', err);
-    D = {};
-  }
-  renderAll();
+// ═══════════════════════════════════════════════════════
+//  LOAD DATA dari GitHub Pages (cache-bust setiap kali)
+// ═══════════════════════════════════════════════════════
+function loadData() {
+  fetch(GH_RAW + '?_=' + Date.now(), { cache: 'no-store' })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(json) {
+      D = json;
+      renderAll();
+    })
+    .catch(function(e) {
+      console.error('loadData error:', e);
+      showToast('⚠ Gagal memuat data: ' + e.message, 'error');
+    });
 }
 
-// ════════════════════════════════════════════════════
-// SAVE DATA
-// Ambil SHA terbaru dari GitHub API lalu PUT data.json baru.
-// Retry 3x jika SHA conflict (422).
-// ════════════════════════════════════════════════════
-async function saveData() {
-  // 1. Pastikan token tersedia
-  let token = localStorage.getItem(TOKEN_KEY) || '';
+// ═══════════════════════════════════════════════════════
+//  SAVE DATA ke GitHub (PUT data.json)
+//  - Ambil SHA terbaru SETIAP KALI (no-cache)
+//  - Retry 3x jika 422 SHA conflict
+// ═══════════════════════════════════════════════════════
+function saveData() {
+  // Pastikan token tersedia
+  var token = localStorage.getItem(TOK_KEY) || '';
   if (!token) {
-    const input = prompt('🔑 Masukkan GitHub Personal Access Token\n(hanya tersimpan di browser Anda, tidak dikirim ke server lain):');
-    if (!input || input.trim().length < 10) {
-      showToast('⚠ Token diperlukan untuk menyimpan', 'error');
-      return false;
-    }
-    token = input.trim();
-    localStorage.setItem(TOKEN_KEY, token);
+    token = (prompt('🔑 Masukkan GitHub Personal Access Token\n(disimpan hanya di browser ini):') || '').trim();
+    if (token.length < 10) { showToast('⚠ Token diperlukan', 'error'); return Promise.resolve(false); }
+    localStorage.setItem(TOK_KEY, token);
   }
 
-  showToast('⏳ Menyimpan ke GitHub...', 'loading');
+  showToast('⏳ Menyimpan...', 'loading');
 
-  // 2. Encode data ke base64 (JSON.stringify dulu)
-  let encoded;
-  try {
-    const jsonStr = JSON.stringify(D, null, 2);
-    // encodeURIComponent → unescape → btoa adalah cara safe untuk UTF-8 ke base64
-    encoded = btoa(unescape(encodeURIComponent(jsonStr)));
-  } catch (e) {
-    showToast('⚠ Gagal encode data: ' + e.message, 'error');
-    return false;
-  }
+  // Encode data
+  var jsonStr;
+  try { jsonStr = JSON.stringify(D, null, 2); }
+  catch(e) { showToast('⚠ Encode error: ' + e.message, 'error'); return Promise.resolve(false); }
 
-  // 3. Coba push, retry 3x jika SHA conflict
-  const MAX_ATTEMPTS = 3;
-  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+  var b64;
+  try { b64 = btoa(unescape(encodeURIComponent(jsonStr))); }
+  catch(e) { showToast('⚠ Base64 error: ' + e.message, 'error'); return Promise.resolve(false); }
 
-    // 3a. Ambil SHA terbaru — WAJIB cache:no-store agar tidak dapat SHA stale
-    let sha;
-    try {
-      const shaRes = await fetch(GH_API + '?t=' + Date.now(), {
-        method: 'GET',
-        cache: 'no-store',
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json',
-          'Cache-Control': 'no-cache'
-        }
-      });
-      if (shaRes.status === 401 || shaRes.status === 403) {
-        localStorage.removeItem(TOKEN_KEY);
-        showToast('⚠ Token tidak valid. Hapus & masukkan token baru.', 'error');
-        return false;
+  // Fungsi satu attempt
+  function attempt(n) {
+    // Langkah 1: ambil SHA terbaru (WAJIB no-store)
+    return fetch(GH_API + '?_=' + Date.now(), {
+      cache: 'no-store',
+      headers: {
+        'Authorization': 'token ' + token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Cache-Control': 'no-cache'
       }
-      if (!shaRes.ok) {
-        const errJson = await shaRes.json().catch(() => ({}));
-        throw new Error((errJson.message || 'HTTP ' + shaRes.status) + ' (ambil SHA)');
+    })
+    .then(function(r) {
+      if (r.status === 401 || r.status === 403) {
+        localStorage.removeItem(TOK_KEY);
+        throw new Error('TOKEN_INVALID');
       }
-      const shaJson = await shaRes.json();
-      sha = shaJson.sha;
-      if (!sha) throw new Error('SHA tidak ada di respons API');
-    } catch (e) {
-      if (attempt === MAX_ATTEMPTS) {
-        showToast('⚠ Gagal ambil SHA: ' + e.message, 'error');
-        return false;
-      }
-      await delay(700 * attempt);
-      continue;
-    }
-
-    // 3b. PUT data baru
-    try {
-      const putRes = await fetch(GH_API, {
+      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'HTTP '+r.status); });
+      return r.json();
+    })
+    .then(function(meta) {
+      if (!meta.sha) throw new Error('SHA tidak ada');
+      // Langkah 2: PUT konten baru
+      return fetch(GH_API, {
         method: 'PUT',
         headers: {
           'Authorization': 'token ' + token,
@@ -419,758 +434,495 @@ async function saveData() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          message: 'Update portfolio data ' + new Date().toLocaleString('id-ID'),
-          content: encoded,
-          sha: sha
+          message: 'Update portfolio ' + new Date().toLocaleString('id-ID'),
+          content: b64,
+          sha: meta.sha
         })
       });
-
-      if (putRes.status === 422) {
+    })
+    .then(function(r) {
+      if (r.status === 422 && n < 3) {
         // SHA conflict — tunggu lalu retry dengan SHA baru
-        if (attempt < MAX_ATTEMPTS) {
-          await delay(1000 * attempt);
-          continue;
-        }
-        showToast('⚠ Konflik SHA setelah ' + MAX_ATTEMPTS + 'x percobaan. Coba lagi.', 'error');
-        return false;
+        return new Promise(function(res) { setTimeout(function() { res(attempt(n + 1)); }, 900 * n); });
       }
-
-      if (putRes.status === 401 || putRes.status === 403) {
-        localStorage.removeItem(TOKEN_KEY);
-        showToast('⚠ Token tidak valid / kedaluwarsa. Coba lagi.', 'error');
-        return false;
+      if (r.status === 401 || r.status === 403) {
+        localStorage.removeItem(TOK_KEY);
+        throw new Error('TOKEN_INVALID');
       }
-
-      if (!putRes.ok) {
-        const errJson = await putRes.json().catch(() => ({}));
-        throw new Error(errJson.message || 'HTTP ' + putRes.status);
-      }
-
-      // Sukses
-      showToast('✅ Tersimpan! Data permanen — aman di-refresh.', 'success');
+      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'HTTP '+r.status); });
+      showToast('✅ Tersimpan! Aman di-refresh.', 'success');
       return true;
-
-    } catch (e) {
-      if (attempt === MAX_ATTEMPTS) {
-        showToast('⚠ Gagal simpan: ' + e.message, 'error');
+    })
+    .catch(function(e) {
+      if (e.message === 'TOKEN_INVALID') {
+        showToast('⚠ Token tidak valid. Masukkan ulang.', 'error');
         return false;
       }
-      await delay(700 * attempt);
-    }
+      if (n < 3) {
+        return new Promise(function(res) { setTimeout(function() { res(attempt(n + 1)); }, 700 * n); });
+      }
+      showToast('⚠ Gagal: ' + e.message, 'error');
+      return false;
+    });
   }
 
-  return false;
+  return attempt(1);
 }
 
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-// ════════════════════════════════════════════════════
-// RENDER — isi semua elemen dari objek D
-// TIDAK menggunakan innerHTML pada container utama untuk
-// menghindari hilangnya event listener.
-// ════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+//  RENDER — isi semua elemen dari D (tidak ada innerHTML
+//  pada elemen yang punya event listener penting)
+// ═══════════════════════════════════════════════════════
 function renderAll() {
   // Hero
-  setTxt('heroTag',  D.heroTag);
-  // heroName: dua baris, baris 2 dengan gradient via <span>
-  const heroNameEl = document.getElementById('heroName');
-  heroNameEl.textContent = '';
-  heroNameEl.appendChild(document.createTextNode(D.heroName1 || ''));
-  heroNameEl.appendChild(document.createElement('br'));
-  const span = document.createElement('span');
-  span.textContent = D.heroName2 || '';
-  heroNameEl.appendChild(span);
-
-  setTxt('heroRole', D.heroRole);
-  setTxt('heroDesc', D.heroDesc);
-  setTxt('heroPhoneSpan', D.heroPhone);
-  setTxt('heroEmailSpan', D.heroEmail);
-  setTxt('heroCitySpan',  D.heroCity);
-
-  const mail = 'mailto:' + (D.heroEmail || '');
-  const wa   = 'tel:' + (D.heroPhone || '').replace(/\D/g, '');
-  document.getElementById('ctaMailBtn').href  = mail;
-  document.getElementById('ctaMailBtn2').href = mail;
-  document.getElementById('ctaWaBtn').href    = wa;
-
+  txt('heroTag',  D.heroTag);
+  // heroName: dua baris — dibuat via DOM agar tidak reset event
+  var hn = el('heroName');
+  if (hn) {
+    hn.innerHTML = '';
+    hn.appendChild(document.createTextNode(D.heroName1 || ''));
+    hn.appendChild(document.createElement('br'));
+    var sp = document.createElement('span');
+    sp.textContent = D.heroName2 || '';
+    hn.appendChild(sp);
+  }
+  txt('heroRole', D.heroRole);
+  txt('heroDesc', D.heroDesc);
+  txt('chipPhoneTxt', D.phone);
+  txt('chipEmailTxt', D.email);
+  txt('chipCityTxt',  D.city);
+  var mail = 'mailto:' + (D.email || '');
+  var wa   = 'tel:' + (D.phone || '').replace(/\D/g,'');
+  attr('btnMail',  'href', mail);
+  attr('btnMail2', 'href', mail);
+  attr('btnWa',    'href', wa);
   // Stats
-  ['1','2','3','4'].forEach(n => {
-    setTxt('stat' + n + 'val', D['stat' + n + 'val']);
-    setTxt('stat' + n + 'lab', D['stat' + n + 'lab']);
-  });
-
+  for (var i = 1; i <= 4; i++) {
+    txt('stat'+i+'v', D['s'+i+'v']);
+    txt('stat'+i+'l', D['s'+i+'l']);
+  }
   // Education
-  setTxt('eduUniversity', D.eduUniversity);
-  setTxt('eduDegree',     D.eduDegree);
-  setTxt('eduPeriod',     D.eduPeriod);
-  setTxt('eduGpa',        D.eduGpa);
-  setTxt('eduStatus',     D.eduStatus);
-
-  // CTA + Footer
-  setTxt('ctaTitle',   D.ctaTitle);
-  setTxt('ctaSub',     D.ctaSub);
-  setTxt('ctaEmail',   D.heroEmail);
-  setTxt('footerName', D.footerName);
-  setTxt('footerNote', D.footerNote);
-
-  // List sections
+  txt('eduUni',    D.eduUni);
+  txt('eduDeg',    D.eduDeg);
+  txt('eduYr',     D.eduYr);
+  txt('eduIpk',    D.eduIpk);
+  txt('eduStatus', D.eduStatus);
+  // CTA / Footer
+  txt('ctaTitle',   D.ctaTitle);
+  txt('ctaSub',     D.ctaSub);
+  txt('ctaEmailEl', D.email);
+  txt('ftName',     D.ftName);
+  txt('ftNote',     D.ftNote);
+  // Lists
   renderSkills();
-  renderExperiences();
-  renderProjects();
+  renderExps();
+  renderProjs();
   renderCerts();
   renderOrgs();
-
-  // Pasang onclick edit
+  // Attach click handlers
   attachEditable();
-
-  // Fade-in scroll observer
-  document.querySelectorAll('.fade-in').forEach((el, i) => {
-    el.style.transitionDelay = (i % 5) * 0.07 + 's';
-    fadeObserver.observe(el);
+  // Fade-in observer
+  els('.fade-in').forEach(function(e, i) {
+    e.style.transitionDelay = (i % 6) * 0.06 + 's';
+    fadeObs.observe(e);
   });
 }
 
-// Helper: set textContent dengan null-check
-function setTxt(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = val || '';
-}
+function el(id)  { return document.getElementById(id); }
+function els(sel){ return Array.from(document.querySelectorAll(sel)); }
+function txt(id, v) { var e = el(id); if (e) e.textContent = v || ''; }
+function attr(id, a, v) { var e = el(id); if (e) e.setAttribute(a, v); }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 // ─── RENDER SKILLS ───
 function renderSkills() {
-  const grid = document.getElementById('skillsGrid');
-  grid.innerHTML = '';
+  var g = el('skillsGrid'); g.innerHTML = '';
   (D.skills || []).forEach(function(sk, i) {
-    const card = document.createElement('div');
-    card.className = 'skill-card fade-in';
-    card.setAttribute('data-ed', '');
-    // Isi via textContent (tidak innerHTML) agar emoji aman
-    const iconDiv = document.createElement('div');
-    iconDiv.className = 'skill-icon';
-    iconDiv.style.background = 'rgba(99,179,237,0.12)';
-    iconDiv.textContent = sk.icon || '';
-    const infoDiv = document.createElement('div');
-    const nameDiv = document.createElement('div');
-    nameDiv.className = 'skill-name';
-    nameDiv.textContent = sk.name || '';
-    const levelDiv = document.createElement('div');
-    levelDiv.className = 'skill-level';
-    levelDiv.textContent = sk.level || '';
-    infoDiv.appendChild(nameDiv);
-    infoDiv.appendChild(levelDiv);
-    card.appendChild(iconDiv);
-    card.appendChild(infoDiv);
-    card.addEventListener('click', (function(idx) {
-      return function() { editSkill(idx); };
-    })(i));
-    grid.appendChild(card);
+    var c = document.createElement('div');
+    c.className = 'skill-card fade-in';
+    c.setAttribute('data-ed','');
+    var ico = document.createElement('div'); ico.className = 'sk-icon'; ico.textContent = sk.icon || '';
+    var inf = document.createElement('div');
+    var nm  = document.createElement('div'); nm.className = 'sk-name'; nm.textContent = sk.name || '';
+    var lv  = document.createElement('div'); lv.className = 'sk-level'; lv.textContent = sk.level || '';
+    inf.appendChild(nm); inf.appendChild(lv);
+    c.appendChild(ico); c.appendChild(inf);
+    c.addEventListener('click', mkFn(editSkill, i));
+    g.appendChild(c);
   });
 }
 
 // ─── RENDER EXPERIENCES ───
-function renderExperiences() {
-  const timeline = document.getElementById('expTimeline');
-  timeline.innerHTML = '';
+function renderExps() {
+  var t = el('expTimeline'); t.innerHTML = '';
   (D.experiences || []).forEach(function(ex, i) {
-    const item = document.createElement('div');
-    item.className = 'timeline-item fade-in';
-    item.setAttribute('data-ed', '');
-    const liItems = (ex.duties || []).map(function(du) {
-      return '<li>' + escHtml(du) + '</li>';
-    }).join('');
+    var item = document.createElement('div');
+    item.className = 'tl-item fade-in'; item.setAttribute('data-ed','');
+    var li = (ex.duties||[]).map(function(d){return '<li>'+esc(d)+'</li>';}).join('');
     item.innerHTML =
-      '<div class="exp-card">' +
-        '<div class="exp-header">' +
-          '<div class="exp-role">' + escHtml(ex.role) + '</div>' +
-          '<div class="exp-period">' + escHtml(ex.period) + '</div>' +
-        '</div>' +
-        '<div class="exp-company">' + escHtml(ex.company) + '</div>' +
-        '<ul class="exp-duties">' + liItems + '</ul>' +
-      '</div>';
-    item.addEventListener('click', (function(idx) {
-      return function() { editExp(idx); };
-    })(i));
-    timeline.appendChild(item);
+      '<div class="exp-card"><div class="exp-top">' +
+      '<div class="exp-role">'+esc(ex.role)+'</div>' +
+      '<div class="exp-period">'+esc(ex.period)+'</div></div>' +
+      '<div class="exp-company">'+esc(ex.company)+'</div>' +
+      '<ul class="exp-list">'+li+'</ul></div>';
+    item.addEventListener('click', mkFn(editExp, i));
+    t.appendChild(item);
   });
 }
 
 // ─── RENDER PROJECTS ───
-function renderProjects() {
-  const grid = document.getElementById('projectsGrid');
-  grid.innerHTML = '';
+function renderProjs() {
+  var g = el('projGrid'); g.innerHTML = '';
   (D.projects || []).forEach(function(pr, i) {
-    const card = document.createElement('div');
-    card.className = 'project-card fade-in';
-    card.setAttribute('data-ed', '');
-    card.innerHTML =
-      '<div class="project-year">' + escHtml(pr.year) + '</div>' +
-      '<div class="project-title">' + escHtml(pr.title) + '</div>' +
-      '<div class="project-tag">' + escHtml(pr.tag) + '</div>';
-    card.addEventListener('click', (function(idx) {
-      return function() { editProject(idx); };
-    })(i));
-    grid.appendChild(card);
+    var c = document.createElement('div');
+    c.className = 'proj-card fade-in'; c.setAttribute('data-ed','');
+    c.innerHTML =
+      '<div class="proj-year">'+esc(pr.year)+'</div>' +
+      '<div class="proj-title">'+esc(pr.title)+'</div>' +
+      '<div class="proj-tag">'+esc(pr.tag)+'</div>';
+    c.addEventListener('click', mkFn(editProj, i));
+    g.appendChild(c);
   });
 }
 
 // ─── RENDER CERTS ───
 function renderCerts() {
-  const grid = document.getElementById('certGrid');
-  grid.innerHTML = '';
-  (D.certificates || []).forEach(function(c, i) {
-    const card = document.createElement('div');
-    card.className = 'cert-card fade-in';
-    card.setAttribute('data-ed', '');
-    const iconDiv = document.createElement('div');
-    iconDiv.className = 'cert-icon';
-    iconDiv.style.background = 'rgba(159,122,234,0.12)';
-    iconDiv.textContent = c.icon || '';
-    const body = document.createElement('div');
-    body.className = 'cert-body';
-    body.innerHTML =
-      '<div class="cert-title">' + escHtml(c.title) + '</div>' +
-      '<div class="cert-issuer">' + escHtml(c.issuer) + '</div>';
-    card.appendChild(iconDiv);
-    card.appendChild(body);
-    card.addEventListener('click', (function(idx) {
-      return function() { editCert(idx); };
-    })(i));
-    grid.appendChild(card);
+  var g = el('certGrid'); g.innerHTML = '';
+  (D.certificates || []).forEach(function(ct, i) {
+    var c = document.createElement('div');
+    c.className = 'cert-card fade-in'; c.setAttribute('data-ed','');
+    var ico = document.createElement('div'); ico.className = 'cert-icon'; ico.textContent = ct.icon || '';
+    var bd  = document.createElement('div'); bd.className = 'cert-body';
+    bd.innerHTML = '<div class="cert-title">'+esc(ct.title)+'</div><div class="cert-issuer">'+esc(ct.issuer)+'</div>';
+    c.appendChild(ico); c.appendChild(bd);
+    c.addEventListener('click', mkFn(editCert, i));
+    g.appendChild(c);
   });
 }
 
 // ─── RENDER ORGS ───
 function renderOrgs() {
-  const grid = document.getElementById('orgGrid');
-  grid.innerHTML = '';
+  var g = el('orgGrid'); g.innerHTML = '';
   (D.organisations || []).forEach(function(o, i) {
-    const card = document.createElement('div');
-    card.className = 'org-card fade-in';
-    card.setAttribute('data-ed', '');
-    const liItems = (o.duties || []).map(function(du) {
-      return '<li>' + escHtml(du) + '</li>';
-    }).join('');
-    card.innerHTML =
-      '<div class="org-role">' + escHtml(o.role) + '</div>' +
-      '<div class="org-name">' + escHtml(o.name) + '</div>' +
-      '<div class="org-period">' + escHtml(o.period) + '</div>' +
-      '<ul class="org-duties">' + liItems + '</ul>';
-    card.addEventListener('click', (function(idx) {
-      return function() { editOrg(idx); };
-    })(i));
-    grid.appendChild(card);
+    var c = document.createElement('div');
+    c.className = 'org-card fade-in'; c.setAttribute('data-ed','');
+    var li = (o.duties||[]).map(function(d){return '<li>'+esc(d)+'</li>';}).join('');
+    c.innerHTML =
+      '<div class="org-role">'+esc(o.role)+'</div>' +
+      '<div class="org-name">'+esc(o.name)+'</div>' +
+      '<div class="org-period">'+esc(o.period)+'</div>' +
+      '<ul class="org-list">'+li+'</ul>';
+    c.addEventListener('click', mkFn(editOrg, i));
+    g.appendChild(c);
   });
 }
 
-// Escape HTML untuk rendering aman
-function escHtml(str) {
-  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+// helper: buat fungsi closure dengan index tetap
+function mkFn(fn, idx) { return function(){ fn(idx); }; }
 
-// ─── ATTACH ONCLICK pada elemen statis (hero, stats, edu, footer) ───
+// ─── ATTACH EDITABLE HANDLERS (elemen statis hero/stats/edu/footer) ───
 function attachEditable() {
-  // Map field → label untuk editSimple
-  var simpleFields = {
-    heroTag:    'Tagline',
-    heroRole:   'Role / Jabatan',
-    heroDesc:   'Deskripsi Profil',
-    ctaTitle:   'Judul CTA',
-    ctaSub:     'Sub Judul CTA',
-    footerName: 'Footer Nama',
-    footerNote: 'Footer Catatan'
+  var simples = {
+    heroTag:'Tagline', heroRole:'Role/Jabatan', heroDesc:'Deskripsi Profil',
+    ctaTitle:'Judul CTA', ctaSub:'Sub CTA', ftName:'Footer Nama', ftNote:'Footer Catatan'
   };
-  Object.keys(simpleFields).forEach(function(field) {
-    var el = document.getElementById(field);
-    if (el) {
-      el.onclick = null; // hapus listener lama
-      el.addEventListener('click', (function(f, lbl) {
-        return function() { editSimple(f, lbl); };
-      })(field, simpleFields[field]));
-    }
+  Object.keys(simples).forEach(function(f) {
+    var e = el(f); if (!e) return;
+    e.onclick = null;
+    e.addEventListener('click', (function(field,lbl){ return function(){ editSimple(field,lbl); }; })(f, simples[f]));
   });
-
   // heroName
-  var heroNameEl = document.getElementById('heroName');
-  heroNameEl.onclick = null;
-  heroNameEl.addEventListener('click', function() { editHeroName(); });
-
-  // Contact chips — klik pada parent chip
-  document.getElementById('heroPhone').onclick = null;
-  document.getElementById('heroPhone').addEventListener('click', function() {
-    editField('heroPhone', 'Nomor Telepon', D.heroPhone);
-  });
-  document.getElementById('heroEmail').onclick = null;
-  document.getElementById('heroEmail').addEventListener('click', function() {
-    editField('heroEmail', 'Email', D.heroEmail);
-  });
-  document.getElementById('heroCity').onclick = null;
-  document.getElementById('heroCity').addEventListener('click', function() {
-    editField('heroCity', 'Kota / Lokasi', D.heroCity);
-  });
-
+  var hn = el('heroName'); if (hn) { hn.onclick=null; hn.addEventListener('click',function(){editHeroName();}); }
+  // Chips
+  setChipClick('chipPhone','Nomor Telepon','phone');
+  setChipClick('chipEmail','Email','email');
+  setChipClick('chipCity','Kota / Lokasi','city');
   // Stats
-  ['1','2','3','4'].forEach(function(n) {
-    var el = document.getElementById('stat' + n + 'el');
-    if (el) {
-      el.onclick = null;
-      el.addEventListener('click', (function(num) {
-        return function() { editStat(num); };
-      })(n));
-    }
-  });
-
+  for (var i = 1; i <= 4; i++) {
+    (function(n){
+      var e = el('stat'+n+'el'); if(!e) return;
+      e.onclick=null; e.addEventListener('click',function(){editStat(n);});
+    })(i);
+  }
   // Edu card
-  var eduCard = document.getElementById('eduCard');
-  if (eduCard) {
-    eduCard.onclick = null;
-    eduCard.addEventListener('click', function() { editEdu(); });
-  }
+  var ec = el('eduCard'); if(ec){ ec.onclick=null; ec.addEventListener('click',function(){editEdu();}); }
 }
-
-// ════════════════════════════════════════════════════
-// AUTENTIKASI
-// ════════════════════════════════════════════════════
-async function hashPassword(pw) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+function setChipClick(chipId, label, field) {
+  var e = el(chipId); if(!e) return;
+  e.onclick=null;
+  e.addEventListener('click',(function(f,l){ return function(){ editField(f,l,D[f]); }; })(field,label));
 }
-function sessionValid() {
-  try {
-    const s = JSON.parse(localStorage.getItem(SESSION_KEY) || '{}');
-    return Date.now() < (s.exp || 0);
-  } catch { return false; }
-}
-
-document.getElementById('ownerLoginBtn').addEventListener('click', function() {
-  document.getElementById('loginInput').value = '';
-  document.getElementById('loginError').textContent = '';
-  document.getElementById('loginOverlay').classList.add('open');
-  setTimeout(function() { document.getElementById('loginInput').focus(); }, 80);
-});
-
-document.getElementById('loginCancelBtn').addEventListener('click', function() {
-  document.getElementById('loginOverlay').classList.remove('open');
-});
-
-document.getElementById('loginInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') doLogin();
-});
-
-document.getElementById('loginSubmitBtn').addEventListener('click', doLogin);
-
-async function doLogin() {
-  const pw = document.getElementById('loginInput').value;
-  if (!pw) return;
-  const h = await hashPassword(pw);
-  if (h === OWNER_HASH) {
-    localStorage.setItem(SESSION_KEY, JSON.stringify({ exp: Date.now() + 8 * 3600 * 1000 }));
-    document.body.classList.add('owner-logged-in');
-    document.getElementById('loginOverlay').classList.remove('open');
-  } else {
-    document.getElementById('loginError').textContent = '❌ Password salah';
-    document.getElementById('loginInput').value = '';
-  }
-}
-
-// ════════════════════════════════════════════════════
-// EDIT MODE
-// ════════════════════════════════════════════════════
-document.getElementById('editToggleBtn').addEventListener('click', function() {
-  editMode = !editMode;
+// Sync UI edit mode setelah setiap renderAll
+function syncEM() {
   document.body.classList.toggle('edit-mode', editMode);
-  var btn = document.getElementById('editToggleBtn');
-  btn.classList.toggle('active', editMode);
-  btn.textContent = editMode ? '✕ Selesai Edit' : '✏ Edit Mode';
-  document.getElementById('editBadge').classList.toggle('on', editMode);
-});
-
-// Tombol tambah (hanya aktif dalam edit mode)
-document.getElementById('addSkillBtn').addEventListener('click', function() {
-  if (!editMode) return;
-  D.skills = D.skills || [];
-  D.skills.push({ icon: '⭐', name: 'Skill Baru', level: 'Level' });
-  saveData().then(function() { renderAll(); syncEditModeUI(); });
-});
-document.getElementById('addExpBtn').addEventListener('click', function() {
-  if (!editMode) return;
-  D.experiences = D.experiences || [];
-  D.experiences.push({ role: 'Jabatan Baru', period: 'Periode', company: 'Perusahaan', duties: ['Deskripsi tugas'] });
-  saveData().then(function() { renderAll(); syncEditModeUI(); });
-});
-document.getElementById('addProjectBtn').addEventListener('click', function() {
-  if (!editMode) return;
-  D.projects = D.projects || [];
-  D.projects.push({ year: '2024', title: 'Judul Projek Baru', tag: 'Kategori' });
-  saveData().then(function() { renderAll(); syncEditModeUI(); });
-});
-document.getElementById('addCertBtn').addEventListener('click', function() {
-  if (!editMode) return;
-  D.certificates = D.certificates || [];
-  D.certificates.push({ icon: '📜', title: 'Sertifikat Baru', issuer: 'Penerbit' });
-  saveData().then(function() { renderAll(); syncEditModeUI(); });
-});
-document.getElementById('addOrgBtn').addEventListener('click', function() {
-  if (!editMode) return;
-  D.organisations = D.organisations || [];
-  D.organisations.push({ role: 'Jabatan Baru', name: 'Nama Organisasi', period: 'Periode', duties: ['Kegiatan'] });
-  saveData().then(function() { renderAll(); syncEditModeUI(); });
-});
-
-// Pastikan UI edit mode sinkron setelah renderAll()
-function syncEditModeUI() {
-  document.body.classList.toggle('edit-mode', editMode);
-  var btn = document.getElementById('editToggleBtn');
-  if (btn) {
-    btn.classList.toggle('active', editMode);
-    btn.textContent = editMode ? '✕ Selesai Edit' : '✏ Edit Mode';
-  }
-  var badge = document.getElementById('editBadge');
+  var btn = el('editToggleBtn');
+  if (btn) { btn.classList.toggle('on', editMode); btn.textContent = editMode ? '✕ Selesai' : '✏ Edit'; }
+  var badge = el('editBadge');
   if (badge) badge.classList.toggle('on', editMode);
 }
 
-// ════════════════════════════════════════════════════
-// MODAL ENGINE
-// Semua field dibuat via DOM API (bukan innerHTML)
-// agar value textarea/input tidak pernah hilang.
-// ════════════════════════════════════════════════════
-var _pendingSave   = null;  // fungsi yang dipanggil saat user klik Simpan
-var _pendingDelete = null;  // fungsi yang dipanggil saat user klik Hapus
+// ═══════════════════════════════════════════════════════
+//  AUTENTIKASI
+// ═══════════════════════════════════════════════════════
+function sesOk() {
+  try { var s=JSON.parse(localStorage.getItem(SES_KEY)||'{}'); return Date.now()<(s.exp||0); } catch(e){ return false; }
+}
+function hashPw(pw) {
+  return crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw))
+    .then(function(buf){
+      return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+    });
+}
+el('ownerLoginBtn').addEventListener('click',function(){
+  el('loginPw').value=''; el('loginErr').textContent='';
+  el('loginOverlay').classList.add('open');
+  setTimeout(function(){el('loginPw').focus();},80);
+});
+el('loginCxBtn').addEventListener('click',function(){ el('loginOverlay').classList.remove('open'); });
+el('loginPw').addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
+el('loginOkBtn').addEventListener('click', doLogin);
+function doLogin(){
+  var pw = el('loginPw').value; if(!pw) return;
+  hashPw(pw).then(function(h){
+    if(h===PWD_HASH){
+      localStorage.setItem(SES_KEY, JSON.stringify({exp: Date.now()+8*3600*1000}));
+      document.body.classList.add('owner-logged-in');
+      el('loginOverlay').classList.remove('open');
+    } else {
+      el('loginErr').textContent='❌ Password salah'; el('loginPw').value='';
+    }
+  });
+}
 
-function openModal(title, buildFields, onSave, onDelete) {
+// ═══════════════════════════════════════════════════════
+//  EDIT MODE TOGGLE
+// ═══════════════════════════════════════════════════════
+el('editToggleBtn').addEventListener('click',function(){
+  editMode = !editMode; syncEM();
+});
+
+// ═══════════════════════════════════════════════════════
+//  MODAL ENGINE — field dibuat via DOM API (bukan innerHTML)
+//  agar .value emoji/karakter khusus tidak pernah hilang
+// ═══════════════════════════════════════════════════════
+function openModal(title, buildFn, onSave, onDelete) {
   if (!editMode) return;
-
-  document.getElementById('modalTitle').textContent = title;
-
-  // Kosongkan modalFields lalu bangun ulang via DOM
-  var container = document.getElementById('modalFields');
-  container.innerHTML = '';
-  buildFields(container); // fungsi yang menerima container dan append field ke dalamnya
-
-  // Tampilkan / sembunyikan tombol Hapus
-  var delBtn = document.getElementById('modalDelBtn');
-  delBtn.style.display = onDelete ? 'inline-flex' : 'none';
-
-  // Simpan callback
-  _pendingSave   = onSave;
-  _pendingDelete = onDelete || null;
-
-  document.getElementById('modalBg').classList.add('open');
+  el('modalTitle').textContent = title;
+  var body = el('modalBody'); body.innerHTML = '';
+  buildFn(body);                               // fungsi mengisi field ke dalam body
+  el('modalDelBtn').style.display = onDelete ? '' : 'none';
+  _cbSave = onSave;
+  _cbDel  = onDelete || null;
+  el('modalWrap').classList.add('open');
 }
-
 function closeModal() {
-  document.getElementById('modalBg').classList.remove('open');
-  // Reset callback agar tidak tertrigger secara tidak sengaja
-  _pendingSave   = null;
-  _pendingDelete = null;
+  el('modalWrap').classList.remove('open');
+  _cbSave = null; _cbDel = null;
 }
-
-// Klik backdrop (luar modal) = tutup
-document.getElementById('modalBg').addEventListener('click', function(e) {
-  if (e.target === document.getElementById('modalBg')) closeModal();
-});
-
-document.getElementById('modalCancelBtn').addEventListener('click', closeModal);
-
-document.getElementById('modalSaveBtn').addEventListener('click', async function() {
-  // Kumpulkan nilai dari form SEBELUM modal ditutup
-  if (_pendingSave) _pendingSave();
+// Klik backdrop
+el('modalWrap').addEventListener('click',function(e){ if(e.target===el('modalWrap')) closeModal(); });
+el('modalCxBtn').addEventListener('click', closeModal);
+// Tombol Simpan — kumpulkan nilai SEBELUM tutup modal
+el('modalOkBtn').addEventListener('click',function(){
+  if (_cbSave) _cbSave();    // mutasi D
   closeModal();
-  await saveData();
-  renderAll();
-  syncEditModeUI(); // pastikan edit mode tetap aktif setelah render ulang
+  saveData().then(function(){ renderAll(); syncEM(); });
 });
-
-document.getElementById('modalDelBtn').addEventListener('click', async function() {
-  if (!_pendingDelete) return;
+// Tombol Hapus
+el('modalDelBtn').addEventListener('click',function(){
+  if (!_cbDel) return;
   if (!confirm('Hapus item ini?')) return;
-  _pendingDelete();
+  _cbDel();                  // mutasi D
   closeModal();
-  await saveData();
-  renderAll();
-  syncEditModeUI();
+  saveData().then(function(){ renderAll(); syncEM(); });
 });
 
-// ─── Helper: buat satu field input/textarea dalam container ───
-function addField(container, label, id, value, isTextarea) {
-  var wrap = document.createElement('div');
-  wrap.className = 'fg';
-  var lbl = document.createElement('label');
-  lbl.textContent = label;
-  wrap.appendChild(lbl);
-  var input;
-  if (isTextarea) {
-    input = document.createElement('textarea');
-  } else {
-    input = document.createElement('input');
-    input.type = 'text';
-  }
-  input.id    = id;
-  input.value = value || '';
-  wrap.appendChild(input);
-  container.appendChild(wrap);
-  return input;
+// ─── DOM helpers untuk form modal ───
+function addInp(parent, label, id, value) {
+  var w = document.createElement('div'); w.className = 'fg';
+  var lb = document.createElement('label'); lb.textContent = label;
+  var inp = document.createElement('input'); inp.type='text'; inp.id=id; inp.value = value || '';
+  w.appendChild(lb); w.appendChild(inp); parent.appendChild(w); return inp;
 }
-
-// ─── Helper: baca nilai field ───
-function fieldVal(id) {
-  var el = document.getElementById(id);
-  return el ? el.value : '';
+function addTa(parent, label, id, value) {
+  var w = document.createElement('div'); w.className = 'fg';
+  var lb = document.createElement('label'); lb.textContent = label;
+  var ta = document.createElement('textarea'); ta.id=id; ta.value = value || '';
+  w.appendChild(lb); w.appendChild(ta); parent.appendChild(w); return ta;
 }
-
-// ─── Helper: buat daftar tugas (li-row) dalam container ───
-function addDutiesSection(container, duties, prefix, labelText) {
-  var wrap = document.createElement('div');
-  wrap.className = 'fg';
-  var lbl = document.createElement('label');
-  lbl.textContent = labelText || 'Tugas / Kegiatan';
-  wrap.appendChild(lbl);
-
-  var listWrap = document.createElement('div');
-  listWrap.id = prefix + 'Wrap';
-  (duties || []).forEach(function(d, i) {
-    listWrap.appendChild(makeDutyRow(prefix, i, d));
+function addDuties(parent, duties, pfx, sectionLabel) {
+  var w = document.createElement('div'); w.className = 'fg';
+  var lb = document.createElement('label'); lb.textContent = sectionLabel || 'Tugas / Kegiatan';
+  w.appendChild(lb);
+  var list = document.createElement('div'); list.id = pfx+'_list';
+  (duties||[]).forEach(function(d,i){ list.appendChild(makeDutyRow(pfx,i,d)); });
+  var addBtn = document.createElement('button'); addBtn.type='button'; addBtn.className='btn-add-duty'; addBtn.textContent='+ Tambah';
+  addBtn.addEventListener('click',function(){
+    var n = list.querySelectorAll('textarea').length;
+    list.appendChild(makeDutyRow(pfx,n,''));
   });
-  wrap.appendChild(listWrap);
-
-  var addBtn = document.createElement('button');
-  addBtn.type = 'button';
-  addBtn.className = 'btn-add-li';
-  addBtn.textContent = '+ Tambah';
-  addBtn.addEventListener('click', function() {
-    var n = listWrap.querySelectorAll('textarea').length;
-    listWrap.appendChild(makeDutyRow(prefix, n, ''));
-  });
-  wrap.appendChild(addBtn);
-  container.appendChild(wrap);
+  w.appendChild(list); w.appendChild(addBtn); parent.appendChild(w);
 }
-
-function makeDutyRow(prefix, idx, value) {
-  var row = document.createElement('div');
-  row.className = 'li-row';
-  var ta = document.createElement('textarea');
-  ta.id    = prefix + idx;
-  ta.value = value || '';
-  var rm = document.createElement('button');
-  rm.type = 'button';
-  rm.className = 'btn-rm';
-  rm.textContent = '✕';
-  rm.addEventListener('click', function() { row.remove(); });
-  row.appendChild(ta);
-  row.appendChild(rm);
-  return row;
+function makeDutyRow(pfx, idx, val) {
+  var row = document.createElement('div'); row.className='duty-row';
+  var ta = document.createElement('textarea'); ta.id=pfx+'_'+idx; ta.value=val||'';
+  var rm = document.createElement('button'); rm.type='button'; rm.className='btn-rm-duty'; rm.textContent='✕';
+  rm.addEventListener('click',function(){ row.remove(); });
+  row.appendChild(ta); row.appendChild(rm); return row;
 }
-
-function collectDuties(prefix) {
-  return Array.from(document.querySelectorAll('[id^="' + prefix + '"]'))
-    .filter(function(el) { return el.tagName === 'TEXTAREA'; })
-    .map(function(el) { return el.value.trim(); })
+function collectDuties(pfx) {
+  return Array.from(document.querySelectorAll('[id^="'+pfx+'_"]'))
+    .filter(function(e){return e.tagName==='TEXTAREA';})
+    .map(function(e){return e.value.trim();})
     .filter(Boolean);
 }
+function fv(id){ var e=el(id); return e ? e.value : ''; }
 
-// ════════════════════════════════════════════════════
-// EDITOR FUNCTIONS — masing-masing panggil openModal
-// ════════════════════════════════════════════════════
-
-function editSimple(field, label) {
-  if (!editMode) return;
-  openModal('✏ ' + label,
-    function(c) { addField(c, label, 'ef_val', D[field] || '', true); },
-    function()  { D[field] = fieldVal('ef_val'); }
+// ═══════════════════════════════════════════════════════
+//  EDITOR FUNCTIONS
+// ═══════════════════════════════════════════════════════
+function editSimple(field, label){
+  if(!editMode) return;
+  openModal('✏ '+label,
+    function(b){ addTa(b, label, 'ef_v', D[field]||''); },
+    function(){ D[field]=fv('ef_v'); }
   );
 }
-
-function editField(field, label, currentVal) {
-  if (!editMode) return;
-  openModal('✏ ' + label,
-    function(c) { addField(c, label, 'ef_val', currentVal || ''); },
-    function()  { D[field] = fieldVal('ef_val'); }
+function editField(field, label, cur){
+  if(!editMode) return;
+  openModal('✏ '+label,
+    function(b){ addInp(b, label, 'ef_v', cur||''); },
+    function(){ D[field]=fv('ef_v'); }
   );
 }
-
-function editHeroName() {
-  if (!editMode) return;
+function editHeroName(){
+  if(!editMode) return;
   openModal('✏ Nama',
-    function(c) {
-      addField(c, 'Baris 1 (putih)', 'hn_1', D.heroName1);
-      addField(c, 'Baris 2 (gradient warna)', 'hn_2', D.heroName2);
-    },
-    function() {
-      D.heroName1 = fieldVal('hn_1');
-      D.heroName2 = fieldVal('hn_2');
-    }
+    function(b){ addInp(b,'Baris 1 (putih)','hn1',D.heroName1); addInp(b,'Baris 2 (gradient)','hn2',D.heroName2); },
+    function(){ D.heroName1=fv('hn1'); D.heroName2=fv('hn2'); }
   );
 }
-
-function editStat(n) {
-  if (!editMode) return;
-  openModal('✏ Statistik #' + n,
-    function(c) {
-      addField(c, 'Angka / Nilai', 'st_v', D['stat' + n + 'val']);
-      addField(c, 'Label', 'st_l', D['stat' + n + 'lab']);
-    },
-    function() {
-      D['stat' + n + 'val'] = fieldVal('st_v');
-      D['stat' + n + 'lab'] = fieldVal('st_l');
-    }
+function editStat(n){
+  if(!editMode) return;
+  openModal('✏ Statistik #'+n,
+    function(b){ addInp(b,'Nilai','sv',D['s'+n+'v']); addInp(b,'Label','sl',D['s'+n+'l']); },
+    function(){ D['s'+n+'v']=fv('sv'); D['s'+n+'l']=fv('sl'); }
   );
 }
-
-function editEdu() {
-  if (!editMode) return;
+function editEdu(){
+  if(!editMode) return;
   openModal('🎓 Edit Pendidikan',
-    function(c) {
-      addField(c, 'Nama Universitas', 'edu_u', D.eduUniversity);
-      addField(c, 'Jurusan / Program Studi', 'edu_d', D.eduDegree);
-      addField(c, 'Tahun (misal: 2022 – 2026)', 'edu_p', D.eduPeriod);
-      addField(c, 'IPK', 'edu_g', D.eduGpa);
-      addField(c, 'Status (misal: Lulus 🎓)', 'edu_s', D.eduStatus);
+    function(b){
+      addInp(b,'Universitas','eu_u',D.eduUni);
+      addInp(b,'Jurusan','eu_d',D.eduDeg);
+      addInp(b,'Tahun','eu_y',D.eduYr);
+      addInp(b,'IPK','eu_i',D.eduIpk);
+      addInp(b,'Status','eu_s',D.eduStatus);
     },
-    function() {
-      D.eduUniversity = fieldVal('edu_u');
-      D.eduDegree     = fieldVal('edu_d');
-      D.eduPeriod     = fieldVal('edu_p');
-      D.eduGpa        = fieldVal('edu_g');
-      D.eduStatus     = fieldVal('edu_s');
-    }
+    function(){ D.eduUni=fv('eu_u');D.eduDeg=fv('eu_d');D.eduYr=fv('eu_y');D.eduIpk=fv('eu_i');D.eduStatus=fv('eu_s'); }
   );
 }
-
-function editSkill(i) {
-  if (!editMode) return;
-  var sk = D.skills[i];
+function editSkill(i){
+  if(!editMode) return;
+  var sk=D.skills[i];
   openModal('🛠 Edit Skill',
-    function(c) {
-      addField(c, 'Emoji / Icon', 'sk_ic', sk.icon);
-      addField(c, 'Nama Skill',   'sk_nm', sk.name);
-      addField(c, 'Level',        'sk_lv', sk.level);
-    },
-    function() {
-      D.skills[i] = { icon: fieldVal('sk_ic'), name: fieldVal('sk_nm'), level: fieldVal('sk_lv') };
-    },
-    function() { D.skills.splice(i, 1); }
+    function(b){ addInp(b,'Emoji','sk_ic',sk.icon);addInp(b,'Nama Skill','sk_nm',sk.name);addInp(b,'Level','sk_lv',sk.level); },
+    function(){ D.skills[i]={icon:fv('sk_ic'),name:fv('sk_nm'),level:fv('sk_lv')}; },
+    function(){ D.skills.splice(i,1); }
   );
 }
-
-function editExp(i) {
-  if (!editMode) return;
-  var ex = D.experiences[i];
+function editExp(i){
+  if(!editMode) return;
+  var ex=D.experiences[i];
   openModal('💼 Edit Pengalaman',
-    function(c) {
-      addField(c, 'Jabatan / Posisi', 'ex_r', ex.role);
-      addField(c, 'Periode',          'ex_p', ex.period);
-      addField(c, 'Perusahaan / Instansi', 'ex_c', ex.company);
-      addDutiesSection(c, ex.duties, 'exd', 'Daftar Tugas');
+    function(b){
+      addInp(b,'Jabatan','ex_r',ex.role);addInp(b,'Periode','ex_p',ex.period);addInp(b,'Perusahaan','ex_c',ex.company);
+      addDuties(b,ex.duties,'exd','Daftar Tugas');
     },
-    function() {
-      D.experiences[i] = {
-        role:    fieldVal('ex_r'),
-        period:  fieldVal('ex_p'),
-        company: fieldVal('ex_c'),
-        duties:  collectDuties('exd')
-      };
-    },
-    function() { D.experiences.splice(i, 1); }
+    function(){ D.experiences[i]={role:fv('ex_r'),period:fv('ex_p'),company:fv('ex_c'),duties:collectDuties('exd')}; },
+    function(){ D.experiences.splice(i,1); }
   );
 }
-
-function editProject(i) {
-  if (!editMode) return;
-  var pr = D.projects[i];
+function editProj(i){
+  if(!editMode) return;
+  var pr=D.projects[i];
   openModal('📁 Edit Projek',
-    function(c) {
-      addField(c, 'Tahun',  'pr_y', pr.year);
-      addField(c, 'Judul',  'pr_t', pr.title, true);
-      addField(c, 'Tag / Kategori', 'pr_tg', pr.tag);
-    },
-    function() {
-      D.projects[i] = { year: fieldVal('pr_y'), title: fieldVal('pr_t'), tag: fieldVal('pr_tg') };
-    },
-    function() { D.projects.splice(i, 1); }
+    function(b){ addInp(b,'Tahun','pr_y',pr.year);addTa(b,'Judul','pr_t',pr.title);addInp(b,'Tag','pr_tg',pr.tag); },
+    function(){ D.projects[i]={year:fv('pr_y'),title:fv('pr_t'),tag:fv('pr_tg')}; },
+    function(){ D.projects.splice(i,1); }
   );
 }
-
-function editCert(i) {
-  if (!editMode) return;
-  var c = D.certificates[i];
+function editCert(i){
+  if(!editMode) return;
+  var ct=D.certificates[i];
   openModal('🏅 Edit Sertifikat',
-    function(cont) {
-      addField(cont, 'Emoji / Icon', 'ct_ic', c.icon);
-      addField(cont, 'Nama Sertifikat', 'ct_t', c.title);
-      addField(cont, 'Penerbit / Issuer', 'ct_is', c.issuer);
-    },
-    function() {
-      D.certificates[i] = { icon: fieldVal('ct_ic'), title: fieldVal('ct_t'), issuer: fieldVal('ct_is') };
-    },
-    function() { D.certificates.splice(i, 1); }
+    function(b){ addInp(b,'Emoji','ct_ic',ct.icon);addInp(b,'Nama','ct_t',ct.title);addInp(b,'Penerbit','ct_is',ct.issuer); },
+    function(){ D.certificates[i]={icon:fv('ct_ic'),title:fv('ct_t'),issuer:fv('ct_is')}; },
+    function(){ D.certificates.splice(i,1); }
   );
 }
-
-function editOrg(i) {
-  if (!editMode) return;
-  var o = D.organisations[i];
+function editOrg(i){
+  if(!editMode) return;
+  var o=D.organisations[i];
   openModal('🤝 Edit Organisasi',
-    function(c) {
-      addField(c, 'Jabatan', 'og_r', o.role);
-      addField(c, 'Nama Organisasi', 'og_n', o.name);
-      addField(c, 'Periode', 'og_p', o.period);
-      addDutiesSection(c, o.duties, 'ogd', 'Daftar Kegiatan');
+    function(b){
+      addInp(b,'Jabatan','og_r',o.role);addInp(b,'Nama Organisasi','og_n',o.name);addInp(b,'Periode','og_p',o.period);
+      addDuties(b,o.duties,'ogd','Daftar Kegiatan');
     },
-    function() {
-      D.organisations[i] = {
-        role:   fieldVal('og_r'),
-        name:   fieldVal('og_n'),
-        period: fieldVal('og_p'),
-        duties: collectDuties('ogd')
-      };
-    },
-    function() { D.organisations.splice(i, 1); }
+    function(){ D.organisations[i]={role:fv('og_r'),name:fv('og_n'),period:fv('og_p'),duties:collectDuties('ogd')}; },
+    function(){ D.organisations.splice(i,1); }
   );
 }
 
-// ════════════════════════════════════════════════════
-// TOAST NOTIFICATION
-// ════════════════════════════════════════════════════
-var _toast = null;
+// ─── Tombol Tambah ───
+function wireAdd(btnId, pushFn) {
+  el(btnId).addEventListener('click',function(){
+    if(!editMode) return;
+    pushFn();
+    saveData().then(function(){ renderAll(); syncEM(); });
+  });
+}
+wireAdd('btnAddSkill', function(){ D.skills=D.skills||[]; D.skills.push({icon:'⭐',name:'Skill Baru',level:'Level'}); });
+wireAdd('btnAddExp',   function(){ D.experiences=D.experiences||[]; D.experiences.push({role:'Jabatan Baru',period:'Periode',company:'Perusahaan',duties:['Deskripsi tugas']}); });
+wireAdd('btnAddProj',  function(){ D.projects=D.projects||[]; D.projects.push({year:'2024',title:'Judul Projek Baru',tag:'Kategori'}); });
+wireAdd('btnAddCert',  function(){ D.certificates=D.certificates||[]; D.certificates.push({icon:'📜',title:'Sertifikat Baru',issuer:'Penerbit'}); });
+wireAdd('btnAddOrg',   function(){ D.organisations=D.organisations||[]; D.organisations.push({role:'Jabatan Baru',name:'Nama Organisasi',period:'Periode',duties:['Kegiatan']}); });
+
+// ═══════════════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════════════
+var _toastTimer = null;
 function showToast(msg, type) {
-  if (_toast) { _toast.remove(); _toast = null; }
-  _toast = document.createElement('div');
+  var t = el('toast');
+  if (_toastTimer) clearTimeout(_toastTimer);
   var styles = {
     loading: 'background:#1a2235;border:1px solid #3b82f6;color:#63b3ed;',
     success: 'background:#1a3328;border:1px solid #22c55e;color:#68d391;',
     error:   'background:#2d1515;border:1px solid #ef4444;color:#f87171;'
   };
-  _toast.style.cssText =
-    'position:fixed;bottom:28px;right:28px;z-index:9999;' +
-    'padding:13px 20px;border-radius:10px;font-size:0.84rem;font-weight:600;' +
-    'box-shadow:0 8px 24px rgba(0,0,0,0.45);transition:opacity 0.4s;' +
-    (styles[type] || styles.loading);
-  _toast.textContent = msg;
-  document.body.appendChild(_toast);
+  t.style.cssText = (styles[type]||styles.loading) + 'display:block;opacity:1;';
+  t.textContent = msg;
   if (type !== 'loading') {
-    var t = _toast;
-    setTimeout(function() {
-      t.style.opacity = '0';
-      setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 420);
-    }, 3500);
+    _toastTimer = setTimeout(function(){
+      t.style.opacity='0';
+      setTimeout(function(){ t.style.display='none'; }, 380);
+    }, 3600);
   }
 }
 
-// ════════════════════════════════════════════════════
-// FADE-IN OBSERVER
-// ════════════════════════════════════════════════════
-var fadeObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      fadeObserver.unobserve(e.target);
-    }
+// ═══════════════════════════════════════════════════════
+//  FADE-IN OBSERVER
+// ═══════════════════════════════════════════════════════
+var fadeObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
 
-// ════════════════════════════════════════════════════
-// INIT
-// ════════════════════════════════════════════════════
-if (sessionValid()) document.body.classList.add('owner-logged-in');
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+if (sesOk()) document.body.classList.add('owner-logged-in');
 loadData();
 </script>
 </body>
