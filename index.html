@@ -404,7 +404,7 @@
       <div class="org-role">Staff BP2</div><div class="org-name">Hima Tekpend — Himpunan Mahasiswa Teknologi Pendidikan</div><div class="org-period">Okt 2023 – Juli 2024</div>
       <ul class="org-duties"><li>Kontribusi dalam kegiatan pengabdian masyarakat.</li><li>Mendukung program kerja bidang pendidikan dan sosial.</li><li>Kolaborasi persiapan dan pelaksanaan kegiatan edukatif.</li></ul>
     </div>
-    <div class="org-card fade-in" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.28s;">
+    <div class="org-card fade-in visible" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.28s;">
       <div class="org-role">Volunteer</div><div class="org-name">Growth Camp</div><div class="org-period">Nov 2024</div>
       <ul class="org-duties"><li>Mendukung kegiatan pengembangan diri dan pendidikan peserta.</li><li>Kolaborasi bersama panitia dan volunteer dalam pelaksanaan.</li><li>Mendampingi peserta selama kegiatan berlangsung.</li></ul>
     </div>
@@ -414,7 +414,7 @@
 
 <!-- CONTACT CTA -->
 <section id="contact">
-  <div class="cta-box fade-in" style="transition-delay: 0s;">
+  <div class="cta-box fade-in visible" style="transition-delay: 0s;">
     <div class="cta-title" data-editable="" onclick="editSimple(this,'Judul CTA','ctaTitle')">Mari Berkolaborasi 🚀</div>
     <p class="cta-sub" data-editable="" onclick="editSimple(this,'Sub-judul CTA','ctaSub')">Saya terbuka untuk peluang kerja, magang, freelance, atau kolaborasi proyek.</p>
     <span class="cta-email" id="ctaEmailDisplay" data-editable="" onclick="editSimple(this,'Email CTA','ctaEmailDisplay')">mohamad.rasya.sath@gmail.com</span>
@@ -426,7 +426,7 @@
 </section>
 
 <footer>
-  <div class="footer-name" data-editable="" onclick="editSimple(this,'Footer Nama','footerName')">© 2025 Mohamad Rasya Sathia</div>
+  <div class="footer-name" data-editable="" onclick="editSimple(this,'Footer Nama','footerName')">© 2026 Mohamad Rasya Sathia</div>
   <div class="footer-note" data-editable="" onclick="editSimple(this,'Footer Catatan','footerNote')">Built with ❤ · Teknologi Pendidikan UPI · Open to Opportunities</div>
 </footer>
 
@@ -446,27 +446,10 @@
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modalBox">
-    <h3><span id="modalIcon">💼</span> <span id="modalTitle">Edit Pengalaman Kerja</span></h3>
-    <div id="modalFields"><div class="field-group"><label>Jabatan / Role</label><input type="text" id="expRole" value="Sekretaris"></div><div class="field-group"><label>Periode (e.g. Jan 2024 – Sekarang)</label><input type="text" id="expPeriod" value="Feb 2025 – Juni 2025"></div><div class="field-group"><label>Nama Perusahaan / Instansi</label><input type="text" id="expCompany" value="CV. Dwi Aksara Mandiri"></div><div class="field-group"><label>Deskripsi Tugas</label><div id="expDutiesContainer">
-    <div class="list-editor-item">
-      <textarea id="expDuty0">Mengelola administrasi dan dokumentasi perusahaan, termasuk surat-menyurat &amp; arsip dokumen.</textarea>
-      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
-    </div>
-    <div class="list-editor-item">
-      <textarea id="expDuty1">Menyiapkan dokumen perusahaan untuk mendukung kegiatan operasional dan administrasi proyek.</textarea>
-      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
-    </div>
-    <div class="list-editor-item">
-      <textarea id="expDuty2">Menyusun laporan, proposal, dan kelengkapan administrasi proyek.</textarea>
-      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
-    </div>
-    <div class="list-editor-item">
-      <textarea id="expDuty3">Mengelola agenda, jadwal, dan kebutuhan administratif pimpinan.</textarea>
-      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
-    </div></div>
-    <button class="btn-add-item" onclick="addDutyField('expDutiesContainer','expDuty')">+ Tambah Tugas</button></div></div>
+    <h3><span id="modalIcon">✏</span> <span id="modalTitle">Footer Nama</span></h3>
+    <div id="modalFields"><div class="field-group"><label>Footer Nama</label><input type="text" id="simpleVal" value="© 2025 Mohamad Rasya Sathia"></div></div>
     <div class="modal-actions">
-      <button class="btn-danger" id="modalDeleteBtn" style="display: inline-flex;" onclick="deleteCard()">Hapus</button>
+      <button class="btn-danger" id="modalDeleteBtn" style="display: none;" onclick="deleteCard()">Hapus</button>
       <button class="btn-cancel" onclick="closeModal()">Batal</button>
       <button class="btn-save" onclick="saveModal()">Simpan</button>
     </div>
@@ -477,7 +460,7 @@
 <div id="publishBar" class="show">
   <p><strong>Ada perubahan belum dipublish.</strong> Klik Publish untuk update portfolio online.</p>
   <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-    <span id="publishStatus"></span>
+    <span id="publishStatus" style="color: rgb(104, 211, 145);"></span>
     <button class="btn-publish" id="publishBtn" onclick="publishToGitHub()" disabled="">⏳ Mengirim...</button>
   </div>
 </div>
