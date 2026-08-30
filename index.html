@@ -363,38 +363,93 @@ async function loadData() {
 // SIMPAN DATA KE data.json DI GITHUB
 // ═══════════════════════════════════════════
 async function saveData() {
-  const token = localStorage.getItem(TOKEN_KEY);
-  if (!token) {
+  // Ambil token dari localStorage, jika belum ada minta dari user
+  let liveToken = localStorage.getItem(TOKEN_KEY);
+  if (!liveToken) {
     const t = prompt('🔑 Masukkan GitHub Token Anda (disimpan di browser):');
-    if (t && t.trim().length > 10) localStorage.setItem(TOKEN_KEY, t.trim());
-    else { toast('⚠ Token diperlukan', 'error'); return false; }
+    if (t && t.trim().length > 10) {
+      localStorage.setItem(TOKEN_KEY, t.trim());
+      liveToken = t.trim();
+    } else {
+      toast('⚠ Token diperlukan untuk menyimpan', 'error');
+      return false;
+    }
   }
-  const liveToken = localStorage.getItem(TOKEN_KEY);
 
   toast('⏳ Menyimpan...', 'loading');
-  try {
-    // Ambil SHA data.json terbaru
-    const shaRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
-      headers: { Authorization: 'token ' + liveToken, Accept: 'application/vnd.github.v3+json' }
-    });
-    const shaData = await shaRes.json();
-    if (!shaData.sha) throw new Error('Tidak bisa membaca data.json');
 
-    // Push data baru
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
-      method: 'PUT',
-      headers: { Authorization: 'token ' + liveToken, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: 'Update portfolio data — ' + new Date().toLocaleString('id-ID'), content, sha: shaData.sha })
-    });
-    if (!res.ok) { const e = await res.json(); throw new Error(e.message); }
+  // Coba simpan maksimal 3 kali (retry jika SHA conflict)
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      // Selalu ambil SHA terbaru dengan cache-busting + no-cache agar tidak stale
+      const shaRes = await fetch(
+        `https://api.github.com/repos/${REPO}/contents/${DATA_FILE}?t=${Date.now()}`,
+        {
+          headers: {
+            Authorization: 'token ' + liveToken,
+            Accept: 'application/vnd.github.v3+json',
+            'Cache-Control': 'no-cache, no-store'
+          },
+          cache: 'no-store'
+        }
+      );
+      if (!shaRes.ok) {
+        const errBody = await shaRes.json().catch(() => ({}));
+        throw new Error(errBody.message || `HTTP ${shaRes.status}`);
+      }
+      const shaData = await shaRes.json();
+      if (!shaData.sha) throw new Error('SHA tidak ditemukan di response');
 
-    toast('✓ Tersimpan! Data permanen, refresh aman.', 'success');
-    return true;
-  } catch(e) {
-    toast('⚠ Gagal simpan: ' + e.message, 'error');
-    return false;
+      // Encode data ke base64
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
+
+      // Push data baru ke GitHub
+      const putRes = await fetch(
+        `https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: 'token ' + liveToken,
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'Update portfolio data — ' + new Date().toLocaleString('id-ID'),
+            content,
+            sha: shaData.sha
+          })
+        }
+      );
+
+      if (putRes.status === 422 && attempt < 3) {
+        // SHA conflict — tunggu sebentar lalu retry
+        await new Promise(r => setTimeout(r, 800 * attempt));
+        continue;
+      }
+
+      if (!putRes.ok) {
+        const e = await putRes.json().catch(() => ({}));
+        // Jika token invalid/expired, hapus dari storage dan minta ulang
+        if (putRes.status === 401 || putRes.status === 403) {
+          localStorage.removeItem(TOKEN_KEY);
+          toast('⚠ Token tidak valid / kedaluwarsa, coba lagi.', 'error');
+          return false;
+        }
+        throw new Error(e.message || `HTTP ${putRes.status}`);
+      }
+
+      toast('✅ Tersimpan! Data permanen, aman di-refresh.', 'success');
+      return true;
+
+    } catch(e) {
+      if (attempt === 3) {
+        toast('⚠ Gagal simpan: ' + e.message, 'error');
+        return false;
+      }
+      await new Promise(r => setTimeout(r, 600));
+    }
   }
+  return false;
 }
 
 // ═══════════════════════════════════════════
@@ -609,25 +664,56 @@ function closeModal() { document.getElementById('modalBg').classList.remove('ope
 document.getElementById('modalBg').addEventListener('click', e => { if(e.target===document.getElementById('modalBg')) closeModal(); });
 
 async function doSave() {
-  if (_onSave) _onSave();
+  if (_onSave) _onSave();  // Terapkan perubahan ke objek D
   closeModal();
-  await saveData();
+  const ok = await saveData();
+  // Selalu render ulang agar UI sinkron dengan D, baik simpan sukses maupun gagal
   renderAll();
+  // Pastikan edit mode tetap aktif setelah render ulang
+  if (editMode) {
+    document.body.classList.add('edit-mode');
+    const btn = document.getElementById('editToggleBtn');
+    if (btn) { btn.classList.add('active'); btn.textContent = '✕ Selesai Edit'; }
+    const badge = document.getElementById('editBadge');
+    if (badge) badge.classList.add('on');
+  }
 }
 async function doDelete() {
   if (_onDelete && confirm('Hapus item ini?')) {
-    _onDelete();
+    _onDelete();  // Terapkan penghapusan ke objek D
     closeModal();
     await saveData();
     renderAll();
+    // Pastikan edit mode tetap aktif setelah render ulang
+    if (editMode) {
+      document.body.classList.add('edit-mode');
+      const btn = document.getElementById('editToggleBtn');
+      if (btn) { btn.classList.add('active'); btn.textContent = '✕ Selesai Edit'; }
+      const badge = document.getElementById('editBadge');
+      if (badge) badge.classList.add('on');
+    }
   }
 }
 
-function f(label,id,val,type='text') {
-  if (type==='textarea') return `<div class="fg"><label>${label}</label><textarea id="${id}">${val||''}</textarea></div>`;
-  return `<div class="fg"><label>${label}</label><input type="text" id="${id}" value="${(val||'').replace(/"/g,'&quot;')}"/></div>`;
+// f() — buat field form HTML. Semua value di-escape agar aman dari karakter khusus.
+function f(label, id, val, type='text') {
+  const safe = (v) => (v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  if (type === 'textarea') {
+    // Untuk textarea, gunakan textContent agar aman terhadap HTML entities
+    const div = document.createElement('div');
+    div.className = 'fg';
+    div.innerHTML = `<label>${label}</label><textarea id="${id}"></textarea>`;
+    div.querySelector('textarea').value = val || '';
+    return div.outerHTML;
+  }
+  return `<div class="fg"><label>${label}</label><input type="text" id="${id}" value="${safe(val)}"/></div>`;
 }
-function g(id) { const el=document.getElementById(id); return el?(el.value||el.textContent.trim()):''; }
+// g() — ambil nilai dari input/textarea berdasarkan id
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return '';
+  return el.tagName === 'TEXTAREA' || el.tagName === 'INPUT' ? el.value : el.textContent.trim();
+}
 
 // ─── EDITOR: Simple text ───
 function editSimple(field, label) {
@@ -790,3 +876,4 @@ loadData();
 </script>
 </body>
 </html>
+
