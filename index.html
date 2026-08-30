@@ -346,8 +346,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 6vw;
 // ═══════════════════════════════════════════════════════
 var REPO      = 'mohamadrasyasath-collab/portfolio';
 var DATA_FILE = 'data.json';
-var GH_RAW    = 'https://mohamadrasyasath-collab.github.io/portfolio/data.json';
+// GH_API  : selalu real-time, tidak ada CDN cache
+// GH_PAGES: hanya fallback awal jika belum login (boleh sedikit stale)
 var GH_API    = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE;
+var GH_PAGES  = 'https://mohamadrasyasath-collab.github.io/portfolio/data.json';
 var PWD_HASH  = '66379381072837118bb70c6ebacd120536732f7364000fc73459d9dd7bec190f';
 var SES_KEY   = 'pf_ses';
 var TOK_KEY   = 'pf_tok';
@@ -361,107 +363,121 @@ var _cbSave = null;    // callback saat modal Simpan diklik
 var _cbDel  = null;    // callback saat modal Hapus diklik
 
 // ═══════════════════════════════════════════════════════
-//  LOAD DATA dari GitHub Pages (cache-bust setiap kali)
+//  LOAD DATA
+//  Strategi:
+//  1. Coba GitHub API dulu (selalu real-time, tidak ada CDN cache).
+//  2. Jika API gagal (misal: rate limit tanpa token), fallback ke GitHub Pages.
+//  Ini memastikan data yang ditampilkan selalu yang terbaru dari repo.
 // ═══════════════════════════════════════════════════════
 function loadData() {
-  fetch(GH_RAW + '?_=' + Date.now(), { cache: 'no-store' })
-    .then(function(r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(function(json) {
-      D = json;
-      renderAll();
-    })
-    .catch(function(e) {
-      console.error('loadData error:', e);
-      showToast('⚠ Gagal memuat data: ' + e.message, 'error');
-    });
+  // Coba via API dulu — response berisi field "content" (base64)
+  fetch(GH_API + '?_=' + Date.now(), {
+    cache: 'no-store',
+    headers: { 'Accept': 'application/vnd.github.v3+json' }
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('api_fail');
+    return r.json();
+  })
+  .then(function(meta) {
+    // Decode base64 → JSON
+    var jsonStr = decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
+    D = JSON.parse(jsonStr);
+    renderAll();
+  })
+  .catch(function() {
+    // Fallback: baca langsung dari GitHub Pages (mungkin sedikit terlambat, tapi tetap coba)
+    fetch(GH_PAGES + '?_=' + Date.now(), { cache: 'no-store' })
+      .then(function(r) { return r.json(); })
+      .then(function(json) { D = json; renderAll(); })
+      .catch(function(e) { showToast('⚠ Gagal memuat data: ' + e.message, 'error'); });
+  });
 }
 
 // ═══════════════════════════════════════════════════════
 //  SAVE DATA ke GitHub (PUT data.json)
-//  - Ambil SHA terbaru SETIAP KALI (no-cache)
+//  - SHA diambil fresh dari API setiap attempt
 //  - Retry 3x jika 422 SHA conflict
+//  - Setelah sukses, D sudah benar (tidak perlu reload)
 // ═══════════════════════════════════════════════════════
 function saveData() {
-  // Pastikan token tersedia
+  // 1. Pastikan token tersedia
   var token = localStorage.getItem(TOK_KEY) || '';
   if (!token) {
-    token = (prompt('🔑 Masukkan GitHub Personal Access Token\n(disimpan hanya di browser ini):') || '').trim();
+    token = (prompt('🔑 Masukkan GitHub Personal Access Token\n(tersimpan di browser, tidak dikirim ke server lain):') || '').trim();
     if (token.length < 10) { showToast('⚠ Token diperlukan', 'error'); return Promise.resolve(false); }
     localStorage.setItem(TOK_KEY, token);
   }
 
   showToast('⏳ Menyimpan...', 'loading');
 
-  // Encode data
-  var jsonStr;
-  try { jsonStr = JSON.stringify(D, null, 2); }
-  catch(e) { showToast('⚠ Encode error: ' + e.message, 'error'); return Promise.resolve(false); }
-
+  // 2. Encode D ke base64
   var b64;
-  try { b64 = btoa(unescape(encodeURIComponent(jsonStr))); }
-  catch(e) { showToast('⚠ Base64 error: ' + e.message, 'error'); return Promise.resolve(false); }
+  try {
+    b64 = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
+  } catch(e) {
+    showToast('⚠ Encode error: ' + e.message, 'error');
+    return Promise.resolve(false);
+  }
 
-  // Fungsi satu attempt
+  var authHdr = {
+    'Authorization': 'token ' + token,
+    'Accept': 'application/vnd.github.v3+json',
+    'Content-Type': 'application/json'
+  };
+
+  // 3. Fungsi satu attempt: ambil SHA baru → PUT
   function attempt(n) {
-    // Langkah 1: ambil SHA terbaru (WAJIB no-store)
+    // Langkah A: ambil SHA — WAJIB cache:no-store + timestamp agar tidak pernah stale
     return fetch(GH_API + '?_=' + Date.now(), {
       cache: 'no-store',
       headers: {
         'Authorization': 'token ' + token,
         'Accept': 'application/vnd.github.v3+json',
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'no-cache, no-store, max-age=0'
       }
     })
     .then(function(r) {
       if (r.status === 401 || r.status === 403) {
-        localStorage.removeItem(TOK_KEY);
-        throw new Error('TOKEN_INVALID');
+        localStorage.removeItem(TOK_KEY); throw new Error('TOKEN_INVALID');
       }
-      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'HTTP '+r.status); });
+      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'SHA fetch HTTP '+r.status); });
       return r.json();
     })
     .then(function(meta) {
-      if (!meta.sha) throw new Error('SHA tidak ada');
-      // Langkah 2: PUT konten baru
+      if (!meta.sha) throw new Error('SHA tidak ada di response');
+      // Langkah B: PUT data baru dengan SHA yang baru saja didapat
       return fetch(GH_API, {
         method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + token,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
-        },
+        headers: authHdr,
         body: JSON.stringify({
           message: 'Update portfolio ' + new Date().toLocaleString('id-ID'),
           content: b64,
-          sha: meta.sha
+          sha: meta.sha   // SHA segar — tidak mungkin stale
         })
       });
     })
     .then(function(r) {
-      if (r.status === 422 && n < 3) {
-        // SHA conflict — tunggu lalu retry dengan SHA baru
-        return new Promise(function(res) { setTimeout(function() { res(attempt(n + 1)); }, 900 * n); });
+      if (r.status === 422) {
+        // SHA conflict (sangat jarang karena SHA baru saja diambil) — retry
+        if (n < 3) return new Promise(function(ok) { setTimeout(function() { ok(attempt(n+1)); }, 800*n); });
+        return r.json().then(function(e) { throw new Error(e.message || 'SHA conflict setelah 3x retry'); });
       }
       if (r.status === 401 || r.status === 403) {
-        localStorage.removeItem(TOK_KEY);
-        throw new Error('TOKEN_INVALID');
+        localStorage.removeItem(TOK_KEY); throw new Error('TOKEN_INVALID');
       }
-      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'HTTP '+r.status); });
-      showToast('✅ Tersimpan! Aman di-refresh.', 'success');
+      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'PUT HTTP '+r.status); });
+      // SUKSES — D sudah berisi data terbaru (tidak perlu reload dari server)
+      showToast('✅ Tersimpan permanen! Data tidak akan balik setelah refresh.', 'success');
       return true;
     })
     .catch(function(e) {
       if (e.message === 'TOKEN_INVALID') {
-        showToast('⚠ Token tidak valid. Masukkan ulang.', 'error');
+        showToast('⚠ Token tidak valid / expired. Coba lagi untuk memasukkan token baru.', 'error');
         return false;
       }
-      if (n < 3) {
-        return new Promise(function(res) { setTimeout(function() { res(attempt(n + 1)); }, 700 * n); });
-      }
-      showToast('⚠ Gagal: ' + e.message, 'error');
+      if (n < 3) return new Promise(function(ok) { setTimeout(function() { ok(attempt(n+1)); }, 700*n); });
+      showToast('⚠ Gagal simpan: ' + e.message, 'error');
       return false;
     });
   }
