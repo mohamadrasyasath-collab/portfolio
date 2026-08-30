@@ -1,209 +1,189 @@
 <!DOCTYPE html>
-<html lang="id"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohamad Rasya Sathia — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <style>
-    /* ───── RESET & BASE ───── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:#06080f; --bg2:#0d1117; --bg3:#131a24; --card:#141c28;
-      --border:rgba(99,179,237,0.12); --accent:#63b3ed; --accent2:#9f7aea;
-      --accent3:#68d391; --gold:#f6e05e; --text:#e2e8f0; --muted:#718096; --white:#ffffff;
-      --grad1:linear-gradient(135deg,#63b3ed 0%,#9f7aea 50%,#f687b3 100%);
-    }
-    html{scroll-behavior:smooth;}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;}
-    a{color:inherit;text-decoration:none;}
-    ::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-track{background:var(--bg);}
-    ::-webkit-scrollbar-thumb{background:#2d3748;border-radius:4px;}
-    ::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Mohamad Rasya Sathia — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#06080f;--bg2:#0d1117;--bg3:#131a24;--card:#141c28;
+  --border:rgba(99,179,237,0.12);--accent:#63b3ed;--accent2:#9f7aea;
+  --accent3:#68d391;--gold:#f6e05e;--text:#e2e8f0;--muted:#718096;--white:#fff;
+  --grad1:linear-gradient(135deg,#63b3ed 0%,#9f7aea 50%,#f687b3 100%);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:#2d3748;border-radius:4px;}
 
-    /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;height:64px;background:rgba(6,8,15,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
-    .nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .nav-links{display:flex;gap:22px;align-items:center;}
-    .nav-links a{font-size:0.8rem;font-weight:500;color:var(--muted);transition:color 0.2s;text-transform:uppercase;letter-spacing:0.08em;}
-    .nav-links a:hover{color:var(--accent);}
-    @media(max-width:640px){.nav-links .hide-mobile{display:none;}}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;height:64px;background:rgba(6,8,15,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:18px;align-items:center;}
+.nav-links a{font-size:0.8rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+@media(max-width:640px){.nav-links .hide-mobile{display:none;}}
+.edit-mode-badge{display:none;font-size:0.7rem;font-weight:700;color:var(--accent);background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:3px 10px;}
+body.owner-logged-in .edit-mode-badge.on{display:inline-flex;}
 
-    /* EDITOR TOGGLE BUTTON */
-    /* Edit button — hanya tampil setelah login */
-    #editToggleBtn{display:none;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all 0.2s;}
-    #editToggleBtn.active{background:rgba(99,179,237,0.12);border-color:var(--accent);color:var(--accent);}
-    #editToggleBtn:hover{border-color:var(--accent);color:var(--accent);}
-    body.owner-logged-in #editToggleBtn{display:inline-flex;}
+/* NAV BUTTONS */
+#ownerLoginBtn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all 0.2s;}
+#ownerLoginBtn:hover{border-color:var(--accent);color:var(--accent);}
+body.owner-logged-in #ownerLoginBtn{display:none;}
+#editToggleBtn{display:none;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all 0.2s;}
+body.owner-logged-in #editToggleBtn{display:inline-flex;}
+#editToggleBtn.active{background:rgba(99,179,237,0.12);border-color:var(--accent);color:var(--accent);}
 
-    /* Login button — tampil ke semua, tapi hanya saat belum login */
-    #ownerLoginBtn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all 0.2s;}
-    #ownerLoginBtn:hover{border-color:var(--accent);color:var(--accent);}
-    body.owner-logged-in #ownerLoginBtn{display:none;}
+/* EDIT HIGHLIGHT */
+body.edit-mode [data-ed]{position:relative;cursor:pointer;}
+body.edit-mode [data-ed]:hover{outline:2px dashed var(--accent);outline-offset:3px;border-radius:4px;}
+body.edit-mode [data-ed]:hover::after{content:'✏ Edit';position:absolute;top:4px;right:4px;background:var(--accent);color:#fff;font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:5px;pointer-events:none;z-index:50;white-space:nowrap;}
 
-    /* Login modal overlay */
-    #loginOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:2000;align-items:center;justify-content:center;padding:20px;}
-    #loginOverlay.open{display:flex;}
-    #loginBox{background:#111827;border:1px solid rgba(99,179,237,0.25);border-radius:20px;padding:36px 36px 28px;width:100%;max-width:380px;text-align:center;}
-    #loginBox h3{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:6px;}
-    #loginBox p{font-size:0.82rem;color:var(--muted);margin-bottom:24px;}
-    #loginBox input{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:10px 14px;font-size:0.9rem;color:var(--text);outline:none;text-align:center;letter-spacing:0.1em;margin-bottom:12px;transition:border-color 0.2s;}
-    #loginBox input:focus{border-color:var(--accent);}
-    #loginBox input::placeholder{letter-spacing:0;color:#4a5568;}
-    #loginError{font-size:0.78rem;color:#f87171;margin-bottom:10px;min-height:18px;}
-    #loginSubmitBtn{width:100%;padding:11px;border-radius:9px;background:var(--grad1);border:none;color:#fff;font-size:0.88rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;margin-bottom:10px;}
-    #loginSubmitBtn:hover{opacity:0.85;}
-    #loginCancelBtn{background:transparent;border:none;color:var(--muted);font-size:0.8rem;cursor:pointer;padding:4px 8px;}
-    #loginCancelBtn:hover{color:var(--accent);}
+/* LOGIN OVERLAY */
+#loginOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:2000;align-items:center;justify-content:center;padding:20px;}
+#loginOverlay.open{display:flex;}
+#loginBox{background:#111827;border:1px solid rgba(99,179,237,0.25);border-radius:20px;padding:36px;width:100%;max-width:360px;text-align:center;}
+#loginBox h3{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:6px;}
+#loginBox p{font-size:0.82rem;color:var(--muted);margin-bottom:22px;}
+#loginInput{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:10px 14px;font-size:0.9rem;color:var(--text);outline:none;text-align:center;letter-spacing:0.1em;margin-bottom:10px;transition:border-color 0.2s;}
+#loginInput:focus{border-color:var(--accent);}
+#loginError{font-size:0.78rem;color:#f87171;min-height:18px;margin-bottom:8px;}
+#loginSubmitBtn{width:100%;padding:11px;border-radius:9px;background:var(--grad1);border:none;color:#fff;font-size:0.88rem;font-weight:700;cursor:pointer;margin-bottom:10px;}
+#loginCancelBtn{background:transparent;border:none;color:var(--muted);font-size:0.8rem;cursor:pointer;}
+#loginCancelBtn:hover{color:var(--accent);}
 
-    /* EDIT OVERLAY — shown when editor mode is on */
-    body.edit-mode [data-editable]{position:relative;cursor:pointer;}
-    body.edit-mode [data-editable]:hover::after{content:'✏ Edit';position:absolute;top:4px;right:4px;background:var(--accent);color:#fff;font-size:0.65rem;font-weight:700;padding:2px 7px;border-radius:5px;pointer-events:none;z-index:50;white-space:nowrap;}
-    body.edit-mode [data-editable]:hover{outline:2px dashed var(--accent);outline-offset:3px;border-radius:4px;}
+/* MODAL */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:20px;}
+.modal-backdrop.open{display:flex;}
+.modal{background:#111827;border:1px solid rgba(99,179,237,0.2);border-radius:18px;padding:28px 32px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;}
+.modal h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:20px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+.fg input,.fg textarea,.fg select{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:9px 13px;font-size:0.86rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;resize:vertical;}
+.fg input:focus,.fg textarea:focus{border-color:var(--accent);}
+.fg textarea{min-height:72px;}
+.modal-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end;}
+.btn-save{padding:9px 22px;border-radius:8px;background:var(--grad1);border:none;color:#fff;font-size:0.84rem;font-weight:600;cursor:pointer;}
+.btn-cancel{padding:9px 18px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:0.84rem;font-weight:600;cursor:pointer;}
+.btn-cancel:hover{border-color:var(--accent);color:var(--accent);}
+.btn-danger{padding:9px 18px;border-radius:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.84rem;font-weight:600;cursor:pointer;}
+.li-row{display:flex;gap:8px;margin-bottom:8px;}
+.li-row textarea{flex:1;min-height:50px;}
+.btn-rm{padding:5px 10px;border-radius:6px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.75rem;cursor:pointer;flex-shrink:0;}
+.btn-add-li{padding:6px 14px;border-radius:7px;background:rgba(104,211,145,0.08);border:1px solid rgba(104,211,145,0.25);color:var(--accent3);font-size:0.78rem;font-weight:600;cursor:pointer;margin-top:4px;}
+.btn-add-card{display:none;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border:2px dashed rgba(99,179,237,0.2);border-radius:14px;background:transparent;color:var(--muted);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+body.edit-mode .btn-add-card{display:flex;}
+.btn-add-card:hover{border-color:var(--accent);color:var(--accent);}
 
-    /* MODAL */
-    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;padding:20px;}
-    .modal-backdrop.open{display:flex;}
-    .modal{background:#111827;border:1px solid rgba(99,179,237,0.2);border-radius:18px;padding:28px 32px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;}
-    .modal h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
-    .modal h3 span{font-size:1.3rem;}
-    .field-group{margin-bottom:16px;}
-    .field-group label{display:block;font-size:0.73rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
-    .field-group input,.field-group textarea,.field-group select{width:100%;background:#1a2235;border:1px solid rgba(99,179,237,0.15);border-radius:8px;padding:9px 13px;font-size:0.86rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;resize:vertical;}
-    .field-group input:focus,.field-group textarea:focus,.field-group select:focus{border-color:var(--accent);}
-    .field-group textarea{min-height:80px;}
-    .modal-actions{display:flex;gap:10px;margin-top:22px;justify-content:flex-end;}
-    .btn-save{padding:9px 22px;border-radius:8px;background:var(--grad1);border:none;color:#fff;font-size:0.84rem;font-weight:600;cursor:pointer;transition:opacity 0.2s;}
-    .btn-save:hover{opacity:0.85;}
-    .btn-cancel{padding:9px 18px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:0.84rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
-    .btn-cancel:hover{border-color:var(--accent);color:var(--accent);}
-    .btn-danger{padding:9px 18px;border-radius:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.84rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
-    .btn-danger:hover{background:rgba(239,68,68,0.2);}
-    .list-editor-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;}
-    .list-editor-item textarea{flex:1;min-height:52px;}
-    .btn-remove-item{padding:6px 10px;border-radius:6px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:0.75rem;cursor:pointer;flex-shrink:0;margin-top:2px;}
-    .btn-add-item{padding:7px 14px;border-radius:7px;background:rgba(104,211,145,0.08);border:1px solid rgba(104,211,145,0.25);color:var(--accent3);font-size:0.78rem;font-weight:600;cursor:pointer;margin-top:4px;}
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 6vw 80px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,0.12) 0%,transparent 70%);animation:pulse 6s ease-in-out infinite;}
+.hero::after{content:'';position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(159,122,234,0.10) 0%,transparent 70%);animation:pulse 8s ease-in-out infinite reverse;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.hero-content{position:relative;z-index:1;max-width:780px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:5px 14px;font-size:0.75rem;font-weight:600;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:24px;}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.4s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#fff;margin-bottom:6px;}
+.hero-name span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-role{font-size:clamp(1rem,2.5vw,1.35rem);font-weight:500;color:var(--muted);margin-bottom:24px;}
+.hero-desc{font-size:0.97rem;color:#a0aec0;max-width:620px;margin-bottom:36px;line-height:1.75;}
+.hero-contact{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;}
+.contact-chip{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:0.8rem;color:var(--muted);transition:all 0.2s;}
+.contact-chip:hover{border-color:var(--accent);color:var(--accent);}
+.contact-chip svg{width:14px;height:14px;flex-shrink:0;}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;background:var(--grad1);font-size:0.87rem;font-weight:600;color:#fff;transition:opacity 0.2s,transform 0.2s;border:none;cursor:pointer;}
+.btn-primary:hover{opacity:0.88;transform:translateY(-2px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;background:transparent;border:1px solid var(--border);font-size:0.87rem;font-weight:600;color:var(--text);transition:all 0.2s;cursor:pointer;}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.hero-stats{display:flex;flex-wrap:wrap;gap:36px;margin-top:56px;padding-top:36px;border-top:1px solid var(--border);}
+.stat{display:flex;flex-direction:column;gap:2px;}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;color:#fff;}
+.stat-num span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{font-size:0.77rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
 
-    /* PUBLISH BAR */
-
-    /* HERO */
-    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 6vw 80px;position:relative;overflow:hidden;}
-    .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,0.12) 0%,transparent 70%);animation:pulse 6s ease-in-out infinite;}
-    .hero::after{content:'';position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(159,122,234,0.10) 0%,transparent 70%);animation:pulse 8s ease-in-out infinite reverse;}
-    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
-    .hero-content{position:relative;z-index:1;max-width:780px;}
-    .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:5px 14px;font-size:0.75rem;font-weight:600;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:24px;}
-    .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.4s infinite;}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-    .hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:var(--white);margin-bottom:6px;}
-    .hero-name span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .hero-role{font-size:clamp(1rem,2.5vw,1.35rem);font-weight:500;color:var(--muted);margin-bottom:24px;}
-    .hero-desc{font-size:0.97rem;color:#a0aec0;max-width:620px;margin-bottom:36px;line-height:1.75;}
-    .hero-contact{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;}
-    .contact-chip{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:0.8rem;color:var(--muted);transition:all 0.2s;}
-    .contact-chip:hover{border-color:var(--accent);color:var(--accent);}
-    .contact-chip svg{width:14px;height:14px;flex-shrink:0;}
-    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;background:var(--grad1);font-size:0.87rem;font-weight:600;color:#fff;transition:opacity 0.2s,transform 0.2s;border:none;cursor:pointer;}
-    .btn-primary:hover{opacity:0.88;transform:translateY(-2px);}
-    .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;background:transparent;border:1px solid var(--border);font-size:0.87rem;font-weight:600;color:var(--text);transition:all 0.2s;cursor:pointer;}
-    .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
-    .hero-stats{display:flex;flex-wrap:wrap;gap:36px;margin-top:56px;padding-top:36px;border-top:1px solid var(--border);}
-    .stat{display:flex;flex-direction:column;gap:2px;}
-    .stat-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;color:var(--white);}
-    .stat-num span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .stat-label{font-size:0.77rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
-
-    /* SECTIONS */
-    section{padding:80px 6vw;}
-    .section-header{margin-bottom:48px;}
-    .section-tag{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
-    .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;color:var(--white);line-height:1.15;}
-    .section-title span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    #skills{background:var(--bg2);}
-    .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
-    .skill-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:center;gap:14px;transition:all 0.25s;cursor:default;position:relative;overflow:hidden;}
-    .skill-card::before{content:'';position:absolute;inset:0;background:var(--grad1);opacity:0;transition:opacity 0.25s;}
-    .skill-card:hover{transform:translateY(-3px);border-color:transparent;box-shadow:0 8px 30px rgba(99,179,237,0.18);}
-    .skill-card:hover::before{opacity:0.06;}
-    .skill-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
-    .skill-name{font-size:0.87rem;font-weight:600;color:var(--text);position:relative;z-index:1;}
-    .skill-level{font-size:0.72rem;color:var(--muted);position:relative;z-index:1;}
-    #experience{background:var(--bg);}
-    .timeline{position:relative;padding-left:28px;}
-    .timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);border-radius:2px;}
-    .timeline-item{position:relative;margin-bottom:40px;}
-    .timeline-item::before{content:'';position:absolute;left:-34px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(99,179,237,0.2);}
-    .exp-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;transition:all 0.25s;}
-    .exp-card:hover{border-color:rgba(99,179,237,0.3);box-shadow:0 4px 24px rgba(99,179,237,0.08);}
-    .exp-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px;}
-    .exp-role{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);}
-    .exp-period{font-size:0.75rem;font-weight:600;color:var(--accent);background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.2);border-radius:100px;padding:3px 12px;white-space:nowrap;}
-    .exp-company{font-size:0.85rem;color:var(--accent2);font-weight:500;margin-bottom:14px;}
-    .exp-duties{list-style:none;display:flex;flex-direction:column;gap:7px;}
-    .exp-duties li{font-size:0.84rem;color:#a0aec0;padding-left:18px;position:relative;line-height:1.55;}
-    .exp-duties li::before{content:'→';position:absolute;left:0;color:var(--accent3);font-weight:700;}
-    #projects{background:var(--bg2);}
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
-    .project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 24px 20px;transition:all 0.25s;display:flex;flex-direction:column;}
-    .project-card:hover{transform:translateY(-4px);border-color:rgba(99,179,237,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.3);}
-    .project-year{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--accent2);text-transform:uppercase;margin-bottom:10px;}
-    .project-title{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;color:var(--white);line-height:1.4;margin-bottom:8px;flex:1;}
-    .project-tag{display:inline-block;font-size:0.7rem;font-weight:600;background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.2);color:var(--accent3);border-radius:6px;padding:2px 10px;margin-top:12px;}
-    #education{background:var(--bg);}
-    .edu-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 40px;max-width:680px;position:relative;overflow:hidden;transition:all 0.25s;}
-    .edu-card::after{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,0.12) 0%,transparent 70%);}
-    .edu-card:hover{border-color:rgba(99,179,237,0.3);box-shadow:0 8px 40px rgba(99,179,237,0.1);}
-    .edu-university{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:6px;}
-    .edu-degree{font-size:0.9rem;color:var(--accent2);font-weight:500;margin-bottom:6px;}
-    .edu-period{font-size:0.8rem;color:var(--muted);margin-bottom:20px;}
-    .edu-gpa{display:inline-flex;align-items:center;gap:8px;background:rgba(246,224,94,0.08);border:1px solid rgba(246,224,94,0.25);border-radius:10px;padding:10px 18px;}
-    .gpa-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:800;color:var(--gold);}
-    .gpa-label{font-size:0.76rem;color:var(--muted);}
-    #certificates{background:var(--bg2);}
-    .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
-    .cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;transition:all 0.25s;}
-    .cert-card:hover{border-color:rgba(159,122,234,0.35);transform:translateY(-2px);box-shadow:0 6px 24px rgba(159,122,234,0.1);}
-    .cert-icon{width:40px;height:40px;flex-shrink:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
-    .cert-body{flex:1;}
-    .cert-title{font-size:0.84rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px;}
-    .cert-issuer{font-size:0.73rem;color:var(--muted);}
-    #organisations{background:var(--bg);}
-    .org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
-    .org-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 24px;transition:all 0.25s;}
-    .org-card:hover{border-color:rgba(104,211,145,0.3);transform:translateY(-3px);box-shadow:0 6px 28px rgba(104,211,145,0.08);}
-    .org-role{font-family:'Space Grotesk',sans-serif;font-size:0.97rem;font-weight:700;color:var(--white);margin-bottom:2px;}
-    .org-name{font-size:0.82rem;color:var(--accent3);font-weight:500;margin-bottom:6px;}
-    .org-period{font-size:0.72rem;color:var(--muted);margin-bottom:12px;}
-    .org-duties{list-style:none;display:flex;flex-direction:column;gap:5px;}
-    .org-duties li{font-size:0.8rem;color:#90a0b7;padding-left:16px;position:relative;line-height:1.45;}
-    .org-duties li::before{content:'·';position:absolute;left:0;color:var(--accent3);font-size:1.2rem;line-height:1.1;}
-    #contact{background:var(--bg3);text-align:center;padding:80px 6vw;}
-    .cta-box{max-width:600px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:52px 40px;position:relative;overflow:hidden;}
-    .cta-box::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,0.08) 0%,transparent 65%);}
-    .cta-title{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:800;color:var(--white);margin-bottom:12px;}
-    .cta-sub{font-size:0.9rem;color:var(--muted);margin-bottom:32px;}
-    .cta-email{font-size:1.05rem;font-weight:600;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:28px;}
-    .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-    footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
-    .footer-name{font-size:0.85rem;font-weight:600;color:var(--muted);}
-    .footer-note{font-size:0.75rem;color:#3d4a5c;}
-    .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
-    .fade-in.visible{opacity:1;transform:translateY(0);}
-
-    /* ADD CARD BUTTON */
-    .btn-add-card{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border:2px dashed rgba(99,179,237,0.2);border-radius:14px;background:transparent;color:var(--muted);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;margin-top:4px;}
-    body.edit-mode .btn-add-card{display:flex;}
-    .btn-add-card:not(body.edit-mode .btn-add-card){display:none;}
-    .btn-add-card:hover{border-color:var(--accent);color:var(--accent);}
-
-    /* EDIT MODE INDICATOR */
-    .edit-mode-badge{display:none;}
-    body.edit-mode .edit-mode-badge{display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:var(--accent);background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:3px 10px;}
-  </style>
+/* SECTIONS */
+section{padding:80px 6vw;}
+.section-header{margin-bottom:48px;}
+.section-tag{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;color:#fff;line-height:1.15;}
+.section-title span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+#skills{background:var(--bg2);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:center;gap:14px;transition:all 0.25s;position:relative;overflow:hidden;}
+.skill-card::before{content:'';position:absolute;inset:0;background:var(--grad1);opacity:0;transition:opacity 0.25s;}
+.skill-card:hover{transform:translateY(-3px);border-color:transparent;box-shadow:0 8px 30px rgba(99,179,237,0.18);}
+.skill-card:hover::before{opacity:0.06;}
+.skill-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.skill-name{font-size:0.87rem;font-weight:600;color:var(--text);position:relative;z-index:1;}
+.skill-level{font-size:0.72rem;color:var(--muted);position:relative;z-index:1;}
+#experience{background:var(--bg);}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);border-radius:2px;}
+.timeline-item{position:relative;margin-bottom:36px;}
+.timeline-item::before{content:'';position:absolute;left:-34px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(99,179,237,0.2);}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;transition:all 0.25s;}
+.exp-card:hover{border-color:rgba(99,179,237,0.3);box-shadow:0 4px 24px rgba(99,179,237,0.08);}
+.exp-header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px;}
+.exp-role{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;}
+.exp-period{font-size:0.75rem;font-weight:600;color:var(--accent);background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.2);border-radius:100px;padding:3px 12px;white-space:nowrap;}
+.exp-company{font-size:0.85rem;color:var(--accent2);font-weight:500;margin-bottom:14px;}
+.exp-duties{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.exp-duties li{font-size:0.84rem;color:#a0aec0;padding-left:18px;position:relative;line-height:1.55;}
+.exp-duties li::before{content:'→';position:absolute;left:0;color:var(--accent3);font-weight:700;}
+#projects{background:var(--bg2);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 24px 20px;transition:all 0.25s;display:flex;flex-direction:column;}
+.project-card:hover{transform:translateY(-4px);border-color:rgba(99,179,237,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.3);}
+.project-year{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--accent2);text-transform:uppercase;margin-bottom:10px;}
+.project-title{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;color:#fff;line-height:1.4;margin-bottom:8px;flex:1;}
+.project-tag{display:inline-block;font-size:0.7rem;font-weight:600;background:rgba(104,211,145,0.1);border:1px solid rgba(104,211,145,0.2);color:var(--accent3);border-radius:6px;padding:2px 10px;margin-top:12px;}
+#education{background:var(--bg);}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 40px;max-width:680px;position:relative;overflow:hidden;transition:all 0.25s;}
+.edu-card:hover{border-color:rgba(99,179,237,0.3);box-shadow:0 8px 40px rgba(99,179,237,0.1);}
+.edu-university{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:6px;}
+.edu-degree{font-size:0.9rem;color:var(--accent2);font-weight:500;margin-bottom:6px;}
+.edu-period{font-size:0.8rem;color:var(--muted);margin-bottom:20px;}
+.edu-gpa{display:inline-flex;align-items:center;gap:8px;background:rgba(246,224,94,0.08);border:1px solid rgba(246,224,94,0.25);border-radius:10px;padding:10px 18px;}
+.gpa-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:800;color:var(--gold);}
+.gpa-label{font-size:0.76rem;color:var(--muted);}
+#certificates{background:var(--bg2);}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:flex-start;gap:14px;transition:all 0.25s;}
+.cert-card:hover{border-color:rgba(159,122,234,0.35);transform:translateY(-2px);}
+.cert-icon{width:40px;height:40px;flex-shrink:0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.cert-body{flex:1;}
+.cert-title{font-size:0.84rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px;}
+.cert-issuer{font-size:0.73rem;color:var(--muted);}
+#organisations{background:var(--bg);}
+.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.org-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 24px;transition:all 0.25s;}
+.org-card:hover{border-color:rgba(104,211,145,0.3);transform:translateY(-3px);}
+.org-role{font-family:'Space Grotesk',sans-serif;font-size:0.97rem;font-weight:700;color:#fff;margin-bottom:2px;}
+.org-name{font-size:0.82rem;color:var(--accent3);font-weight:500;margin-bottom:6px;}
+.org-period{font-size:0.72rem;color:var(--muted);margin-bottom:12px;}
+.org-duties{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.org-duties li{font-size:0.8rem;color:#90a0b7;padding-left:16px;position:relative;line-height:1.45;}
+.org-duties li::before{content:'·';position:absolute;left:0;color:var(--accent3);font-size:1.2rem;line-height:1.1;}
+#contact{background:var(--bg3);text-align:center;padding:80px 6vw;}
+.cta-box{max-width:600px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:52px 40px;position:relative;overflow:hidden;}
+.cta-title{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:12px;}
+.cta-sub{font-size:0.9rem;color:var(--muted);margin-bottom:32px;}
+.cta-email{font-size:1.05rem;font-weight:600;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:28px;}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+footer{background:var(--bg);border-top:1px solid var(--border);padding:24px 6vw;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
+.footer-name{font-size:0.85rem;font-weight:600;color:var(--muted);}
+.footer-note{font-size:0.75rem;color:#3d4a5c;}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
 </head>
-<body class="owner-logged-in edit-mode">
+<body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">MRS.</div>
   <div class="nav-links">
@@ -211,803 +191,602 @@
     <a href="#experience" class="hide-mobile">Experience</a>
     <a href="#projects" class="hide-mobile">Projects</a>
     <a href="#contact" class="hide-mobile">Contact</a>
-    <span class="edit-mode-badge">✏ Edit Mode ON</span>
-    <button id="ownerLoginBtn" onclick="openLoginModal()" title="Login sebagai pemilik">🔐 Owner</button>
-    <button id="editToggleBtn" onclick="toggleEditMode()" class="active">✕ Selesai Edit</button>
+    <span class="edit-mode-badge" id="editBadge">✏ Edit Mode ON</span>
+    <button id="ownerLoginBtn" onclick="openLogin()">🔐 Owner</button>
+    <button id="editToggleBtn" onclick="toggleEdit()">✏ Edit Mode</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-tag" data-editable="" data-key="heroTag" onclick="editSimple(this,'Tagline Hero','heroTag')">Open to Work · Full-time / Internship</div>
-    <h1 class="hero-name" data-editable="" data-key="heroName" onclick="editHeroName(this)">Mohamad<br><span>Rasya Sathia</span></h1>
-    <p class="hero-role" data-editable="" data-key="heroRole" onclick="editSimple(this,'Role / Sub-title','heroRole')">Instructional Designer &amp; AI Enthusiast &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Content Strategist</p>
-    <p class="hero-desc" data-editable="" data-key="heroDesc" onclick="editTextarea(this,'Deskripsi Profil','heroDesc')">Lulusan S1 Teknologi Pendidikan UPI (IPK 3.73/4.00) dengan keahlian di bidang Instructional Design, Artificial Intelligence, Social Media Management, dan Data Analytics. Berpengalaman lintas sektor: pendidikan, perusahaan, dan organisasi. Cepat beradaptasi, sistematis, dan berorientasi pada hasil.</p>
+    <div id="heroTag" class="hero-tag" data-ed data-field="heroTag"></div>
+    <h1 class="hero-name" id="heroName" data-ed data-field="heroName"></h1>
+    <p class="hero-role" id="heroRole" data-ed data-field="heroRole"></p>
+    <p class="hero-desc" id="heroDesc" data-ed data-field="heroDesc"></p>
     <div class="hero-contact">
-      <div class="contact-chip" data-editable="" data-key="heroPhone" onclick="editSimple(this,'Nomor Telepon','heroPhone')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.07 6.07l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
-        <span>+62 852 1555 1314</span>
+      <div class="contact-chip" id="heroPhone" data-ed data-field="heroPhone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.07 6.07l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <span></span>
       </div>
-      <div class="contact-chip" data-editable="" data-key="heroEmail" onclick="editSimple(this,'Email','heroEmail')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <span>mohamad.rasya.sath@gmail.com</span>
+      <div class="contact-chip" id="heroEmail" data-ed data-field="heroEmail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span></span>
       </div>
-      <div class="contact-chip" data-editable="" data-key="heroCity" onclick="editSimple(this,'Kota / Lokasi','heroCity')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        <span>Cianjur, Jawa Barat</span>
+      <div class="contact-chip" id="heroCity" data-ed data-field="heroCity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span></span>
       </div>
     </div>
     <div class="hero-cta">
-      <a id="ctaBtnEmail" href="mailto:mohamad.rasya.sath@gmail.com" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      <a id="ctaMailBtn" href="#" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         Hubungi Saya
       </a>
       <a href="#experience" class="btn-outline">Lihat Pengalaman</a>
     </div>
     <div class="hero-stats">
-      <div class="stat" data-editable="" data-key="stat1" onclick="editStat(this,'stat1')">
-        <div class="stat-num"><span id="stat1val">3.73</span></div>
-        <div class="stat-label" id="stat1lab">IPK / 4.00</div>
-      </div>
-      <div class="stat" data-editable="" data-key="stat2" onclick="editStat(this,'stat2')">
-        <div class="stat-num"><span id="stat2val">10+</span></div>
-        <div class="stat-label" id="stat2lab">Pengalaman Kerja</div>
-      </div>
-      <div class="stat" data-editable="" data-key="stat3" onclick="editStat(this,'stat3')">
-        <div class="stat-num"><span id="stat3val">7+</span></div>
-        <div class="stat-label" id="stat3lab">Projek Akademik</div>
-      </div>
-      <div class="stat" data-editable="" data-key="stat4" onclick="editStat(this,'stat4')">
-        <div class="stat-num"><span id="stat4val">8+</span></div>
-        <div class="stat-label" id="stat4lab">Sertifikat</div>
-      </div>
+      <div class="stat" data-ed data-field="stat1" id="stat1el"><div class="stat-num"><span id="stat1val"></span></div><div class="stat-label" id="stat1lab"></div></div>
+      <div class="stat" data-ed data-field="stat2" id="stat2el"><div class="stat-num"><span id="stat2val"></span></div><div class="stat-label" id="stat2lab"></div></div>
+      <div class="stat" data-ed data-field="stat3" id="stat3el"><div class="stat-num"><span id="stat3val"></span></div><div class="stat-label" id="stat3lab"></div></div>
+      <div class="stat" data-ed data-field="stat4" id="stat4el"><div class="stat-num"><span id="stat4val"></span></div><div class="stat-label" id="stat4lab"></div></div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-header fade-in visible" style="transition-delay: 0s;">
-    <div class="section-tag">// Core Competencies</div>
-    <h2 class="section-title">Kemampuan <span>Utama</span></h2>
-  </div>
-  <div class="skills-grid" id="skillsGrid">
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(99,179,237,0.12);">🎓</div><div><div class="skill-name">Instructional Designer</div><div class="skill-level">Expert</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.14s;"><div class="skill-icon" style="background:rgba(159,122,234,0.12);">🤖</div><div><div class="skill-name">AI &amp; Prompt Engineering</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.21s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">📊</div><div><div class="skill-name">Data Analyst</div><div class="skill-level">Intermediate</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.28s;"><div class="skill-icon" style="background:rgba(104,211,145,0.12);">📱</div><div><div class="skill-name">Social Media Management</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0s;"><div class="skill-icon" style="background:rgba(246,224,94,0.12);">✍️</div><div><div class="skill-name">Copywriting &amp; Content</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">📈</div><div><div class="skill-name">Digital Content Marketing</div><div class="skill-level">Intermediate</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.14s;"><div class="skill-icon" style="background:rgba(99,179,237,0.12);">🗂️</div><div><div class="skill-name">Project Management</div><div class="skill-level">Intermediate</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.21s;"><div class="skill-icon" style="background:rgba(159,122,234,0.12);">🔍</div><div><div class="skill-name">Research &amp; Documentation</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.28s;"><div class="skill-icon" style="background:rgba(104,211,145,0.12);">💼</div><div><div class="skill-name">Microsoft Office Suite</div><div class="skill-level">Proficient</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0s;"><div class="skill-icon" style="background:rgba(246,224,94,0.12);">🧩</div><div><div class="skill-name">Problem Solving</div><div class="skill-level">Strong</div></div></div>
-    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">🤝</div><div><div class="skill-name">Team Collaboration</div><div class="skill-level">Strong</div></div></div>
-  </div>
+  <div class="section-header fade-in"><div class="section-tag">// Core Competencies</div><h2 class="section-title">Kemampuan <span>Utama</span></h2></div>
+  <div class="skills-grid" id="skillsGrid"></div>
   <button class="btn-add-card" onclick="addSkill()">+ Tambah Skill</button>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-header fade-in visible" style="transition-delay: 0.14s;">
-    <div class="section-tag">// Work History</div>
-    <h2 class="section-title">Pengalaman <span>Kerja</span></h2>
-  </div>
-  <div class="timeline" id="expTimeline">
-    <div class="timeline-item fade-in visible" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.21s;">
-      <div class="exp-card">
-        <div class="exp-header"><div class="exp-role">Intern — Divisi P3TK</div><div class="exp-period">Feb 2025 – Juni 2025</div></div>
-        <div class="exp-company">Dinas Pendidikan Kota Bandung</div>
-        <ul class="exp-duties"><li>Mendukung administrasi &amp; koordinasi program pengembangan kompetensi pendidik.</li><li>Penyusunan, pengelolaan, dan dokumentasi dokumen administrasi serta laporan kegiatan.</li><li>Kolaborasi tim dalam mendukung program peningkatan mutu layanan pendidikan.</li><li>Mengolah data dan informasi sebagai bahan pendukung pelaksanaan program.</li><li>Memanfaatkan teknologi digital untuk efisiensi pengelolaan dokumen &amp; administrasi.</li></ul>
-      </div>
-    </div>
-    <div class="timeline-item fade-in visible" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.28s;">
-      <div class="exp-card">
-        <div class="exp-header"><div class="exp-role">Crew &amp; Social Media Management</div><div class="exp-period">Nov 2025 – Juli 2026</div></div>
-        <div class="exp-company">Captbooth</div>
-        <ul class="exp-duties"><li>Membuat dan menjadwalkan konten untuk kebutuhan postingan media sosial (Instagram).</li><li>Riset tren aktual dan mengaplikasikannya dalam strategi konten postingan.</li><li>Riset keyword dan optimasi caption untuk peningkatan engagement.</li><li>Membantu penataan dan pelaksanaan setiap acara yang diselenggarakan.</li></ul>
-      </div>
-    </div>
-    <div class="timeline-item fade-in visible" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0s;">
-      <div class="exp-card">
-        <div class="exp-header"><div class="exp-role">Sekretaris</div><div class="exp-period">Juni 2025 – Sekarang</div></div>
-        <div class="exp-company">CV. Dwi Aksara Mandiri</div>
-        <ul class="exp-duties"><li>Mengelola administrasi dan dokumentasi perusahaan, termasuk surat-menyurat &amp; arsip dokumen.</li><li>Menyiapkan dokumen perusahaan untuk mendukung kegiatan operasional dan administrasi proyek.</li><li>Menyusun laporan, proposal, dan kelengkapan administrasi proyek.</li><li>Mengelola agenda, jadwal, dan kebutuhan administratif pimpinan.</li></ul>
-      </div>
-    </div>
-  </div>
-  <button class="btn-add-card" onclick="addExp()">+ Tambah Pengalaman Kerja</button>
+  <div class="section-header fade-in"><div class="section-tag">// Work History</div><h2 class="section-title">Pengalaman <span>Kerja</span></h2></div>
+  <div class="timeline" id="expTimeline"></div>
+  <button class="btn-add-card" onclick="addExp()">+ Tambah Pengalaman</button>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-header fade-in visible" style="transition-delay: 0.07s;">
-    <div class="section-tag">// Academic Work</div>
-    <h2 class="section-title">Pengalaman <span>Projek</span></h2>
-  </div>
-  <div class="projects-grid" id="projectsGrid">
-    <div class="project-card fade-in visible" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.14s;"><div class="project-year">2026</div><div class="project-title">Efektivitas Penggunaan Boardgame Interaktif "SAMUDRAKSI" Untuk Meningkatkan Keterlibatan Siswa Dalam Pembelajaran IPS di Kelas VIII MTs.</div><div class="project-tag">Research &amp; Development</div></div>
-    <div class="project-card fade-in visible" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.21s;"><div class="project-year">2025</div><div class="project-title">Evaluasi Perilaku Belajar Peserta Didik Kelas XII Ditinjau dari Sudut Pandang Teori Behaviorisme.</div><div class="project-tag">Educational Evaluation</div></div>
-    <div class="project-card fade-in visible" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.28s;"><div class="project-year">2024</div><div class="project-title">Desain Program Pelatihan Yogya Group</div><div class="project-tag">Instructional Design</div></div>
-    <div class="project-card fade-in visible" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0s;"><div class="project-year">2024</div><div class="project-title">Analisis Kinerja dan Intervensi Pada Organisasi Gerakan Mengajar Desa</div><div class="project-tag">Org. Performance Analysis</div></div>
-    <div class="project-card fade-in visible" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.07s;"><div class="project-year">2024</div><div class="project-title">Analisis Sistem Informasi Manajemen Penjualan Pada Liana Swalayan</div><div class="project-tag">Data &amp; MIS Analysis</div></div>
-    <div class="project-card fade-in visible" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.14s;"><div class="project-year">2023</div><div class="project-title">Efektivitas Video Pembelajaran Nama-Nama Planet di Tata Surya Pada Anak Usia Dini TK Binekas PGRI</div><div class="project-tag">Media Evaluation</div></div>
-    <div class="project-card fade-in visible" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.21s;"><div class="project-year">2023</div><div class="project-title">Pembuatan Media Pembelajaran Interaktif Berbasis Articulate Storyline 3 — "Mengenal Flora &amp; Fauna di Indonesia"</div><div class="project-tag">Interactive Learning Media</div></div>
-  </div>
+  <div class="section-header fade-in"><div class="section-tag">// Academic Work</div><h2 class="section-title">Pengalaman <span>Projek</span></h2></div>
+  <div class="projects-grid" id="projectsGrid"></div>
   <button class="btn-add-card" onclick="addProject()">+ Tambah Projek</button>
 </section>
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-header fade-in visible" style="transition-delay: 0.28s;">
-    <div class="section-tag">// Academic Background</div>
-    <h2 class="section-title">Pendidikan <span>Formal</span></h2>
-  </div>
-  <div class="edu-card fade-in visible" data-editable="" onclick="editEdu(this)" style="transition-delay: 0s;">
-    <div class="edu-university">Universitas Pendidikan Indonesia</div>
-    <div class="edu-degree">S1 Teknologi Pendidikan</div>
-    <div class="edu-period">2022 — 2026</div>
+  <div class="section-header fade-in"><div class="section-tag">// Academic Background</div><h2 class="section-title">Pendidikan <span>Formal</span></h2></div>
+  <div class="edu-card fade-in" data-ed onclick="editEdu()">
+    <div class="edu-university" id="eduUniversity"></div>
+    <div class="edu-degree" id="eduDegree"></div>
+    <div class="edu-period" id="eduPeriod"></div>
     <div class="edu-gpa">
-      <div><div class="gpa-num">3.73</div><div class="gpa-label">IPK</div></div>
+      <div><div class="gpa-num" id="eduGpa"></div><div class="gpa-label">IPK</div></div>
       <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);margin:0 14px;"></div>
       <div><div style="font-size:0.8rem;color:var(--muted)">Skala</div><div style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text)">4.00</div></div>
       <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);margin:0 14px;"></div>
-      <div><div style="font-size:0.8rem;color:var(--muted)">Status</div><div id="eduStatus" style="font-size:0.9rem;font-weight:700;color:var(--accent3)">Lulus 🎓</div></div>
+      <div><div style="font-size:0.8rem;color:var(--muted)">Status</div><div id="eduStatus" style="font-size:0.9rem;font-weight:700;color:var(--accent3)"></div></div>
     </div>
   </div>
 </section>
 
 <!-- CERTIFICATES -->
 <section id="certificates">
-  <div class="section-header fade-in visible" style="transition-delay: 0.07s;">
-    <div class="section-tag">// Credentials</div>
-    <h2 class="section-title">Sertifikat &amp; <span>Pelatihan</span></h2>
-  </div>
-  <div class="cert-grid" id="certGrid">
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.14s;"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Getting Started with Data</div><div class="cert-issuer">Credly · IBM SkillsBuild</div></div></div>
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.21s;"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Classifying Data Using IBM Granite</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.28s;"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Unleashing the Power of AI Agents</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0s;"><div class="cert-icon" style="background:rgba(246,173,85,0.12);">🌟</div><div class="cert-body"><div class="cert-title">Berinovasi dengan AI — 15 Learning Hours</div><div class="cert-issuer">Kemenpora &amp; PLAN International · ADB google.org</div></div></div>
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.07s;"><div class="cert-icon" style="background:rgba(104,211,145,0.12);">📜</div><div class="cert-body"><div class="cert-title">Media Video Pembelajaran</div><div class="cert-issuer">Wajar.id · Universitas Pendidikan Indonesia</div></div></div>
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.14s;"><div class="cert-icon" style="background:rgba(159,122,234,0.12);">📜</div><div class="cert-body"><div class="cert-title">Mendesain Rencana Pembelajaran Mendalam dengan Integrasi AI</div><div class="cert-issuer">Diklat Online · PT Sumber Belajar Bersama</div></div></div>
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.21s;"><div class="cert-icon" style="background:rgba(246,224,94,0.12);">📜</div><div class="cert-body"><div class="cert-title">Peningkatan Kompetensi Siswa — Literasi &amp; Numerasi</div><div class="cert-issuer">Edukarya</div></div></div>
-    <div class="cert-card fade-in visible" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.28s;"><div class="cert-icon" style="background:rgba(246,173,85,0.12);">📜</div><div class="cert-body"><div class="cert-title">Content Marketing Basic</div><div class="cert-issuer">Great Learning</div></div></div>
-  </div>
+  <div class="section-header fade-in"><div class="section-tag">// Credentials</div><h2 class="section-title">Sertifikat &amp; <span>Pelatihan</span></h2></div>
+  <div class="cert-grid" id="certGrid"></div>
   <button class="btn-add-card" onclick="addCert()">+ Tambah Sertifikat</button>
 </section>
 
 <!-- ORGANISATIONS -->
 <section id="organisations">
-  <div class="section-header fade-in visible" style="transition-delay: 0s;">
-    <div class="section-tag">// Leadership &amp; Volunteering</div>
-    <h2 class="section-title">Organisasi &amp; <span>Relawan</span></h2>
-  </div>
-  <div class="org-grid" id="orgGrid">
-    <div class="org-card fade-in visible" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.07s;">
-      <div class="org-role">Sekretaris</div><div class="org-name">DPC Forum Relawan Demokrasi (Foreder)</div><div class="org-period">Maret 2025 – Sekarang</div>
-      <ul class="org-duties"><li>Mengelola administrasi organisasi, surat-menyurat, pendataan, arsip.</li><li>Menyusun notulen rapat dan laporan kegiatan secara sistematis.</li><li>Mengatur komunikasi dan koordinasi antara pengurus, anggota, dan pihak eksternal.</li></ul>
-    </div>
-    <div class="org-card fade-in visible" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.14s;">
-      <div class="org-role">Pengurus</div><div class="org-name">Forum Mahasiswa Cianjur (Formaci)</div><div class="org-period">Maret 2024 – Juli 2025</div>
-      <ul class="org-duties"><li>Perencanaan dan pelaksanaan kegiatan organisasi mahasiswa daerah.</li><li>Koordinasi pembagian tugas dan pelaksanaan program kerja.</li><li>Mengembangkan kemampuan kerja sama tim dan komunikasi.</li></ul>
-    </div>
-    <div class="org-card fade-in visible" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.21s;">
-      <div class="org-role">Staff BP2</div><div class="org-name">Hima Tekpend — Himpunan Mahasiswa Teknologi Pendidikan</div><div class="org-period">Okt 2023 – Juli 2024</div>
-      <ul class="org-duties"><li>Kontribusi dalam kegiatan pengabdian masyarakat.</li><li>Mendukung program kerja bidang pendidikan dan sosial.</li><li>Kolaborasi persiapan dan pelaksanaan kegiatan edukatif.</li></ul>
-    </div>
-    <div class="org-card fade-in visible" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.28s;">
-      <div class="org-role">Volunteer</div><div class="org-name">Growth Camp</div><div class="org-period">Nov 2024</div>
-      <ul class="org-duties"><li>Mendukung kegiatan pengembangan diri dan pendidikan peserta.</li><li>Kolaborasi bersama panitia dan volunteer dalam pelaksanaan.</li><li>Mendampingi peserta selama kegiatan berlangsung.</li></ul>
-    </div>
-  </div>
+  <div class="section-header fade-in"><div class="section-tag">// Leadership &amp; Volunteering</div><h2 class="section-title">Organisasi &amp; <span>Relawan</span></h2></div>
+  <div class="org-grid" id="orgGrid"></div>
   <button class="btn-add-card" onclick="addOrg()">+ Tambah Organisasi</button>
 </section>
 
-<!-- CONTACT CTA -->
+<!-- CONTACT -->
 <section id="contact">
-  <div class="cta-box fade-in visible" style="transition-delay: 0s;">
-    <div class="cta-title" data-editable="" onclick="editSimple(this,'Judul CTA','ctaTitle')">Mari Berkolaborasi 🚀</div>
-    <p class="cta-sub" data-editable="" onclick="editSimple(this,'Sub-judul CTA','ctaSub')">Saya terbuka untuk peluang kerja, magang, freelance, atau kolaborasi proyek.</p>
-    <span class="cta-email" id="ctaEmailDisplay" data-editable="" onclick="editSimple(this,'Email CTA','ctaEmailDisplay')">mohamad.rasya.sath@gmail.com</span>
+  <div class="cta-box fade-in">
+    <div class="cta-title" id="ctaTitle" data-ed data-field="ctaTitle"></div>
+    <p class="cta-sub" id="ctaSub" data-ed data-field="ctaSub"></p>
+    <span class="cta-email" id="ctaEmail" data-ed data-field="ctaEmail"></span>
     <div class="cta-actions">
-      <a id="ctaBtnEmail2" href="mailto:mohamad.rasya.sath@gmail.com" class="btn-primary">Kirim Email</a>
-      <a href="tel:+6285215551314" class="btn-outline">Hubungi via WA</a>
+      <a id="ctaMailBtn2" href="#" class="btn-primary">Kirim Email</a>
+      <a id="ctaWaBtn" href="#" class="btn-outline">Hubungi via WA</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-name" data-editable="" onclick="editSimple(this,'Footer Nama','footerName')">© 2026 Mohamad Rasya Sathia</div>
-  <div class="footer-note" data-editable="" onclick="editSimple(this,'Footer Catatan','footerNote')">Built with ❤ · Teknologi Pendidikan UPI · Open to Opportunities</div>
+  <div class="footer-name" id="footerName" data-ed data-field="footerName"></div>
+  <div class="footer-note" id="footerNote" data-ed data-field="footerNote"></div>
 </footer>
 
-<!-- LOGIN MODAL -->
+<!-- LOGIN OVERLAY -->
 <div id="loginOverlay">
   <div id="loginBox">
     <h3>🔐 Owner Login</h3>
     <p>Masukkan password untuk mengaktifkan mode edit</p>
-    <input type="password" id="loginInput" placeholder="Masukkan password..." onkeydown="if(event.key==='Enter')submitLogin()">
+    <input type="password" id="loginInput" placeholder="Password..." onkeydown="if(event.key==='Enter')doLogin()"/>
     <div id="loginError"></div>
-    <button id="loginSubmitBtn" onclick="submitLogin()">Masuk</button>
-    <br>
-    <button id="loginCancelBtn" onclick="closeLoginModal()">Batal</button>
+    <button id="loginSubmitBtn" onclick="doLogin()">Masuk</button><br/>
+    <button id="loginCancelBtn" onclick="closeLogin()">Batal</button>
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal-backdrop" id="modalBackdrop">
-  <div class="modal" id="modalBox">
-    <h3><span id="modalIcon">✏</span> <span id="modalTitle">Footer Nama</span></h3>
-    <div id="modalFields"><div class="field-group"><label>Footer Nama</label><input type="text" id="simpleVal" value="© 2025 Mohamad Rasya Sathia"></div></div>
+<!-- EDITOR MODAL -->
+<div class="modal-backdrop" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">Edit</h3>
+    <div id="modalFields"></div>
     <div class="modal-actions">
-      <button class="btn-danger" id="modalDeleteBtn" style="display: none;" onclick="deleteCard()">Hapus</button>
+      <button class="btn-danger" id="modalDelBtn" style="display:none" onclick="doDelete()">Hapus</button>
       <button class="btn-cancel" onclick="closeModal()">Batal</button>
-      <button class="btn-save" onclick="saveModal()">Simpan</button>
+      <button class="btn-save" onclick="doSave()">Simpan &amp; Publish</button>
     </div>
   </div>
 </div>
 
-<!-- Publish bar dihapus — auto-save otomatis setiap Simpan -->
-
 <script>
-// ─────────────────────────────────────────────
-// OWNER AUTHENTICATION
-// Password di-hash SHA-256 — tidak bisa dibaca langsung dari source
-// Hash dari password: RasyaAdmin2025
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════
+// KONFIGURASI
+// ═══════════════════════════════════════════
+const REPO      = 'mohamadrasyasath-collab/portfolio';
+const DATA_FILE = 'data.json';
+// Hash SHA-256 dari password "RasyaAdmin2025"
 const OWNER_HASH = '66379381072837118bb70c6ebacd120536732f7364000fc73459d9dd7bec190f';
-const SESSION_KEY = 'portfolio_owner_session';
+const SESSION_KEY = 'pf_session';
+const TOKEN_KEY   = 'pf_token';
 
-// Hash password dengan Web Crypto API (async)
-async function hashPassword(pw) {
-  const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let D = {};           // data portfolio (dari data.json)
+let editMode = false;
+let currentIdx = null;
+let currentSection = null;
+
+// ═══════════════════════════════════════════
+// LOAD DATA DARI GITHUB data.json
+// ═══════════════════════════════════════════
+async function loadData() {
+  // Tambah cache-busting agar selalu ambil data terbaru
+  const url = `https://mohamadrasyasath-collab.github.io/portfolio/data.json?t=${Date.now()}`;
+  const res = await fetch(url);
+  D = await res.json();
+  renderAll();
 }
 
-// Cek apakah sesi login masih aktif (berlaku 8 jam)
-function checkSession() {
-  const s = localStorage.getItem(SESSION_KEY);
-  if (!s) return false;
+// ═══════════════════════════════════════════
+// SIMPAN DATA KE data.json DI GITHUB
+// ═══════════════════════════════════════════
+async function saveData() {
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (!token) {
+    const t = prompt('🔑 Masukkan GitHub Token Anda (disimpan di browser):');
+    if (t && t.trim().length > 10) localStorage.setItem(TOKEN_KEY, t.trim());
+    else { toast('⚠ Token diperlukan', 'error'); return false; }
+  }
+  const liveToken = localStorage.getItem(TOKEN_KEY);
+
+  toast('⏳ Menyimpan...', 'loading');
   try {
-    const { expires } = JSON.parse(s);
-    return Date.now() < expires;
-  } catch { return false; }
-}
+    // Ambil SHA data.json terbaru
+    const shaRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
+      headers: { Authorization: 'token ' + liveToken, Accept: 'application/vnd.github.v3+json' }
+    });
+    const shaData = await shaRes.json();
+    if (!shaData.sha) throw new Error('Tidak bisa membaca data.json');
 
-function saveSession() {
-  localStorage.setItem(SESSION_KEY, JSON.stringify({ expires: Date.now() + 8 * 60 * 60 * 1000 }));
-}
+    // Push data baru
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_FILE}`, {
+      method: 'PUT',
+      headers: { Authorization: 'token ' + liveToken, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Update portfolio data — ' + new Date().toLocaleString('id-ID'), content, sha: shaData.sha })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.message); }
 
-function clearSession() {
-  localStorage.removeItem(SESSION_KEY);
-}
-
-function openLoginModal() {
-  document.getElementById('loginInput').value = '';
-  document.getElementById('loginError').textContent = '';
-  document.getElementById('loginOverlay').classList.add('open');
-  setTimeout(() => document.getElementById('loginInput').focus(), 100);
-}
-
-function closeLoginModal() {
-  document.getElementById('loginOverlay').classList.remove('open');
-}
-
-async function submitLogin() {
-  const pw    = document.getElementById('loginInput').value;
-  const errEl = document.getElementById('loginError');
-  const btn   = document.getElementById('loginSubmitBtn');
-
-  if (!pw) { errEl.textContent = 'Masukkan password terlebih dahulu.'; return; }
-
-  btn.textContent = 'Memeriksa...';
-  btn.disabled = true;
-
-  const hash = await hashPassword(pw);
-
-  if (hash === OWNER_HASH) {
-    saveSession();
-    document.body.classList.add('owner-logged-in');
-    closeLoginModal();
-    btn.textContent = 'Masuk';
-    btn.disabled = false;
-    errEl.textContent = '';
-  } else {
-    errEl.textContent = '❌ Password salah. Coba lagi.';
-    document.getElementById('loginInput').value = '';
-    document.getElementById('loginInput').focus();
-    btn.textContent = 'Masuk';
-    btn.disabled = false;
+    toast('✓ Tersimpan! Data permanen, refresh aman.', 'success');
+    return true;
+  } catch(e) {
+    toast('⚠ Gagal simpan: ' + e.message, 'error');
+    return false;
   }
 }
 
-// Auto-restore sesi jika masih valid saat halaman dibuka
-if (checkSession()) {
-  document.addEventListener('DOMContentLoaded', () => {
-    document.body.classList.add('owner-logged-in');
+// ═══════════════════════════════════════════
+// RENDER SEMUA SECTION DARI DATA
+// ═══════════════════════════════════════════
+function renderAll() {
+  // Hero teks
+  setText('heroTag', D.heroTag);
+  document.getElementById('heroName').innerHTML = D.heroName1 + '<br/><span>' + D.heroName2 + '</span>';
+  setText('heroRole', D.heroRole);
+  setText('heroDesc', D.heroDesc);
+  document.getElementById('heroPhone').querySelector('span').textContent = D.heroPhone;
+  document.getElementById('heroEmail').querySelector('span').textContent = D.heroEmail;
+  document.getElementById('heroCity').querySelector('span').textContent  = D.heroCity;
+  document.getElementById('ctaMailBtn').href  = 'mailto:' + D.heroEmail;
+  document.getElementById('ctaMailBtn2').href = 'mailto:' + D.heroEmail;
+  document.getElementById('ctaWaBtn').href    = 'tel:' + D.heroPhone.replace(/\D/g,'');
+
+  // Stats
+  ['1','2','3','4'].forEach(n => {
+    document.getElementById('stat'+n+'val').textContent = D['stat'+n+'val'];
+    document.getElementById('stat'+n+'lab').textContent = D['stat'+n+'lab'];
+  });
+
+  // Education
+  setText('eduUniversity', D.eduUniversity);
+  setText('eduDegree',     D.eduDegree);
+  setText('eduPeriod',     D.eduPeriod);
+  setText('eduGpa',        D.eduGpa);
+  setText('eduStatus',     D.eduStatus);
+
+  // CTA + Footer
+  setText('ctaTitle',   D.ctaTitle);
+  setText('ctaSub',     D.ctaSub);
+  setText('ctaEmail',   D.heroEmail);
+  setText('footerName', D.footerName);
+  setText('footerNote', D.footerNote);
+
+  // Skills
+  renderSkills();
+  renderExperiences();
+  renderProjects();
+  renderCerts();
+  renderOrgs();
+
+  // Pasang onclick edit pada elemen data-ed
+  attachEditable();
+
+  // Fade-in
+  document.querySelectorAll('.fade-in').forEach((el,i) => {
+    el.style.transitionDelay = (i%5)*0.07+'s';
+    fadeObserver.observe(el);
   });
 }
 
-// ─────────────────────────────────────────────
-// CONFIG GITHUB — Token & Repo
-// ─────────────────────────────────────────────
-// Token disimpan di localStorage agar aman (tidak hardcode di kode)
-const GH_TOKEN = localStorage.getItem('gh_token') || '';
-const GH_REPO  = 'mohamadrasyasath-collab/portfolio';
-const GH_FILE  = 'index.html';
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val || '';
+}
 
-// ─────────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────────
-let editMode    = false;
-let hasChanges  = false;
-let currentCard = null;   // DOM element being edited
-let currentType = null;   // 'skill'|'exp'|'project'|'cert'|'org'|'edu'
+// ───── RENDER SKILLS ─────
+function renderSkills() {
+  const g = document.getElementById('skillsGrid');
+  g.innerHTML = '';
+  (D.skills||[]).forEach((sk,i) => {
+    const d = document.createElement('div');
+    d.className = 'skill-card fade-in';
+    d.setAttribute('data-ed','');
+    d.innerHTML = `<div class="skill-icon" style="background:rgba(99,179,237,0.12);">${sk.icon}</div><div><div class="skill-name">${sk.name}</div><div class="skill-level">${sk.level}</div></div>`;
+    d.onclick = () => editSkill(i);
+    g.appendChild(d);
+  });
+}
 
-// ─────────────────────────────────────────────
+// ───── RENDER EXPERIENCES ─────
+function renderExperiences() {
+  const t = document.getElementById('expTimeline');
+  t.innerHTML = '';
+  (D.experiences||[]).forEach((ex,i) => {
+    const d = document.createElement('div');
+    d.className = 'timeline-item fade-in';
+    d.setAttribute('data-ed','');
+    const liHtml = (ex.duties||[]).map(du => `<li>${du}</li>`).join('');
+    d.innerHTML = `<div class="exp-card"><div class="exp-header"><div class="exp-role">${ex.role}</div><div class="exp-period">${ex.period}</div></div><div class="exp-company">${ex.company}</div><ul class="exp-duties">${liHtml}</ul></div>`;
+    d.onclick = () => editExp(i);
+    t.appendChild(d);
+  });
+}
+
+// ───── RENDER PROJECTS ─────
+function renderProjects() {
+  const g = document.getElementById('projectsGrid');
+  g.innerHTML = '';
+  (D.projects||[]).forEach((pr,i) => {
+    const d = document.createElement('div');
+    d.className = 'project-card fade-in';
+    d.setAttribute('data-ed','');
+    d.innerHTML = `<div class="project-year">${pr.year}</div><div class="project-title">${pr.title}</div><div class="project-tag">${pr.tag}</div>`;
+    d.onclick = () => editProject(i);
+    g.appendChild(d);
+  });
+}
+
+// ───── RENDER CERTS ─────
+function renderCerts() {
+  const g = document.getElementById('certGrid');
+  g.innerHTML = '';
+  (D.certificates||[]).forEach((c,i) => {
+    const d = document.createElement('div');
+    d.className = 'cert-card fade-in';
+    d.setAttribute('data-ed','');
+    d.innerHTML = `<div class="cert-icon" style="background:rgba(99,179,237,0.12);">${c.icon}</div><div class="cert-body"><div class="cert-title">${c.title}</div><div class="cert-issuer">${c.issuer}</div></div>`;
+    d.onclick = () => editCert(i);
+    g.appendChild(d);
+  });
+}
+
+// ───── RENDER ORGS ─────
+function renderOrgs() {
+  const g = document.getElementById('orgGrid');
+  g.innerHTML = '';
+  (D.organisations||[]).forEach((o,i) => {
+    const d = document.createElement('div');
+    d.className = 'org-card fade-in';
+    d.setAttribute('data-ed','');
+    const liHtml = (o.duties||[]).map(du => `<li>${du}</li>`).join('');
+    d.innerHTML = `<div class="org-role">${o.role}</div><div class="org-name">${o.name}</div><div class="org-period">${o.period}</div><ul class="org-duties">${liHtml}</ul>`;
+    d.onclick = () => editOrg(i);
+    g.appendChild(d);
+  });
+}
+
+function attachEditable() {
+  // Hero chips & simple fields
+  const simpleMap = {
+    heroTag:'Tagline', heroRole:'Role', heroDesc:'Deskripsi Profil',
+    ctaTitle:'Judul CTA', ctaSub:'Sub Judul CTA',
+    footerName:'Footer Nama', footerNote:'Footer Catatan'
+  };
+  Object.entries(simpleMap).forEach(([id, label]) => {
+    const el = document.getElementById(id);
+    if (el) el.onclick = () => editSimple(id, label);
+  });
+  document.getElementById('heroName').onclick  = () => editHeroName();
+  document.getElementById('heroPhone').onclick = () => editSimpleChip('heroPhone','Nomor Telepon','heroPhone');
+  document.getElementById('heroEmail').onclick = () => editSimpleChip('heroEmail','Email','heroEmail');
+  document.getElementById('heroCity').onclick  = () => editSimpleChip('heroCity','Kota','heroCity');
+  ['1','2','3','4'].forEach(n => {
+    document.getElementById('stat'+n+'el').onclick = () => editStat(n);
+  });
+}
+
+// ═══════════════════════════════════════════
+// AUTHENTICATION
+// ═══════════════════════════════════════════
+async function hashPw(pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function checkSession() {
+  try { const s=JSON.parse(localStorage.getItem(SESSION_KEY)||'{}'); return Date.now()<(s.exp||0); } catch{return false;}
+}
+function openLogin() {
+  document.getElementById('loginInput').value='';
+  document.getElementById('loginError').textContent='';
+  document.getElementById('loginOverlay').classList.add('open');
+  setTimeout(()=>document.getElementById('loginInput').focus(),80);
+}
+function closeLogin() { document.getElementById('loginOverlay').classList.remove('open'); }
+async function doLogin() {
+  const pw = document.getElementById('loginInput').value;
+  if (!pw) return;
+  const h = await hashPw(pw);
+  if (h === OWNER_HASH) {
+    localStorage.setItem(SESSION_KEY, JSON.stringify({exp: Date.now()+8*3600*1000}));
+    document.body.classList.add('owner-logged-in');
+    closeLogin();
+  } else {
+    document.getElementById('loginError').textContent = '❌ Password salah';
+    document.getElementById('loginInput').value = '';
+  }
+}
+
+// ═══════════════════════════════════════════
 // EDIT MODE TOGGLE
-// ─────────────────────────────────────────────
-function toggleEditMode() {
+// ═══════════════════════════════════════════
+function toggleEdit() {
   editMode = !editMode;
   document.body.classList.toggle('edit-mode', editMode);
   const btn = document.getElementById('editToggleBtn');
   btn.classList.toggle('active', editMode);
   btn.textContent = editMode ? '✕ Selesai Edit' : '✏ Edit Mode';
-  // Hide publish bar when exiting edit mode without publishing
-  if (!editMode && hasChanges) {
-    document.getElementById('publishBar').classList.add('show');
+  document.getElementById('editBadge').classList.toggle('on', editMode);
+}
+
+// ═══════════════════════════════════════════
+// MODAL ENGINE
+// ═══════════════════════════════════════════
+let _onSave = null;
+let _onDelete = null;
+
+function openModal(title, fieldsHtml, onSave, onDelete) {
+  if (!editMode) return;
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalFields').innerHTML = fieldsHtml;
+  document.getElementById('modalDelBtn').style.display = onDelete ? 'inline-flex' : 'none';
+  _onSave = onSave;
+  _onDelete = onDelete || null;
+  document.getElementById('modalBg').classList.add('open');
+}
+function closeModal() { document.getElementById('modalBg').classList.remove('open'); }
+document.getElementById('modalBg').addEventListener('click', e => { if(e.target===document.getElementById('modalBg')) closeModal(); });
+
+async function doSave() {
+  if (_onSave) _onSave();
+  closeModal();
+  await saveData();
+  renderAll();
+}
+async function doDelete() {
+  if (_onDelete && confirm('Hapus item ini?')) {
+    _onDelete();
+    closeModal();
+    await saveData();
+    renderAll();
   }
 }
 
-// ─────────────────────────────────────────────
-// MODAL HELPERS
-// ─────────────────────────────────────────────
-function openModal(icon, title, fieldsHtml, showDelete) {
-  document.getElementById('modalIcon').textContent = icon;
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalFields').innerHTML = fieldsHtml;
-  document.getElementById('modalDeleteBtn').style.display = showDelete ? 'inline-flex' : 'none';
-  document.getElementById('modalBackdrop').classList.add('open');
+function f(label,id,val,type='text') {
+  if (type==='textarea') return `<div class="fg"><label>${label}</label><textarea id="${id}">${val||''}</textarea></div>`;
+  return `<div class="fg"><label>${label}</label><input type="text" id="${id}" value="${(val||'').replace(/"/g,'&quot;')}"/></div>`;
 }
-function closeModal() {
-  document.getElementById('modalBackdrop').classList.remove('open');
-  currentCard = null; currentType = null;
-}
-document.getElementById('modalBackdrop').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
+function g(id) { const el=document.getElementById(id); return el?(el.value||el.textContent.trim()):''; }
 
-function field(label, id, value, type='input') {
-  if (type === 'textarea')
-    return `<div class="field-group"><label>${label}</label><textarea id="${id}">${value}</textarea></div>`;
-  return `<div class="field-group"><label>${label}</label><input type="text" id="${id}" value="${value}"/></div>`;
-}
-
-function markChanged() {
-  hasChanges = true;
-  // auto-save sudah ditangani langsung di saveModal() dan deleteCard()
-}
-
-// ─────────────────────────────────────────────
-// SIMPLE TEXT EDIT (single line in-place)
-// ─────────────────────────────────────────────
-function editSimple(el, label, key) {
+// ─── EDITOR: Simple text ───
+function editSimple(field, label) {
   if (!editMode) return;
-  // For chips, edit the inner <span>
-  const target = el.querySelector('span') || el;
-  const val = target.textContent.trim();
-  currentCard = el; currentType = 'simple';
-  el._target = target;
-  openModal('✏', label,
-    field(label, 'simpleVal', val),
-    false
+  openModal('✏ '+label,
+    f(label,'val',D[field]||'','textarea'),
+    () => { D[field] = g('val'); }
+  );
+}
+function editSimpleChip(elId, label, field) {
+  if (!editMode) return;
+  const val = document.getElementById(elId).querySelector('span').textContent;
+  openModal('✏ '+label,
+    f(label,'val',val),
+    () => { D[field] = g('val'); }
+  );
+}
+function editHeroName() {
+  if (!editMode) return;
+  openModal('✏ Nama',
+    f('Baris 1','n1',D.heroName1) + f('Baris 2 (gradient)','n2',D.heroName2),
+    () => { D.heroName1=g('n1'); D.heroName2=g('n2'); }
+  );
+}
+function editStat(n) {
+  if (!editMode) return;
+  openModal('✏ Statistik',
+    f('Angka','sv',D['stat'+n+'val']) + f('Label','sl',D['stat'+n+'lab']),
+    () => { D['stat'+n+'val']=g('sv'); D['stat'+n+'lab']=g('sl'); }
+  );
+}
+function editEdu() {
+  if (!editMode) return;
+  openModal('🎓 Edit Pendidikan',
+    f('Universitas','eu',D.eduUniversity) + f('Jurusan','ed',D.eduDegree) +
+    f('Tahun','ep',D.eduPeriod) + f('IPK','eg',D.eduGpa) +
+    f('Status (e.g. Lulus 🎓)','es',D.eduStatus),
+    () => { D.eduUniversity=g('eu'); D.eduDegree=g('ed'); D.eduPeriod=g('ep'); D.eduGpa=g('eg'); D.eduStatus=g('es'); }
   );
 }
 
-function editTextarea(el, label, key) {
+// ─── EDITOR: Skill ───
+function editSkill(i) {
   if (!editMode) return;
-  currentCard = el; currentType = 'textarea';
-  openModal('✏', label,
-    field(label, 'simpleVal', el.textContent.trim(), 'textarea'),
-    false
-  );
-}
-
-// ─────────────────────────────────────────────
-// HERO NAME EDIT
-// ─────────────────────────────────────────────
-function editHeroName(el) {
-  if (!editMode) return;
-  currentCard = el; currentType = 'heroName';
-  const parts = el.innerText.split('\n');
-  openModal('👤', 'Nama Hero',
-    field('Baris 1 (e.g. "Mohamad")', 'hName1', parts[0]||'') +
-    field('Baris 2 — Gradient (e.g. "Rasya Sathia")', 'hName2', parts[1]||''),
-    false
-  );
-}
-
-// ─────────────────────────────────────────────
-// STAT EDIT
-// ─────────────────────────────────────────────
-function editStat(el, key) {
-  if (!editMode) return;
-  currentCard = el; currentType = 'stat'; el._key = key;
-  const val = document.getElementById(key+'val').textContent;
-  const lab = document.getElementById(key+'lab').textContent;
-  openModal('📊', 'Edit Statistik',
-    field('Angka / Nilai', 'statVal', val) +
-    field('Label', 'statLab', lab),
-    false
-  );
-}
-
-// ─────────────────────────────────────────────
-// SKILL CARD EDIT
-// ─────────────────────────────────────────────
-function editSkillCard(el) {
-  if (!editMode) return;
-  currentCard = el; currentType = 'skill';
-  const icon  = el.querySelector('.skill-icon').textContent.trim();
-  const name  = el.querySelector('.skill-name').textContent.trim();
-  const level = el.querySelector('.skill-level').textContent.trim();
-  openModal('🛠', 'Edit Skill',
-    field('Emoji Ikon', 'skIcon', icon) +
-    field('Nama Skill', 'skName', name) +
-    field('Level (e.g. Expert, Advanced)', 'skLevel', level),
-    true
+  const sk = D.skills[i];
+  openModal('🛠 Edit Skill',
+    f('Emoji','si',sk.icon) + f('Nama Skill','sn',sk.name) + f('Level','sl',sk.level),
+    () => { D.skills[i] = {icon:g('si'),name:g('sn'),level:g('sl')}; },
+    () => { D.skills.splice(i,1); }
   );
 }
 function addSkill() {
-  const newCard = document.createElement('div');
-  newCard.className = 'skill-card fade-in visible';
-  newCard.setAttribute('data-editable','');
-  newCard.onclick = function(){ editSkillCard(this); };
-  newCard.innerHTML = `<div class="skill-icon" style="background:rgba(99,179,237,0.12);">⭐</div><div><div class="skill-name">Skill Baru</div><div class="skill-level">Level</div></div>`;
-  document.getElementById('skillsGrid').appendChild(newCard);
-  markChanged();
-  currentCard = newCard; currentType = 'skill';
-  editSkillCard(newCard);
+  D.skills.push({icon:'⭐',name:'Skill Baru',level:'Level'});
+  saveData().then(()=>renderAll());
 }
 
-// ─────────────────────────────────────────────
-// EXPERIENCE CARD EDIT
-// ─────────────────────────────────────────────
-function editExpCard(el) {
+// ─── EDITOR: Experience ───
+function dutiesHtml(duties, prefix) {
+  return (duties||[]).map((d,i)=>`<div class="li-row"><textarea id="${prefix}${i}">${d}</textarea><button class="btn-rm" onclick="this.closest('.li-row').remove()">✕</button></div>`).join('');
+}
+function collectDuties(prefix) {
+  return Array.from(document.querySelectorAll(`[id^="${prefix}"]`)).map(t=>t.value.trim()).filter(Boolean);
+}
+function editExp(i) {
   if (!editMode) return;
-  currentCard = el; currentType = 'exp';
-  const role    = el.querySelector('.exp-role').textContent.trim();
-  const period  = el.querySelector('.exp-period').textContent.trim();
-  const company = el.querySelector('.exp-company').textContent.trim();
-  const duties  = Array.from(el.querySelectorAll('.exp-duties li')).map(li => li.textContent.trim());
-  const dutiesFields = duties.map((d,i) => `
-    <div class="list-editor-item">
-      <textarea id="expDuty${i}">${d}</textarea>
-      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
-    </div>`).join('');
-  openModal('💼', 'Edit Pengalaman Kerja',
-    field('Jabatan / Role', 'expRole', role) +
-    field('Periode (e.g. Jan 2024 – Sekarang)', 'expPeriod', period) +
-    field('Nama Perusahaan / Instansi', 'expCompany', company) +
-    `<div class="field-group"><label>Deskripsi Tugas</label><div id="expDutiesContainer">${dutiesFields}</div>
-    <button class="btn-add-item" onclick="addDutyField('expDutiesContainer','expDuty')">+ Tambah Tugas</button></div>`,
-    true
+  const ex = D.experiences[i];
+  openModal('💼 Edit Pengalaman',
+    f('Jabatan','er',ex.role)+f('Periode','ep',ex.period)+f('Perusahaan','ec',ex.company)+
+    `<div class="fg"><label>Tugas</label><div id="dutiesWrap">${dutiesHtml(ex.duties,'du')}</div><button class="btn-add-li" onclick="addDutyRow('dutiesWrap','du')">+ Tambah Tugas</button></div>`,
+    () => { D.experiences[i]={role:g('er'),period:g('ep'),company:g('ec'),duties:collectDuties('du')}; },
+    () => { D.experiences.splice(i,1); }
   );
 }
 function addExp() {
-  const item = document.createElement('div');
-  item.className = 'timeline-item fade-in visible';
-  item.setAttribute('data-editable','');
-  item.onclick = function(){ editExpCard(this); };
-  item.innerHTML = `<div class="exp-card"><div class="exp-header"><div class="exp-role">Jabatan Baru</div><div class="exp-period">Periode</div></div><div class="exp-company">Nama Perusahaan</div><ul class="exp-duties"><li>Deskripsi tugas</li></ul></div>`;
-  document.getElementById('expTimeline').appendChild(item);
-  markChanged();
-  editExpCard(item);
+  D.experiences.push({role:'Jabatan Baru',period:'Periode',company:'Perusahaan',duties:['Deskripsi tugas']});
+  saveData().then(()=>renderAll());
 }
 
-// ─────────────────────────────────────────────
-// PROJECT CARD EDIT
-// ─────────────────────────────────────────────
-function editProjectCard(el) {
+// ─── EDITOR: Project ───
+function editProject(i) {
   if (!editMode) return;
-  currentCard = el; currentType = 'project';
-  const year  = el.querySelector('.project-year').textContent.trim();
-  const title = el.querySelector('.project-title').textContent.trim();
-  const tag   = el.querySelector('.project-tag').textContent.trim();
-  openModal('📁', 'Edit Projek',
-    field('Tahun', 'prjYear', year) +
-    field('Judul Projek', 'prjTitle', title, 'textarea') +
-    field('Tag / Kategori', 'prjTag', tag),
-    true
+  const pr = D.projects[i];
+  openModal('📁 Edit Projek',
+    f('Tahun','py',pr.year) + f('Judul','pt',pr.title,'textarea') + f('Tag','ptg',pr.tag),
+    () => { D.projects[i]={year:g('py'),title:g('pt'),tag:g('ptg')}; },
+    () => { D.projects.splice(i,1); }
   );
 }
 function addProject() {
-  const card = document.createElement('div');
-  card.className = 'project-card fade-in visible';
-  card.setAttribute('data-editable','');
-  card.onclick = function(){ editProjectCard(this); };
-  card.innerHTML = `<div class="project-year">2024</div><div class="project-title">Judul Projek Baru</div><div class="project-tag">Kategori</div>`;
-  document.getElementById('projectsGrid').appendChild(card);
-  markChanged();
-  editProjectCard(card);
+  D.projects.push({year:'2024',title:'Judul Projek Baru',tag:'Kategori'});
+  saveData().then(()=>renderAll());
 }
 
-// ─────────────────────────────────────────────
-// EDUCATION EDIT
-// ─────────────────────────────────────────────
-function editEdu(el) {
+// ─── EDITOR: Certificate ───
+function editCert(i) {
   if (!editMode) return;
-  currentCard = el; currentType = 'edu';
-  const uni    = el.querySelector('.edu-university').textContent.trim();
-  const degree = el.querySelector('.edu-degree').textContent.trim();
-  const period = el.querySelector('.edu-period').textContent.trim();
-  const gpa    = el.querySelector('.gpa-num').textContent.trim();
-  const status = document.getElementById('eduStatus').textContent.trim();
-  openModal('🎓', 'Edit Pendidikan',
-    field('Nama Universitas', 'eduUni', uni) +
-    field('Jurusan / Program Studi', 'eduDegree', degree) +
-    field('Tahun (e.g. 2022 — 2026)', 'eduPeriod', period) +
-    field('IPK (e.g. 3.73)', 'eduGpa', gpa) +
-    field('Status (e.g. Lulus 🎓 / On-track 📚 / Aktif)', 'eduStatus', status),
-    false
-  );
-}
-
-// ─────────────────────────────────────────────
-// CERTIFICATE CARD EDIT
-// ─────────────────────────────────────────────
-function editCertCard(el) {
-  if (!editMode) return;
-  currentCard = el; currentType = 'cert';
-  const icon   = el.querySelector('.cert-icon').textContent.trim();
-  const title  = el.querySelector('.cert-title').textContent.trim();
-  const issuer = el.querySelector('.cert-issuer').textContent.trim();
-  openModal('🏅', 'Edit Sertifikat',
-    field('Emoji Ikon', 'certIcon', icon) +
-    field('Nama Sertifikat', 'certTitle', title) +
-    field('Penerbit / Issuer', 'certIssuer', issuer),
-    true
+  const c = D.certificates[i];
+  openModal('🏅 Edit Sertifikat',
+    f('Emoji','ci',c.icon) + f('Nama','ct',c.title) + f('Penerbit','cis',c.issuer),
+    () => { D.certificates[i]={icon:g('ci'),title:g('ct'),issuer:g('cis')}; },
+    () => { D.certificates.splice(i,1); }
   );
 }
 function addCert() {
-  const card = document.createElement('div');
-  card.className = 'cert-card fade-in visible';
-  card.setAttribute('data-editable','');
-  card.onclick = function(){ editCertCard(this); };
-  card.innerHTML = `<div class="cert-icon" style="background:rgba(99,179,237,0.12);">📜</div><div class="cert-body"><div class="cert-title">Nama Sertifikat Baru</div><div class="cert-issuer">Penerbit</div></div>`;
-  document.getElementById('certGrid').appendChild(card);
-  markChanged();
-  editCertCard(card);
+  D.certificates.push({icon:'📜',title:'Sertifikat Baru',issuer:'Penerbit'});
+  saveData().then(()=>renderAll());
 }
 
-// ─────────────────────────────────────────────
-// ORGANISATION CARD EDIT
-// ─────────────────────────────────────────────
-function editOrgCard(el) {
+// ─── EDITOR: Organisation ───
+function editOrg(i) {
   if (!editMode) return;
-  currentCard = el; currentType = 'org';
-  const role   = el.querySelector('.org-role').textContent.trim();
-  const name   = el.querySelector('.org-name').textContent.trim();
-  const period = el.querySelector('.org-period').textContent.trim();
-  const duties = Array.from(el.querySelectorAll('.org-duties li')).map(li => li.textContent.trim());
-  const dutiesFields = duties.map((d,i) => `
-    <div class="list-editor-item">
-      <textarea id="orgDuty${i}">${d}</textarea>
-      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
-    </div>`).join('');
-  openModal('🤝', 'Edit Organisasi / Relawan',
-    field('Jabatan', 'orgRole', role) +
-    field('Nama Organisasi', 'orgName', name) +
-    field('Periode', 'orgPeriod', period) +
-    `<div class="field-group"><label>Kegiatan / Tugas</label><div id="orgDutiesContainer">${dutiesFields}</div>
-    <button class="btn-add-item" onclick="addDutyField('orgDutiesContainer','orgDuty')">+ Tambah Kegiatan</button></div>`,
-    true
+  const o = D.organisations[i];
+  openModal('🤝 Edit Organisasi',
+    f('Jabatan','or',o.role)+f('Nama Organisasi','on',o.name)+f('Periode','op',o.period)+
+    `<div class="fg"><label>Kegiatan</label><div id="orgDuWrap">${dutiesHtml(o.duties,'od')}</div><button class="btn-add-li" onclick="addDutyRow('orgDuWrap','od')">+ Tambah Kegiatan</button></div>`,
+    () => { D.organisations[i]={role:g('or'),name:g('on'),period:g('op'),duties:collectDuties('od')}; },
+    () => { D.organisations.splice(i,1); }
   );
 }
 function addOrg() {
-  const card = document.createElement('div');
-  card.className = 'org-card fade-in visible';
-  card.setAttribute('data-editable','');
-  card.onclick = function(){ editOrgCard(this); };
-  card.innerHTML = `<div class="org-role">Jabatan Baru</div><div class="org-name">Nama Organisasi</div><div class="org-period">Periode</div><ul class="org-duties"><li>Kegiatan</li></ul>`;
-  document.getElementById('orgGrid').appendChild(card);
-  markChanged();
-  editOrgCard(card);
+  D.organisations.push({role:'Jabatan Baru',name:'Nama Organisasi',period:'Periode',duties:['Kegiatan']});
+  saveData().then(()=>renderAll());
 }
 
-// ─────────────────────────────────────────────
-// DUTY LIST HELPERS
-// ─────────────────────────────────────────────
-function addDutyField(containerId, prefix) {
-  const container = document.getElementById(containerId);
-  const n = container.querySelectorAll('textarea').length;
-  const div = document.createElement('div');
-  div.className = 'list-editor-item';
-  div.innerHTML = `<textarea id="${prefix}${n}"></textarea><button class="btn-remove-item" onclick="removeListItem(this)">✕</button>`;
-  container.appendChild(div);
-}
-function removeListItem(btn) {
-  btn.closest('.list-editor-item').remove();
+function addDutyRow(wrapperId, prefix) {
+  const w = document.getElementById(wrapperId);
+  const n = w.querySelectorAll('textarea').length;
+  const d = document.createElement('div');
+  d.className = 'li-row';
+  d.innerHTML = `<textarea id="${prefix}${n}"></textarea><button class="btn-rm" onclick="this.closest('.li-row').remove()">✕</button>`;
+  w.appendChild(d);
 }
 
-// ─────────────────────────────────────────────
-// SAVE MODAL
-// ─────────────────────────────────────────────
-function saveModal() {
-  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
-
-  if (currentType === 'simple') {
-    const val = g('simpleVal');
-    const target = currentCard._target || currentCard;
-    target.textContent = val;
-    // sync email hrefs if editing email chip
-    if (currentCard.dataset.key === 'heroEmail' || currentCard.id === 'ctaEmailDisplay') {
-      document.getElementById('ctaBtnEmail').href  = 'mailto:' + val;
-      document.getElementById('ctaBtnEmail2').href = 'mailto:' + val;
-      if (currentCard.id === 'ctaEmailDisplay') currentCard.textContent = val;
-    }
-  } else if (currentType === 'textarea') {
-    currentCard.textContent = g('simpleVal');
-  } else if (currentType === 'heroName') {
-    currentCard.innerHTML = g('hName1') + '<br/><span>' + g('hName2') + '</span>';
-  } else if (currentType === 'stat') {
-    const key = currentCard._key;
-    document.getElementById(key+'val').textContent = g('statVal');
-    document.getElementById(key+'lab').textContent = g('statLab');
-  } else if (currentType === 'skill') {
-    currentCard.querySelector('.skill-icon').textContent = g('skIcon');
-    currentCard.querySelector('.skill-name').textContent = g('skName');
-    currentCard.querySelector('.skill-level').textContent = g('skLevel');
-  } else if (currentType === 'exp') {
-    currentCard.querySelector('.exp-role').textContent    = g('expRole');
-    currentCard.querySelector('.exp-period').textContent  = g('expPeriod');
-    currentCard.querySelector('.exp-company').textContent = g('expCompany');
-    const ul = currentCard.querySelector('.exp-duties');
-    ul.innerHTML = '';
-    document.querySelectorAll('#expDutiesContainer textarea').forEach(ta => {
-      if (ta.value.trim()) { const li = document.createElement('li'); li.textContent = ta.value.trim(); ul.appendChild(li); }
-    });
-  } else if (currentType === 'project') {
-    currentCard.querySelector('.project-year').textContent  = g('prjYear');
-    currentCard.querySelector('.project-title').textContent = g('prjTitle');
-    currentCard.querySelector('.project-tag').textContent   = g('prjTag');
-  } else if (currentType === 'edu') {
-    currentCard.querySelector('.edu-university').textContent = g('eduUni');
-    currentCard.querySelector('.edu-degree').textContent     = g('eduDegree');
-    currentCard.querySelector('.edu-period').textContent     = g('eduPeriod');
-    currentCard.querySelector('.gpa-num').textContent        = g('eduGpa');
-    document.getElementById('eduStatus').textContent         = g('eduStatus');
-  } else if (currentType === 'cert') {
-    currentCard.querySelector('.cert-icon').textContent   = g('certIcon');
-    currentCard.querySelector('.cert-title').textContent  = g('certTitle');
-    currentCard.querySelector('.cert-issuer').textContent = g('certIssuer');
-  } else if (currentType === 'org') {
-    currentCard.querySelector('.org-role').textContent   = g('orgRole');
-    currentCard.querySelector('.org-name').textContent   = g('orgName');
-    currentCard.querySelector('.org-period').textContent = g('orgPeriod');
-    const ul = currentCard.querySelector('.org-duties');
-    ul.innerHTML = '';
-    document.querySelectorAll('#orgDutiesContainer textarea').forEach(ta => {
-      if (ta.value.trim()) { const li = document.createElement('li'); li.textContent = ta.value.trim(); ul.appendChild(li); }
-    });
-  }
-
-  closeModal();
-  autoSaveToGitHub();
+// ═══════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════
+let _toastEl = null;
+function toast(msg, type) {
+  if (_toastEl) _toastEl.remove();
+  _toastEl = document.createElement('div');
+  const c = {loading:'background:#1a2235;border:1px solid #3b82f6;color:#63b3ed;',success:'background:#1a3328;border:1px solid #22c55e;color:#68d391;',error:'background:#2d1515;border:1px solid #ef4444;color:#f87171;'};
+  _toastEl.style.cssText = `position:fixed;bottom:28px;right:28px;z-index:9999;padding:13px 20px;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,0.45);transition:opacity 0.4s;${c[type]||c.loading}`;
+  _toastEl.textContent = msg;
+  document.body.appendChild(_toastEl);
+  if (type !== 'loading') setTimeout(()=>{ _toastEl.style.opacity='0'; setTimeout(()=>_toastEl&&_toastEl.remove(),400); }, 3500);
 }
 
-// ─────────────────────────────────────────────
-// DELETE CARD
-// ─────────────────────────────────────────────
-function deleteCard() {
-  if (!currentCard) return;
-  if (confirm('Hapus item ini?')) {
-    currentCard.remove();
-    closeModal();
-    autoSaveToGitHub();
-  }
-}
-
-// ─────────────────────────────────────────────
-// TOAST NOTIFICATION (muncul di pojok kanan bawah)
-// ─────────────────────────────────────────────
-function showToast(msg, type) {
-  const old = document.getElementById('saveToast');
-  if (old) old.remove();
-  const toast = document.createElement('div');
-  toast.id = 'saveToast';
-  const colors = {
-    loading: 'background:#1a2235;border:1px solid rgba(99,179,237,0.4);color:#63b3ed;',
-    success: 'background:#1a3328;border:1px solid rgba(104,211,145,0.4);color:#68d391;',
-    error:   'background:#2d1515;border:1px solid rgba(248,113,113,0.4);color:#f87171;'
-  };
-  toast.style.cssText = `position:fixed;bottom:28px;right:28px;z-index:9999;padding:13px 20px;
-    border-radius:10px;font-size:0.84rem;font-weight:600;display:flex;align-items:center;gap:8px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.45);transition:opacity 0.4s;${colors[type]||colors.loading}`;
-  toast.innerHTML = msg;
-  document.body.appendChild(toast);
-  if (type !== 'loading') {
-    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3500);
-  }
-  return toast;
-}
-
-// ─────────────────────────────────────────────
-// AUTO-SAVE — dipanggil otomatis setiap Simpan/Hapus
-// Tidak perlu klik Publish manual lagi
-// ─────────────────────────────────────────────
-async function autoSaveToGitHub() {
-  let liveToken = localStorage.getItem('gh_token');
-
-  // Jika token belum ada, minta sekali lalu simpan
-  if (!liveToken) {
-    const t = prompt('🔑 Masukkan GitHub Token untuk menyimpan perubahan\n(hanya dibutuhkan sekali, disimpan di browser):');
-    if (t && t.trim().length > 10) {
-      localStorage.setItem('gh_token', t.trim());
-      liveToken = t.trim();
-    } else {
-      showToast('⚠ Token diperlukan. Perubahan tidak tersimpan.', 'error');
-      return;
-    }
-  }
-
-  const toast = showToast('⏳ Menyimpan perubahan ke GitHub...', 'loading');
-
-  try {
-    // 1. Ambil SHA terbaru dari GitHub
-    const shaRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
-      headers: { Authorization: 'token ' + liveToken, Accept: 'application/vnd.github.v3+json' }
-    });
-    const shaData = await shaRes.json();
-    if (!shaData.sha) throw new Error('Gagal membaca file dari GitHub');
-    const sha = shaData.sha;
-
-    // 2. Encode seluruh DOM halaman saat ini sebagai HTML baru
-    const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    const base64 = btoa(unescape(encodeURIComponent(htmlContent)));
-
-    // 3. Push ke GitHub
-    const putRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: 'token ' + liveToken,
-        Accept: 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: 'Auto-save via editor — ' + new Date().toLocaleString('id-ID'),
-        content: base64,
-        sha: sha
-      })
-    });
-
-    if (putRes.ok) {
-      toast.remove();
-      showToast('✓ Tersimpan! Perubahan sudah permanen.', 'success');
-    } else {
-      const err = await putRes.json();
-      throw new Error(err.message || 'Push gagal');
-    }
-  } catch (e) {
-    toast.remove();
-    showToast('⚠ Gagal simpan: ' + e.message, 'error');
-  }
-}
-
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════
 // FADE-IN OBSERVER
-// ─────────────────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.fade-in').forEach((el, i) => {
-  el.style.transitionDelay = (i % 5) * 0.07 + 's';
-  observer.observe(el);
-});
+// ═══════════════════════════════════════════
+const fadeObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');fadeObserver.unobserve(e.target);} });
+}, {threshold:0.1, rootMargin:'0px 0px -30px 0px'});
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+if (checkSession()) document.body.classList.add('owner-logged-in');
+loadData();
 </script>
-
-
-<div id="saveToast" style="position: fixed; bottom: 28px; right: 28px; z-index: 9999; padding: 13px 20px; border-radius: 10px; font-size: 0.84rem; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: rgba(0, 0, 0, 0.45) 0px 8px 24px; transition: opacity 0.4s; background: rgb(26, 34, 53); border: 1px solid rgba(99, 179, 237, 0.4); color: rgb(99, 179, 237);">⏳ Menyimpan perubahan ke GitHub...</div></body></html>
+</body>
+</html>
