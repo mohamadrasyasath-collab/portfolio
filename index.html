@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="id"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mohamad Rasya Sathia — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     /* ───── RESET & BASE ───── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -202,7 +201,7 @@
     body.edit-mode .edit-mode-badge{display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:var(--accent);background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:3px 10px;}
   </style>
 </head>
-<body>
+<body class="owner-logged-in edit-mode">
 
 <!-- NAV -->
 <nav>
@@ -214,52 +213,52 @@
     <a href="#contact" class="hide-mobile">Contact</a>
     <span class="edit-mode-badge">✏ Edit Mode ON</span>
     <button id="ownerLoginBtn" onclick="openLoginModal()" title="Login sebagai pemilik">🔐 Owner</button>
-    <button id="editToggleBtn" onclick="toggleEditMode()">✏ Edit Mode</button>
+    <button id="editToggleBtn" onclick="toggleEditMode()" class="active">✕ Selesai Edit</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-tag" data-editable data-key="heroTag" onclick="editSimple(this,'Tagline Hero','heroTag')">Open to Work · Full-time / Internship</div>
-    <h1 class="hero-name" data-editable data-key="heroName" onclick="editHeroName(this)">Mohamad<br/><span>Rasya Sathia</span></h1>
-    <p class="hero-role" data-editable data-key="heroRole" onclick="editSimple(this,'Role / Sub-title','heroRole')">Instructional Designer &amp; AI Enthusiast &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Content Strategist</p>
-    <p class="hero-desc" data-editable data-key="heroDesc" onclick="editTextarea(this,'Deskripsi Profil','heroDesc')">Lulusan S1 Teknologi Pendidikan UPI (IPK 3.73/4.00) dengan keahlian di bidang Instructional Design, Artificial Intelligence, Social Media Management, dan Data Analytics. Berpengalaman lintas sektor: pendidikan, perusahaan, dan organisasi. Cepat beradaptasi, sistematis, dan berorientasi pada hasil.</p>
+    <div class="hero-tag" data-editable="" data-key="heroTag" onclick="editSimple(this,'Tagline Hero','heroTag')">Open to Work · Full-time / Internship</div>
+    <h1 class="hero-name" data-editable="" data-key="heroName" onclick="editHeroName(this)">Mohamad<br><span>Rasya Sathia</span></h1>
+    <p class="hero-role" data-editable="" data-key="heroRole" onclick="editSimple(this,'Role / Sub-title','heroRole')">Instructional Designer &amp; AI Enthusiast &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Content Strategist</p>
+    <p class="hero-desc" data-editable="" data-key="heroDesc" onclick="editTextarea(this,'Deskripsi Profil','heroDesc')">Lulusan S1 Teknologi Pendidikan UPI (IPK 3.73/4.00) dengan keahlian di bidang Instructional Design, Artificial Intelligence, Social Media Management, dan Data Analytics. Berpengalaman lintas sektor: pendidikan, perusahaan, dan organisasi. Cepat beradaptasi, sistematis, dan berorientasi pada hasil.</p>
     <div class="hero-contact">
-      <div class="contact-chip" data-editable data-key="heroPhone" onclick="editSimple(this,'Nomor Telepon','heroPhone')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.07 6.07l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <div class="contact-chip" data-editable="" data-key="heroPhone" onclick="editSimple(this,'Nomor Telepon','heroPhone')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.07 6.07l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
         <span>+62 852 1555 1314</span>
       </div>
-      <div class="contact-chip" data-editable data-key="heroEmail" onclick="editSimple(this,'Email','heroEmail')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <div class="contact-chip" data-editable="" data-key="heroEmail" onclick="editSimple(this,'Email','heroEmail')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         <span>mohamad.rasya.sath@gmail.com</span>
       </div>
-      <div class="contact-chip" data-editable data-key="heroCity" onclick="editSimple(this,'Kota / Lokasi','heroCity')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div class="contact-chip" data-editable="" data-key="heroCity" onclick="editSimple(this,'Kota / Lokasi','heroCity')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
         <span>Cianjur, Jawa Barat</span>
       </div>
     </div>
     <div class="hero-cta">
       <a id="ctaBtnEmail" href="mailto:mohamad.rasya.sath@gmail.com" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         Hubungi Saya
       </a>
       <a href="#experience" class="btn-outline">Lihat Pengalaman</a>
     </div>
     <div class="hero-stats">
-      <div class="stat" data-editable data-key="stat1" onclick="editStat(this,'stat1')">
+      <div class="stat" data-editable="" data-key="stat1" onclick="editStat(this,'stat1')">
         <div class="stat-num"><span id="stat1val">3.73</span></div>
         <div class="stat-label" id="stat1lab">IPK / 4.00</div>
       </div>
-      <div class="stat" data-editable data-key="stat2" onclick="editStat(this,'stat2')">
-        <div class="stat-num"><span id="stat2val">3+</span></div>
+      <div class="stat" data-editable="" data-key="stat2" onclick="editStat(this,'stat2')">
+        <div class="stat-num"><span id="stat2val">10+</span></div>
         <div class="stat-label" id="stat2lab">Pengalaman Kerja</div>
       </div>
-      <div class="stat" data-editable data-key="stat3" onclick="editStat(this,'stat3')">
+      <div class="stat" data-editable="" data-key="stat3" onclick="editStat(this,'stat3')">
         <div class="stat-num"><span id="stat3val">7+</span></div>
         <div class="stat-label" id="stat3lab">Projek Akademik</div>
       </div>
-      <div class="stat" data-editable data-key="stat4" onclick="editStat(this,'stat4')">
+      <div class="stat" data-editable="" data-key="stat4" onclick="editStat(this,'stat4')">
         <div class="stat-num"><span id="stat4val">8+</span></div>
         <div class="stat-label" id="stat4lab">Sertifikat</div>
       </div>
@@ -269,34 +268,34 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-header fade-in">
+  <div class="section-header fade-in visible" style="transition-delay: 0s;">
     <div class="section-tag">// Core Competencies</div>
     <h2 class="section-title">Kemampuan <span>Utama</span></h2>
   </div>
   <div class="skills-grid" id="skillsGrid">
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(99,179,237,0.12);">🎓</div><div><div class="skill-name">Instructional Designer</div><div class="skill-level">Expert</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(159,122,234,0.12);">🤖</div><div><div class="skill-name">AI &amp; Prompt Engineering</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">📊</div><div><div class="skill-name">Data Analyst</div><div class="skill-level">Intermediate</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(104,211,145,0.12);">📱</div><div><div class="skill-name">Social Media Management</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(246,224,94,0.12);">✍️</div><div><div class="skill-name">Copywriting &amp; Content</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">📈</div><div><div class="skill-name">Digital Content Marketing</div><div class="skill-level">Intermediate</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(99,179,237,0.12);">🗂️</div><div><div class="skill-name">Project Management</div><div class="skill-level">Intermediate</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(159,122,234,0.12);">🔍</div><div><div class="skill-name">Research &amp; Documentation</div><div class="skill-level">Advanced</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(104,211,145,0.12);">💼</div><div><div class="skill-name">Microsoft Office Suite</div><div class="skill-level">Proficient</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(246,224,94,0.12);">🧩</div><div><div class="skill-name">Problem Solving</div><div class="skill-level">Strong</div></div></div>
-    <div class="skill-card fade-in" data-editable onclick="editSkillCard(this)"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">🤝</div><div><div class="skill-name">Team Collaboration</div><div class="skill-level">Strong</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(99,179,237,0.12);">🎓</div><div><div class="skill-name">Instructional Designer</div><div class="skill-level">Expert</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.14s;"><div class="skill-icon" style="background:rgba(159,122,234,0.12);">🤖</div><div><div class="skill-name">AI &amp; Prompt Engineering</div><div class="skill-level">Advanced</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.21s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">📊</div><div><div class="skill-name">Data Analyst</div><div class="skill-level">Intermediate</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.28s;"><div class="skill-icon" style="background:rgba(104,211,145,0.12);">📱</div><div><div class="skill-name">Social Media Management</div><div class="skill-level">Advanced</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0s;"><div class="skill-icon" style="background:rgba(246,224,94,0.12);">✍️</div><div><div class="skill-name">Copywriting &amp; Content</div><div class="skill-level">Advanced</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">📈</div><div><div class="skill-name">Digital Content Marketing</div><div class="skill-level">Intermediate</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.14s;"><div class="skill-icon" style="background:rgba(99,179,237,0.12);">🗂️</div><div><div class="skill-name">Project Management</div><div class="skill-level">Intermediate</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.21s;"><div class="skill-icon" style="background:rgba(159,122,234,0.12);">🔍</div><div><div class="skill-name">Research &amp; Documentation</div><div class="skill-level">Advanced</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.28s;"><div class="skill-icon" style="background:rgba(104,211,145,0.12);">💼</div><div><div class="skill-name">Microsoft Office Suite</div><div class="skill-level">Proficient</div></div></div>
+    <div class="skill-card fade-in visible" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0s;"><div class="skill-icon" style="background:rgba(246,224,94,0.12);">🧩</div><div><div class="skill-name">Problem Solving</div><div class="skill-level">Strong</div></div></div>
+    <div class="skill-card fade-in" data-editable="" onclick="editSkillCard(this)" style="transition-delay: 0.07s;"><div class="skill-icon" style="background:rgba(246,173,85,0.12);">🤝</div><div><div class="skill-name">Team Collaboration</div><div class="skill-level">Strong</div></div></div>
   </div>
   <button class="btn-add-card" onclick="addSkill()">+ Tambah Skill</button>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-header fade-in">
+  <div class="section-header fade-in" style="transition-delay: 0.14s;">
     <div class="section-tag">// Work History</div>
     <h2 class="section-title">Pengalaman <span>Kerja</span></h2>
   </div>
   <div class="timeline" id="expTimeline">
-    <div class="timeline-item fade-in" data-editable onclick="editExpCard(this)">
+    <div class="timeline-item fade-in" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.21s;">
       <div class="exp-card">
         <div class="exp-header"><div class="exp-role">Intern — Divisi P3TK</div><div class="exp-period">Nov 2025 – Juli 2026</div></div>
         <div class="exp-company">Dinas Pendidikan Kota Bandung</div>
@@ -309,7 +308,7 @@
         </ul>
       </div>
     </div>
-    <div class="timeline-item fade-in" data-editable onclick="editExpCard(this)">
+    <div class="timeline-item fade-in" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0.28s;">
       <div class="exp-card">
         <div class="exp-header"><div class="exp-role">Crew &amp; Social Media Management</div><div class="exp-period">Jun 2025 – Sekarang</div></div>
         <div class="exp-company">Captbooth</div>
@@ -321,7 +320,7 @@
         </ul>
       </div>
     </div>
-    <div class="timeline-item fade-in" data-editable onclick="editExpCard(this)">
+    <div class="timeline-item fade-in" data-editable="" onclick="editExpCard(this)" style="transition-delay: 0s;">
       <div class="exp-card">
         <div class="exp-header"><div class="exp-role">Sekretaris</div><div class="exp-period">Feb 2025 – Juni 2025</div></div>
         <div class="exp-company">CV. Dwi Aksara Mandiri</div>
@@ -339,29 +338,29 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-header fade-in">
+  <div class="section-header fade-in" style="transition-delay: 0.07s;">
     <div class="section-tag">// Academic Work</div>
     <h2 class="section-title">Pengalaman <span>Projek</span></h2>
   </div>
   <div class="projects-grid" id="projectsGrid">
-    <div class="project-card fade-in" data-editable onclick="editProjectCard(this)"><div class="project-year">2026</div><div class="project-title">Efektivitas Penggunaan Boardgame Interaktif "SAMUDRAKSI" Untuk Meningkatkan Keterlibatan Siswa Dalam Pembelajaran IPS di Kelas VIII MTs.</div><div class="project-tag">Research &amp; Development</div></div>
-    <div class="project-card fade-in" data-editable onclick="editProjectCard(this)"><div class="project-year">2025</div><div class="project-title">Evaluasi Perilaku Belajar Peserta Didik Kelas XII Ditinjau dari Sudut Pandang Teori Behaviorisme.</div><div class="project-tag">Educational Evaluation</div></div>
-    <div class="project-card fade-in" data-editable onclick="editProjectCard(this)"><div class="project-year">2024</div><div class="project-title">Desain Program Pelatihan Yogya Group</div><div class="project-tag">Instructional Design</div></div>
-    <div class="project-card fade-in" data-editable onclick="editProjectCard(this)"><div class="project-year">2024</div><div class="project-title">Analisis Kinerja dan Intervensi Pada Organisasi Gerakan Mengajar Desa</div><div class="project-tag">Org. Performance Analysis</div></div>
-    <div class="project-card fade-in" data-editable onclick="editProjectCard(this)"><div class="project-year">2024</div><div class="project-title">Analisis Sistem Informasi Manajemen Penjualan Pada Liana Swalayan</div><div class="project-tag">Data &amp; MIS Analysis</div></div>
-    <div class="project-card fade-in" data-editable onclick="editProjectCard(this)"><div class="project-year">2023</div><div class="project-title">Efektivitas Video Pembelajaran Nama-Nama Planet di Tata Surya Pada Anak Usia Dini TK Binekas PGRI</div><div class="project-tag">Media Evaluation</div></div>
-    <div class="project-card fade-in" data-editable onclick="editProjectCard(this)"><div class="project-year">2023</div><div class="project-title">Pembuatan Media Pembelajaran Interaktif Berbasis Articulate Storyline 3 — "Mengenal Flora &amp; Fauna di Indonesia"</div><div class="project-tag">Interactive Learning Media</div></div>
+    <div class="project-card fade-in" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.14s;"><div class="project-year">2026</div><div class="project-title">Efektivitas Penggunaan Boardgame Interaktif "SAMUDRAKSI" Untuk Meningkatkan Keterlibatan Siswa Dalam Pembelajaran IPS di Kelas VIII MTs.</div><div class="project-tag">Research &amp; Development</div></div>
+    <div class="project-card fade-in" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.21s;"><div class="project-year">2025</div><div class="project-title">Evaluasi Perilaku Belajar Peserta Didik Kelas XII Ditinjau dari Sudut Pandang Teori Behaviorisme.</div><div class="project-tag">Educational Evaluation</div></div>
+    <div class="project-card fade-in" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.28s;"><div class="project-year">2024</div><div class="project-title">Desain Program Pelatihan Yogya Group</div><div class="project-tag">Instructional Design</div></div>
+    <div class="project-card fade-in" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0s;"><div class="project-year">2024</div><div class="project-title">Analisis Kinerja dan Intervensi Pada Organisasi Gerakan Mengajar Desa</div><div class="project-tag">Org. Performance Analysis</div></div>
+    <div class="project-card fade-in" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.07s;"><div class="project-year">2024</div><div class="project-title">Analisis Sistem Informasi Manajemen Penjualan Pada Liana Swalayan</div><div class="project-tag">Data &amp; MIS Analysis</div></div>
+    <div class="project-card fade-in" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.14s;"><div class="project-year">2023</div><div class="project-title">Efektivitas Video Pembelajaran Nama-Nama Planet di Tata Surya Pada Anak Usia Dini TK Binekas PGRI</div><div class="project-tag">Media Evaluation</div></div>
+    <div class="project-card fade-in" data-editable="" onclick="editProjectCard(this)" style="transition-delay: 0.21s;"><div class="project-year">2023</div><div class="project-title">Pembuatan Media Pembelajaran Interaktif Berbasis Articulate Storyline 3 — "Mengenal Flora &amp; Fauna di Indonesia"</div><div class="project-tag">Interactive Learning Media</div></div>
   </div>
   <button class="btn-add-card" onclick="addProject()">+ Tambah Projek</button>
 </section>
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-header fade-in">
+  <div class="section-header fade-in" style="transition-delay: 0.28s;">
     <div class="section-tag">// Academic Background</div>
     <h2 class="section-title">Pendidikan <span>Formal</span></h2>
   </div>
-  <div class="edu-card fade-in" data-editable onclick="editEdu(this)">
+  <div class="edu-card fade-in" data-editable="" onclick="editEdu(this)" style="transition-delay: 0s;">
     <div class="edu-university">Universitas Pendidikan Indonesia</div>
     <div class="edu-degree">S1 Teknologi Pendidikan</div>
     <div class="edu-period">2022 — 2026</div>
@@ -377,43 +376,43 @@
 
 <!-- CERTIFICATES -->
 <section id="certificates">
-  <div class="section-header fade-in">
+  <div class="section-header fade-in" style="transition-delay: 0.07s;">
     <div class="section-tag">// Credentials</div>
     <h2 class="section-title">Sertifikat &amp; <span>Pelatihan</span></h2>
   </div>
   <div class="cert-grid" id="certGrid">
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Getting Started with Data</div><div class="cert-issuer">Credly · IBM SkillsBuild</div></div></div>
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Classifying Data Using IBM Granite</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Unleashing the Power of AI Agents</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(246,173,85,0.12);">🌟</div><div class="cert-body"><div class="cert-title">Berinovasi dengan AI — 15 Learning Hours</div><div class="cert-issuer">Kemenpora &amp; PLAN International · ADB google.org</div></div></div>
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(104,211,145,0.12);">📜</div><div class="cert-body"><div class="cert-title">Media Video Pembelajaran</div><div class="cert-issuer">Wajar.id · Universitas Pendidikan Indonesia</div></div></div>
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(159,122,234,0.12);">📜</div><div class="cert-body"><div class="cert-title">Mendesain Rencana Pembelajaran Mendalam dengan Integrasi AI</div><div class="cert-issuer">Diklat Online · PT Sumber Belajar Bersama</div></div></div>
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(246,224,94,0.12);">📜</div><div class="cert-body"><div class="cert-title">Peningkatan Kompetensi Siswa — Literasi &amp; Numerasi</div><div class="cert-issuer">Edukarya</div></div></div>
-    <div class="cert-card fade-in" data-editable onclick="editCertCard(this)"><div class="cert-icon" style="background:rgba(246,173,85,0.12);">📜</div><div class="cert-body"><div class="cert-title">Content Marketing Basic</div><div class="cert-issuer">Great Learning</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.14s;"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Getting Started with Data</div><div class="cert-issuer">Credly · IBM SkillsBuild</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.21s;"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Classifying Data Using IBM Granite</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.28s;"><div class="cert-icon" style="background:rgba(99,179,237,0.12);">🏅</div><div class="cert-body"><div class="cert-title">Unleashing the Power of AI Agents</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0s;"><div class="cert-icon" style="background:rgba(246,173,85,0.12);">🌟</div><div class="cert-body"><div class="cert-title">Berinovasi dengan AI — 15 Learning Hours</div><div class="cert-issuer">Kemenpora &amp; PLAN International · ADB google.org</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.07s;"><div class="cert-icon" style="background:rgba(104,211,145,0.12);">📜</div><div class="cert-body"><div class="cert-title">Media Video Pembelajaran</div><div class="cert-issuer">Wajar.id · Universitas Pendidikan Indonesia</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.14s;"><div class="cert-icon" style="background:rgba(159,122,234,0.12);">📜</div><div class="cert-body"><div class="cert-title">Mendesain Rencana Pembelajaran Mendalam dengan Integrasi AI</div><div class="cert-issuer">Diklat Online · PT Sumber Belajar Bersama</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.21s;"><div class="cert-icon" style="background:rgba(246,224,94,0.12);">📜</div><div class="cert-body"><div class="cert-title">Peningkatan Kompetensi Siswa — Literasi &amp; Numerasi</div><div class="cert-issuer">Edukarya</div></div></div>
+    <div class="cert-card fade-in" data-editable="" onclick="editCertCard(this)" style="transition-delay: 0.28s;"><div class="cert-icon" style="background:rgba(246,173,85,0.12);">📜</div><div class="cert-body"><div class="cert-title">Content Marketing Basic</div><div class="cert-issuer">Great Learning</div></div></div>
   </div>
   <button class="btn-add-card" onclick="addCert()">+ Tambah Sertifikat</button>
 </section>
 
 <!-- ORGANISATIONS -->
 <section id="organisations">
-  <div class="section-header fade-in">
+  <div class="section-header fade-in" style="transition-delay: 0s;">
     <div class="section-tag">// Leadership &amp; Volunteering</div>
     <h2 class="section-title">Organisasi &amp; <span>Relawan</span></h2>
   </div>
   <div class="org-grid" id="orgGrid">
-    <div class="org-card fade-in" data-editable onclick="editOrgCard(this)">
+    <div class="org-card fade-in" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.07s;">
       <div class="org-role">Sekretaris</div><div class="org-name">DPC Forum Relawan Demokrasi (Foreder)</div><div class="org-period">Maret 2025 – Sekarang</div>
       <ul class="org-duties"><li>Mengelola administrasi organisasi, surat-menyurat, pendataan, arsip.</li><li>Menyusun notulen rapat dan laporan kegiatan secara sistematis.</li><li>Mengatur komunikasi dan koordinasi antara pengurus, anggota, dan pihak eksternal.</li></ul>
     </div>
-    <div class="org-card fade-in" data-editable onclick="editOrgCard(this)">
+    <div class="org-card fade-in" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.14s;">
       <div class="org-role">Pengurus</div><div class="org-name">Forum Mahasiswa Cianjur (Formaci)</div><div class="org-period">Maret 2024 – Juli 2025</div>
       <ul class="org-duties"><li>Perencanaan dan pelaksanaan kegiatan organisasi mahasiswa daerah.</li><li>Koordinasi pembagian tugas dan pelaksanaan program kerja.</li><li>Mengembangkan kemampuan kerja sama tim dan komunikasi.</li></ul>
     </div>
-    <div class="org-card fade-in" data-editable onclick="editOrgCard(this)">
+    <div class="org-card fade-in" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.21s;">
       <div class="org-role">Staff BP2</div><div class="org-name">Hima Tekpend — Himpunan Mahasiswa Teknologi Pendidikan</div><div class="org-period">Okt 2023 – Juli 2024</div>
       <ul class="org-duties"><li>Kontribusi dalam kegiatan pengabdian masyarakat.</li><li>Mendukung program kerja bidang pendidikan dan sosial.</li><li>Kolaborasi persiapan dan pelaksanaan kegiatan edukatif.</li></ul>
     </div>
-    <div class="org-card fade-in" data-editable onclick="editOrgCard(this)">
+    <div class="org-card fade-in" data-editable="" onclick="editOrgCard(this)" style="transition-delay: 0.28s;">
       <div class="org-role">Volunteer</div><div class="org-name">Growth Camp</div><div class="org-period">Nov 2024</div>
       <ul class="org-duties"><li>Mendukung kegiatan pengembangan diri dan pendidikan peserta.</li><li>Kolaborasi bersama panitia dan volunteer dalam pelaksanaan.</li><li>Mendampingi peserta selama kegiatan berlangsung.</li></ul>
     </div>
@@ -423,10 +422,10 @@
 
 <!-- CONTACT CTA -->
 <section id="contact">
-  <div class="cta-box fade-in">
-    <div class="cta-title" data-editable onclick="editSimple(this,'Judul CTA','ctaTitle')">Mari Berkolaborasi 🚀</div>
-    <p class="cta-sub" data-editable onclick="editSimple(this,'Sub-judul CTA','ctaSub')">Saya terbuka untuk peluang kerja, magang, freelance, atau kolaborasi proyek.</p>
-    <span class="cta-email" id="ctaEmailDisplay" data-editable onclick="editSimple(this,'Email CTA','ctaEmailDisplay')">mohamad.rasya.sath@gmail.com</span>
+  <div class="cta-box fade-in" style="transition-delay: 0s;">
+    <div class="cta-title" data-editable="" onclick="editSimple(this,'Judul CTA','ctaTitle')">Mari Berkolaborasi 🚀</div>
+    <p class="cta-sub" data-editable="" onclick="editSimple(this,'Sub-judul CTA','ctaSub')">Saya terbuka untuk peluang kerja, magang, freelance, atau kolaborasi proyek.</p>
+    <span class="cta-email" id="ctaEmailDisplay" data-editable="" onclick="editSimple(this,'Email CTA','ctaEmailDisplay')">mohamad.rasya.sath@gmail.com</span>
     <div class="cta-actions">
       <a id="ctaBtnEmail2" href="mailto:mohamad.rasya.sath@gmail.com" class="btn-primary">Kirim Email</a>
       <a href="tel:+6285215551314" class="btn-outline">Hubungi via WA</a>
@@ -435,8 +434,8 @@
 </section>
 
 <footer>
-  <div class="footer-name" data-editable onclick="editSimple(this,'Footer Nama','footerName')">© 2025 Mohamad Rasya Sathia</div>
-  <div class="footer-note" data-editable onclick="editSimple(this,'Footer Catatan','footerNote')">Built with ❤ · Teknologi Pendidikan UPI · Open to Opportunities</div>
+  <div class="footer-name" data-editable="" onclick="editSimple(this,'Footer Nama','footerName')">© 2025 Mohamad Rasya Sathia</div>
+  <div class="footer-note" data-editable="" onclick="editSimple(this,'Footer Catatan','footerNote')">Built with ❤ · Teknologi Pendidikan UPI · Open to Opportunities</div>
 </footer>
 
 <!-- LOGIN MODAL -->
@@ -444,10 +443,10 @@
   <div id="loginBox">
     <h3>🔐 Owner Login</h3>
     <p>Masukkan password untuk mengaktifkan mode edit</p>
-    <input type="password" id="loginInput" placeholder="Masukkan password..." onkeydown="if(event.key==='Enter')submitLogin()" />
+    <input type="password" id="loginInput" placeholder="Masukkan password..." onkeydown="if(event.key==='Enter')submitLogin()">
     <div id="loginError"></div>
     <button id="loginSubmitBtn" onclick="submitLogin()">Masuk</button>
-    <br/>
+    <br>
     <button id="loginCancelBtn" onclick="closeLoginModal()">Batal</button>
   </div>
 </div>
@@ -455,8 +454,8 @@
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modalBox">
-    <h3><span id="modalIcon">✏</span> <span id="modalTitle">Edit</span></h3>
-    <div id="modalFields"></div>
+    <h3><span id="modalIcon">📊</span> <span id="modalTitle">Edit Statistik</span></h3>
+    <div id="modalFields"><div class="field-group"><label>Angka / Nilai</label><input type="text" id="statVal" value="3+"></div><div class="field-group"><label>Label</label><input type="text" id="statLab" value="Pengalaman Kerja"></div></div>
     <div class="modal-actions">
       <button class="btn-danger" id="modalDeleteBtn" style="display:none" onclick="deleteCard()">Hapus</button>
       <button class="btn-cancel" onclick="closeModal()">Batal</button>
@@ -1025,5 +1024,6 @@ document.querySelectorAll('.fade-in').forEach((el, i) => {
   observer.observe(el);
 });
 </script>
-</body>
-</html>
+
+
+<div id="saveToast" style="position: fixed; bottom: 28px; right: 28px; z-index: 9999; padding: 13px 20px; border-radius: 10px; font-size: 0.84rem; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: rgba(0, 0, 0, 0.45) 0px 8px 24px; transition: opacity 0.4s; background: rgb(26, 34, 53); border: 1px solid rgba(99, 179, 237, 0.4); color: rgb(99, 179, 237);">⏳ Menyimpan perubahan ke GitHub...</div></body></html>
