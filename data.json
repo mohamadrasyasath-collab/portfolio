@@ -1,241 +1,135 @@
 {
-  "ctaSub": "Saya terbuka untuk peluang kerja, magang, freelance, atau kolaborasi proyek.",
-  "certificates": [
-    {
-      "icon": "🏅",
-      "issuer": "Credly · IBM SkillsBuild",
-      "title": "Getting Started with Data"
-    },
-    {
-      "icon": "🏅",
-      "issuer": "IBM SkillsBuild",
-      "title": "Classifying Data Using IBM Granite"
-    },
-    {
-      "icon": "🏅",
-      "issuer": "IBM SkillsBuild",
-      "title": "Unleashing the Power of AI Agents"
-    },
-    {
-      "icon": "🌟",
-      "issuer": "Kemenpora & PLAN International · ADB google.org",
-      "title": "Berinovasi dengan AI — 15 Learning Hours"
-    },
-    {
-      "icon": "📜",
-      "issuer": "Wajar.id · Universitas Pendidikan Indonesia",
-      "title": "Media Video Pembelajaran"
-    },
-    {
-      "icon": "📜",
-      "issuer": "Diklat Online · PT Sumber Belajar Bersama",
-      "title": "Mendesain Rencana Pembelajaran Mendalam dengan Integrasi AI"
-    },
-    {
-      "icon": "📜",
-      "issuer": "Edukarya",
-      "title": "Peningkatan Kompetensi Siswa — Literasi & Numerasi"
-    },
-    {
-      "icon": "📜",
-      "issuer": "Great Learning",
-      "title": "Content Marketing Basic"
-    }
-  ],
-  "eduUniversity": "Universitas Pendidikan Indonesia",
-  "stat2val": "10+",
-  "stat3val": "7+",
-  "heroRole": "Instructional Designer & AI Enthusiast · Data Analyst · Content Strategist",
-  "skills": [
-    {
-      "icon": "🎓",
-      "name": "Instructional Designer",
-      "level": "Expert"
-    },
-    {
-      "icon": "🤖",
-      "name": "AI & Prompt Engineering",
-      "level": "Advanced"
-    },
-    {
-      "icon": "📊",
-      "name": "Data Analyst",
-      "level": "Intermediate"
-    },
-    {
-      "icon": "📱",
-      "name": "Social Media Management",
-      "level": "Advanced"
-    },
-    {
-      "icon": "✍️",
-      "name": "Copywriting & Content",
-      "level": "Advanced"
-    },
-    {
-      "icon": "📈",
-      "name": "Digital Content Marketing",
-      "level": "Intermediate"
-    },
-    {
-      "icon": "🗂️",
-      "name": "Project Management",
-      "level": "Intermediate"
-    },
-    {
-      "icon": "🔍",
-      "name": "Research & Documentation",
-      "level": "Advanced"
-    },
-    {
-      "icon": "💼",
-      "name": "Microsoft Office Suite",
-      "level": "Proficient"
-    },
-    {
-      "icon": "🧩",
-      "name": "Problem Solving",
-      "level": "Strong"
-    },
-    {
-      "icon": "🤝",
-      "name": "Team Collaboration",
-      "level": "Strong"
-    }
-  ],
-  "footerName": "© 2025 Mohamad Rasya Sathia",
-  "eduDegree": "S1 Teknologi Pendidikan",
-  "stat3lab": "Projek Akademik",
-  "projects": [
-    {
-      "title": "Efektivitas Penggunaan Boardgame Interaktif \"SAMUDRAKSI\" Untuk Meningkatkan Keterlibatan Siswa Dalam Pembelajaran IPS di Kelas VIII MTs.",
-      "tag": "Research & Development",
-      "year": "2026"
-    },
-    {
-      "title": "Evaluasi Perilaku Belajar Peserta Didik Kelas XII Ditinjau dari Sudut Pandang Teori Behaviorisme.",
-      "tag": "Educational Evaluation",
-      "year": "2025"
-    },
-    {
-      "title": "Desain Program Pelatihan Yogya Group",
-      "tag": "Instructional Design",
-      "year": "2024"
-    },
-    {
-      "title": "Analisis Kinerja dan Intervensi Pada Organisasi Gerakan Mengajar Desa",
-      "tag": "Org. Performance Analysis",
-      "year": "2024"
-    },
-    {
-      "title": "Analisis Sistem Informasi Manajemen Penjualan Pada Liana Swalayan",
-      "tag": "Data & MIS Analysis",
-      "year": "2024"
-    },
-    {
-      "title": "Efektivitas Video Pembelajaran Nama-Nama Planet di Tata Surya Pada Anak Usia Dini TK Binekas PGRI",
-      "tag": "Media Evaluation",
-      "year": "2023"
-    },
-    {
-      "title": "Pembuatan Media Pembelajaran Interaktif Berbasis Articulate Storyline 3 — \"Mengenal Flora & Fauna di Indonesia\"",
-      "tag": "Interactive Learning Media",
-      "year": "2023"
-    }
-  ],
-  "stat1val": "3.73",
-  "organisations": [
-    {
-      "duties": [
-        "Mengelola administrasi organisasi, surat-menyurat, pendataan, arsip.",
-        "Menyusun notulen rapat dan laporan kegiatan secara sistematis.",
-        "Mengatur komunikasi dan koordinasi antara pengurus, anggota, dan pihak eksternal."
-      ],
-      "name": "DPC Forum Relawan Demokrasi (Foreder)",
-      "period": "Maret 2025 – Sekarang",
-      "role": "Sekretaris"
-    },
-    {
-      "duties": [
-        "Perencanaan dan pelaksanaan kegiatan organisasi mahasiswa daerah.",
-        "Koordinasi pembagian tugas dan pelaksanaan program kerja.",
-        "Mengembangkan kemampuan kerja sama tim dan komunikasi."
-      ],
-      "name": "Forum Mahasiswa Cianjur (Formaci)",
-      "period": "Maret 2024 – Juli 2025",
-      "role": "Pengurus"
-    },
-    {
-      "duties": [
-        "Kontribusi dalam kegiatan pengabdian masyarakat.",
-        "Mendukung program kerja bidang pendidikan dan sosial.",
-        "Kolaborasi persiapan dan pelaksanaan kegiatan edukatif."
-      ],
-      "name": "Hima Tekpend — Himpunan Mahasiswa Teknologi Pendidikan",
-      "period": "Okt 2023 – Juli 2024",
-      "role": "Staff BP2"
-    },
-    {
-      "duties": [
-        "Mendukung kegiatan pengembangan diri dan pendidikan peserta.",
-        "Kolaborasi bersama panitia dan volunteer dalam pelaksanaan.",
-        "Mendampingi peserta selama kegiatan berlangsung."
-      ],
-      "name": "Growth Camp",
-      "period": "Nov 2024",
-      "role": "Volunteer"
-    }
-  ],
-  "eduPeriod": "2022 — 2026",
-  "heroCity": "Cianjur, Jawa Barat",
-  "stat4lab": "Sertifikat",
-  "heroPhone": "+62 852 1555 1314",
-  "heroName2": "Rasya Sathia",
-  "heroDesc": "Lulusan S1 Teknologi Pendidikan UPI (IPK 3.73/4.00) dengan keahlian di bidang Instructional Design, Artificial Intelligence, Social Media Management, dan Data Analytics. Berpengalaman lintas sektor: pendidikan, perusahaan, dan organisasi. Cepat beradaptasi, sistematis, dan berorientasi pada hasil.",
-  "heroEmail": "mohamad.rasya.sath@gmail.com",
+  "heroTag": "Open to Work — Full-time / Internship",
   "heroName1": "Mohamad",
-  "eduStatus": "Lulus 🎓",
-  "stat2lab": "Pengalaman Kerja",
-  "stat1lab": "IPK / 4.00",
-  "eduGpa": "3.73",
+  "heroName2": "Rasya Sathia",
+  "heroRole": "Instructional Designer · AI Enthusiast · Data Analyst · Content Strategist",
+  "heroDesc": "Lulusan S1 Teknologi Pendidikan UPI (IPK 3.73/4.00) dengan keahlian di bidang Instructional Design, Artificial Intelligence, Social Media Management, dan Data Analytics. Berpengalaman lintas sektor: pendidikan, perusahaan, dan organisasi. Cepat beradaptasi, sistematis, dan berorientasi pada hasil.",
+  "phone": "+62 852 1555 1314",
+  "email": "mohamad.rasya.sath@gmail.com",
+  "city": "Cianjur, Jawa Barat",
+  "s1v": "3.73", "s1l": "IPK / 4.00",
+  "s2v": "3+",   "s2l": "Pengalaman Kerja",
+  "s3v": "7+",   "s3l": "Projek Akademik",
+  "s4v": "8+",   "s4l": "Sertifikat",
+  "eduUni": "Universitas Pendidikan Indonesia",
+  "eduDeg": "S1 Teknologi Pendidikan",
+  "eduYr": "2022 – 2026",
+  "eduIpk": "3.73",
+  "eduStatus": "Lulus",
+  "ctaTitle": "Mari Berkolaborasi!",
+  "ctaSub": "Saya terbuka untuk peluang kerja, magang, freelance, atau kolaborasi proyek.",
+  "ftName": "© 2025 Mohamad Rasya Sathia",
+  "ftNote": "Built with passion · Teknologi Pendidikan UPI · Open to Opportunities",
+  "skills": [
+    { "icon": "🎨", "name": "Instructional Designer", "level": "Expert" },
+    { "icon": "🤖", "name": "AI & Prompt Engineering", "level": "Advanced" },
+    { "icon": "📊", "name": "Data Analyst", "level": "Intermediate" },
+    { "icon": "📱", "name": "Social Media Management", "level": "Advanced" },
+    { "icon": "✍️", "name": "Copywriting & Content", "level": "Advanced" },
+    { "icon": "📢", "name": "Digital Content Marketing", "level": "Intermediate" },
+    { "icon": "📋", "name": "Project Management", "level": "Intermediate" },
+    { "icon": "🔍", "name": "Research & Documentation", "level": "Advanced" },
+    { "icon": "💻", "name": "Microsoft Office Suite", "level": "Proficient" },
+    { "icon": "🧩", "name": "Problem Solving", "level": "Strong" },
+    { "icon": "🤝", "name": "Team Collaboration", "level": "Strong" }
+  ],
   "experiences": [
     {
-      "duties": [
-        "Mendukung administrasi & koordinasi program pengembangan kompetensi pendidik.",
-        "Penyusunan, pengelolaan, dan dokumentasi dokumen administrasi serta laporan kegiatan.",
-        "Kolaborasi tim dalam mendukung program peningkatan mutu layanan pendidikan.",
-        "Mengolah data dan informasi sebagai bahan pendukung pelaksanaan program.",
-        "Memanfaatkan teknologi digital untuk efisiensi pengelolaan dokumen & administrasi."
-      ],
-      "company": "Dinas Pendidikan Kota Bandung",
+      "role": "Intern — Divisi P3TK",
       "period": "Nov 2025 – Juli 2026",
-      "role": "Intern — Divisi P3TK"
+      "company": "Dinas Pendidikan Kota Bandung",
+      "duties": [
+        "Mendukung pelaksanaan administrasi dan koordinasi program pengembangan kompetensi pendidik dan tenaga kependidikan.",
+        "Membantu penyusunan, pengelolaan, serta dokumentasi berbagai dokumen administrasi dan laporan kegiatan.",
+        "Berkolaborasi dengan tim dalam mendukung pelaksanaan program peningkatan mutu layanan pendidikan.",
+        "Mengolah data dan informasi sebagai bahan pendukung pelaksanaan program dan penyusunan laporan.",
+        "Memanfaatkan teknologi digital untuk meningkatkan efisiensi pengelolaan dokumen dan proses administrasi."
+      ]
     },
     {
-      "duties": [
-        "Membuat dan menjadwalkan konten untuk kebutuhan postingan media sosial (Instagram).",
-        "Riset tren aktual dan mengaplikasikannya dalam strategi konten postingan.",
-        "Riset keyword dan optimasi caption untuk peningkatan engagement.",
-        "Membantu penataan dan pelaksanaan setiap acara yang diselenggarakan."
-      ],
-      "company": "Captbooth",
+      "role": "Crew & Social Media Management",
       "period": "Jun 2025 – Sekarang",
-      "role": "Crew & Social Media Management"
+      "company": "Captbooth",
+      "duties": [
+        "Membuat dan menjadwalkan konten untuk kebutuhan postingan sosial media (Instagram).",
+        "Melakukan research terkait tren yang sedang ramai lalu mengaplikasikannya dalam postingan.",
+        "Melakukan riset keyword dan optimasi caption untuk peningkatan engagement.",
+        "Membantu dalam penataan dan pelaksanaan setiap acara yang diselenggarakan."
+      ]
     },
     {
-      "duties": [
-        "Mengelola administrasi dan dokumentasi perusahaan, termasuk surat-menyurat & arsip dokumen.",
-        "Menyiapkan dokumen perusahaan untuk mendukung kegiatan operasional dan administrasi proyek.",
-        "Menyusun laporan, proposal, dan kelengkapan administrasi proyek.",
-        "Mengelola agenda, jadwal, dan kebutuhan administratif pimpinan."
-      ],
-      "company": "CV. Dwi Aksara Mandiri",
+      "role": "Sekretaris",
       "period": "Feb 2025 – Juni 2025",
-      "role": "Sekretaris"
+      "company": "CV. Dwi Aksara Mandiri",
+      "duties": [
+        "Mengelola administrasi dan dokumentasi perusahaan, termasuk surat-menyurat, arsip, serta dokumen internal dan eksternal.",
+        "Menyiapkan dan menyusun berbagai dokumen perusahaan untuk mendukung kegiatan operasional dan administrasi proyek.",
+        "Membantu penyusunan laporan, proposal, dan kelengkapan administrasi proyek.",
+        "Mengelola agenda, jadwal, dan kebutuhan administratif pimpinan untuk memastikan kegiatan berjalan terorganisir.",
+        "Mendukung pengelolaan informasi dan data perusahaan secara sistematis dengan memanfaatkan Microsoft Office dan perangkat digital."
+      ]
     }
   ],
-  "ctaTitle": "Mari Berkolaborasi 🚀",
-  "footerNote": "Built with ❤ · Teknologi Pendidikan UPI · Open to Opportunities",
-  "stat4val": "8+",
-  "heroTag": "Open to Work · Full-time / Internship"
+  "projects": [
+    { "year": "2026", "title": "Efektivitas Penggunaan Boardgame Interaktif \"SAMUDRAKSI\" Untuk Meningkatkan Keterlibatan Siswa Dalam Pembelajaran IPS di Kelas VIII MTs.", "tag": "Research & Development" },
+    { "year": "2025", "title": "Evaluasi Perilaku Belajar Peserta Didik Kelas XII Ditinjau dari Sudut Pandang Teori Behaviorisme.", "tag": "Educational Evaluation" },
+    { "year": "2024", "title": "Desain Program Pelatihan Yogya Group", "tag": "Instructional Design" },
+    { "year": "2024", "title": "Analisis Kinerja dan Intervensi Pada Organisasi Gerakan Mengajar Desa", "tag": "Org. Performance Analysis" },
+    { "year": "2024", "title": "Analisis Sistem Informasi Manajemen Penjualan Pada Liana Swalayan", "tag": "Data & MIS Analysis" },
+    { "year": "2023", "title": "Efektivitas Video Pembelajaran Nama-Nama Planet di Tata Surya Pada Anak Usia Dini TK Binekas PGRI", "tag": "Media Evaluation" },
+    { "year": "2023", "title": "Pembuatan Media Pembelajaran Interaktif Berbasis Articulate Storyline 3 — \"Mengenal Flora dan Fauna di Indonesia Serta Keadaan Alam dan Distribusinya\"", "tag": "Interactive Learning Media" }
+  ],
+  "certificates": [
+    { "icon": "🏅", "title": "Getting Started with Data", "issuer": "Credly · IBM SkillsBuild" },
+    { "icon": "🏅", "title": "Classifying Data Using IBM Granite", "issuer": "IBM SkillsBuild" },
+    { "icon": "🏅", "title": "Unleashing the Power of AI Agents", "issuer": "IBM SkillsBuild" },
+    { "icon": "🏅", "title": "Berinovasi dengan AI — 15 Learning Hours", "issuer": "Kemenpora & PLAN International · ADB google.org" },
+    { "icon": "🏅", "title": "Media Video Pembelajaran", "issuer": "Wajar.id · Universitas Pendidikan Indonesia" },
+    { "icon": "🏅", "title": "Mendesain Rencana Pembelajaran Mendalam dengan Integrasi AI", "issuer": "Diklat Online · PT Sumber Belajar Bersama" },
+    { "icon": "🏅", "title": "Peningkatan Kompetensi Siswa — Literasi & Numerasi Pembelajaran Mendalam", "issuer": "Edukarya" },
+    { "icon": "🏅", "title": "Content Marketing Basic", "issuer": "Great Learning" }
+  ],
+  "organisations": [
+    {
+      "role": "Sekretaris",
+      "name": "DPC Forum Relawan Demokrasi (Foreder)",
+      "period": "Maret 2025 – Sekarang",
+      "duties": [
+        "Mengelola administrasi organisasi, termasuk surat-menyurat, pendataan, arsip, dan dokumentasi kegiatan.",
+        "Menyusun serta mengelola dokumen organisasi, notulen rapat, dan laporan kegiatan secara sistematis.",
+        "Mengatur komunikasi dan koordinasi antara pengurus, anggota, serta pihak eksternal terkait pelaksanaan kegiatan.",
+        "Mendukung perencanaan dan pelaksanaan program organisasi melalui koordinasi administrasi dan kebutuhan kegiatan."
+      ]
+    },
+    {
+      "role": "Pengurus",
+      "name": "Forum Mahasiswa Cianjur (Formaci)",
+      "period": "Maret 2024 – Juli 2025",
+      "duties": [
+        "Berpartisipasi dalam perencanaan dan pelaksanaan kegiatan organisasi.",
+        "Berkoordinasi dengan anggota dalam pembagian tugas dan pelaksanaan program.",
+        "Mengembangkan kemampuan kerja sama tim, komunikasi, koordinasi, dan tanggung jawab."
+      ]
+    },
+    {
+      "role": "Staff BP2",
+      "name": "Himpunan Mahasiswa Teknologi Pendidikan (Hima Tekpend)",
+      "period": "Okt 2023 – Juli 2024",
+      "duties": [
+        "Berkontribusi dalam pelaksanaan kegiatan pengabdian masyarakat.",
+        "Mendukung program kerja di bidang pendidikan dan sosial.",
+        "Berkolaborasi dalam persiapan dan pelaksanaan kegiatan edukatif."
+      ]
+    },
+    {
+      "role": "Volunteer",
+      "name": "Growth Camp",
+      "period": "November 2024",
+      "duties": [
+        "Mendukung pelaksanaan kegiatan pengembangan diri dan pendidikan peserta.",
+        "Berkolaborasi dengan panitia dan volunteer dalam pelaksanaan kegiatan.",
+        "Mendampingi peserta selama kegiatan berlangsung."
+      ]
+    }
+  ]
 }
