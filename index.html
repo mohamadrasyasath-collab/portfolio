@@ -344,145 +344,248 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:20px 6vw;
 // ═══════════════════════════════════════════════════════
 //  KONFIGURASI
 // ═══════════════════════════════════════════════════════
-var REPO      = 'mohamadrasyasath-collab/portfolio';
-var DATA_FILE = 'data.json';
-// GH_API  : selalu real-time, tidak ada CDN cache
-// GH_PAGES: hanya fallback awal jika belum login (boleh sedikit stale)
-var GH_API    = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE;
-var GH_PAGES  = 'https://mohamadrasyasath-collab.github.io/portfolio/data.json';
-var PWD_HASH  = '66379381072837118bb70c6ebacd120536732f7364000fc73459d9dd7bec190f';
-var SES_KEY   = 'pf_ses';
-var TOK_KEY   = 'pf_tok';
+var REPO     = 'mohamadrasyasath-collab/portfolio';
+var GH_API   = 'https://api.github.com/repos/' + REPO + '/contents/data.json';
+var PWD_HASH = '66379381072837118bb70c6ebacd120536732f7364000fc73459d9dd7bec190f';
+var SES_KEY  = 'pf_ses';
+var TOK_KEY  = 'pf_tok';
+// localStorage key: data portfolio tersimpan di sini setiap kali disimpan
+// → saat refresh, data dibaca dari sini dulu (INSTAN, tidak perlu network)
+var DATA_KEY = 'pf_data_v2';
 
 // ═══════════════════════════════════════════════════════
 //  STATE
 // ═══════════════════════════════════════════════════════
-var D = {};            // semua data portfolio
-var editMode = false;  // true = owner aktif edit
-var _cbSave = null;    // callback saat modal Simpan diklik
-var _cbDel  = null;    // callback saat modal Hapus diklik
+var D = {};
+var editMode = false;
+var _cbSave  = null;
+var _cbDel   = null;
 
 // ═══════════════════════════════════════════════════════
-//  LOAD DATA
-//  Strategi:
-//  1. Coba GitHub API dulu (selalu real-time, tidak ada CDN cache).
-//  2. Jika API gagal (misal: rate limit tanpa token), fallback ke GitHub Pages.
-//  Ini memastikan data yang ditampilkan selalu yang terbaru dari repo.
+//  DATA DEFAULT (fallback jika localStorage kosong)
+// ═══════════════════════════════════════════════════════
+var DEFAULT_DATA = {
+  heroTag:'Open to Work \u2014 Full-time / Internship',
+  heroName1:'Mohamad', heroName2:'Rasya Sathia',
+  heroRole:'Instructional Designer \u00b7 AI Enthusiast \u00b7 Data Analyst \u00b7 Content Strategist',
+  heroDesc:'Lulusan S1 Teknologi Pendidikan UPI (IPK 3.73/4.00) dengan keahlian di bidang Instructional Design, Artificial Intelligence, Social Media Management, dan Data Analytics. Berpengalaman lintas sektor: pendidikan, perusahaan, dan organisasi. Cepat beradaptasi, sistematis, dan berorientasi pada hasil.',
+  phone:'+62 852 1555 1314', email:'mohamad.rasya.sath@gmail.com', city:'Cianjur, Jawa Barat',
+  s1v:'3.73',s1l:'IPK / 4.00', s2v:'3+',s2l:'Pengalaman Kerja', s3v:'7+',s3l:'Projek Akademik', s4v:'8+',s4l:'Sertifikat',
+  eduUni:'Universitas Pendidikan Indonesia', eduDeg:'S1 Teknologi Pendidikan',
+  eduYr:'2022 \u2013 2026', eduIpk:'3.73', eduStatus:'Lulus',
+  ctaTitle:'Mari Berkolaborasi!',
+  ctaSub:'Saya terbuka untuk peluang kerja, magang, freelance, atau kolaborasi proyek.',
+  ftName:'\u00a9 2025 Mohamad Rasya Sathia',
+  ftNote:'Built with passion \u00b7 Teknologi Pendidikan UPI \u00b7 Open to Opportunities',
+  skills:[
+    {icon:'\ud83c\udfa8',name:'Instructional Designer',level:'Expert'},
+    {icon:'\ud83e\udd16',name:'AI & Prompt Engineering',level:'Advanced'},
+    {icon:'\ud83d\udcca',name:'Data Analyst',level:'Intermediate'},
+    {icon:'\ud83d\udcf1',name:'Social Media Management',level:'Advanced'},
+    {icon:'\u270d\ufe0f',name:'Copywriting & Content',level:'Advanced'},
+    {icon:'\ud83d\udce2',name:'Digital Content Marketing',level:'Intermediate'},
+    {icon:'\ud83d\udccb',name:'Project Management',level:'Intermediate'},
+    {icon:'\ud83d\udd0d',name:'Research & Documentation',level:'Advanced'},
+    {icon:'\ud83d\udcbb',name:'Microsoft Office Suite',level:'Proficient'},
+    {icon:'\ud83e\udde9',name:'Problem Solving',level:'Strong'},
+    {icon:'\ud83e\udd1d',name:'Team Collaboration',level:'Strong'}
+  ],
+  experiences:[
+    {role:'Intern \u2014 Divisi P3TK',period:'Nov 2025 \u2013 Juli 2026',company:'Dinas Pendidikan Kota Bandung',
+     duties:['Mendukung administrasi & koordinasi program pengembangan kompetensi pendidik.','Penyusunan dan dokumentasi dokumen administrasi serta laporan kegiatan.','Kolaborasi tim dalam mendukung program peningkatan mutu layanan pendidikan.','Mengolah data dan informasi sebagai bahan pendukung pelaksanaan program.','Memanfaatkan teknologi digital untuk efisiensi pengelolaan dokumen.']},
+    {role:'Crew & Social Media Management',period:'Jun 2025 \u2013 Sekarang',company:'Captbooth',
+     duties:['Membuat dan menjadwalkan konten untuk postingan Instagram.','Research tren aktual dan mengaplikasikannya dalam strategi konten.','Riset keyword dan optimasi caption untuk peningkatan engagement.','Membantu penataan dan pelaksanaan setiap acara yang diselenggarakan.']},
+    {role:'Sekretaris',period:'Feb 2025 \u2013 Juni 2025',company:'CV. Dwi Aksara Mandiri',
+     duties:['Mengelola administrasi dan dokumentasi perusahaan termasuk surat-menyurat dan arsip.','Menyiapkan dokumen perusahaan untuk mendukung kegiatan operasional dan administrasi proyek.','Membantu penyusunan laporan, proposal, dan kelengkapan administrasi proyek.','Mengelola agenda, jadwal, dan kebutuhan administratif pimpinan.']}
+  ],
+  projects:[
+    {year:'2026',title:'Efektivitas Penggunaan Boardgame Interaktif "SAMUDRAKSI" Untuk Meningkatkan Keterlibatan Siswa Dalam Pembelajaran IPS di Kelas VIII MTs.',tag:'Research & Development'},
+    {year:'2025',title:'Evaluasi Perilaku Belajar Peserta Didik Kelas XII Ditinjau dari Sudut Pandang Teori Behaviorisme.',tag:'Educational Evaluation'},
+    {year:'2024',title:'Desain Program Pelatihan Yogya Group',tag:'Instructional Design'},
+    {year:'2024',title:'Analisis Kinerja dan Intervensi Pada Organisasi Gerakan Mengajar Desa',tag:'Org. Performance Analysis'},
+    {year:'2024',title:'Analisis Sistem Informasi Manajemen Penjualan Pada Liana Swalayan',tag:'Data & MIS Analysis'},
+    {year:'2023',title:'Efektivitas Video Pembelajaran Nama-Nama Planet di Tata Surya Pada Anak Usia Dini TK Binekas PGRI',tag:'Media Evaluation'},
+    {year:'2023',title:'Pembuatan Media Pembelajaran Interaktif Berbasis Articulate Storyline 3 \u2014 "Mengenal Flora dan Fauna di Indonesia"',tag:'Interactive Learning Media'}
+  ],
+  certificates:[
+    {icon:'\ud83c\udfc5',title:'Getting Started with Data',issuer:'Credly \u00b7 IBM SkillsBuild'},
+    {icon:'\ud83c\udfc5',title:'Classifying Data Using IBM Granite',issuer:'IBM SkillsBuild'},
+    {icon:'\ud83c\udfc5',title:'Unleashing the Power of AI Agents',issuer:'IBM SkillsBuild'},
+    {icon:'\ud83c\udfc5',title:'Berinovasi dengan AI \u2014 15 Learning Hours',issuer:'Kemenpora & PLAN International \u00b7 ADB google.org'},
+    {icon:'\ud83c\udfc5',title:'Media Video Pembelajaran',issuer:'Wajar.id \u00b7 Universitas Pendidikan Indonesia'},
+    {icon:'\ud83c\udfc5',title:'Mendesain Rencana Pembelajaran Mendalam dengan Integrasi AI',issuer:'Diklat Online \u00b7 PT Sumber Belajar Bersama'},
+    {icon:'\ud83c\udfc5',title:'Peningkatan Kompetensi Siswa \u2014 Literasi & Numerasi',issuer:'Edukarya'},
+    {icon:'\ud83c\udfc5',title:'Content Marketing Basic',issuer:'Great Learning'}
+  ],
+  organisations:[
+    {role:'Sekretaris',name:'DPC Forum Relawan Demokrasi (Foreder)',period:'Maret 2025 \u2013 Sekarang',
+     duties:['Mengelola administrasi organisasi termasuk surat-menyurat, pendataan, arsip, dan dokumentasi.','Menyusun dokumen organisasi, notulen rapat, dan laporan kegiatan secara sistematis.','Mengatur komunikasi dan koordinasi antara pengurus, anggota, serta pihak eksternal.']},
+    {role:'Pengurus',name:'Forum Mahasiswa Cianjur (Formaci)',period:'Maret 2024 \u2013 Juli 2025',
+     duties:['Berpartisipasi dalam perencanaan dan pelaksanaan kegiatan organisasi.','Berkoordinasi dengan anggota dalam pembagian tugas dan pelaksanaan program.','Mengembangkan kemampuan kerja sama tim, komunikasi, dan tanggung jawab.']},
+    {role:'Staff BP2',name:'Himpunan Mahasiswa Teknologi Pendidikan (Hima Tekpend)',period:'Okt 2023 \u2013 Juli 2024',
+     duties:['Berkontribusi dalam pelaksanaan kegiatan pengabdian masyarakat.','Mendukung program kerja di bidang pendidikan dan sosial.','Berkolaborasi dalam persiapan dan pelaksanaan kegiatan edukatif.']},
+    {role:'Volunteer',name:'Growth Camp',period:'November 2024',
+     duties:['Mendukung pelaksanaan kegiatan pengembangan diri dan pendidikan peserta.','Berkolaborasi dengan panitia dan volunteer dalam pelaksanaan kegiatan.','Mendampingi peserta selama kegiatan berlangsung.']}
+  ]
+};
+
+// ═══════════════════════════════════════════════════════
+//  LOAD DATA — localStorage FIRST
+//  Urutan prioritas:
+//  1. localStorage  → instan, tidak perlu network, TIDAK bisa stale
+//  2. GitHub API    → jika localStorage kosong (pertama kali buka)
+//  3. DEFAULT_DATA  → jika semua gagal
+//
+//  Dengan localStorage-first: refresh SELALU menampilkan data terakhir
+//  yang disimpan, karena setiap saveData() menulis ke localStorage DULU.
 // ═══════════════════════════════════════════════════════
 function loadData() {
-  // Coba via API dulu — response berisi field "content" (base64)
-  fetch(GH_API + '?_=' + Date.now(), {
-    cache: 'no-store',
-    headers: { 'Accept': 'application/vnd.github.v3+json' }
-  })
-  .then(function(r) {
-    if (!r.ok) throw new Error('api_fail');
-    return r.json();
-  })
-  .then(function(meta) {
-    // Decode base64 → JSON
-    var jsonStr = decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
-    D = JSON.parse(jsonStr);
-    renderAll();
-  })
-  .catch(function() {
-    // Fallback: baca langsung dari GitHub Pages (mungkin sedikit terlambat, tapi tetap coba)
-    fetch(GH_PAGES + '?_=' + Date.now(), { cache: 'no-store' })
-      .then(function(r) { return r.json(); })
-      .then(function(json) { D = json; renderAll(); })
-      .catch(function(e) { showToast('⚠ Gagal memuat data: ' + e.message, 'error'); });
+  // 1. Coba baca dari localStorage dulu (paling andal, tidak ada network)
+  var stored = localStorage.getItem(DATA_KEY);
+  if (stored) {
+    try {
+      D = JSON.parse(stored);
+      renderAll();
+      // Di background, sinkronkan dari GitHub jika token tersedia
+      // (agar perubahan dari device lain bisa masuk)
+      syncFromGitHub();
+      return;
+    } catch(e) {
+      // localStorage corrupt — hapus dan lanjut ke GitHub
+      localStorage.removeItem(DATA_KEY);
+    }
+  }
+
+  // 2. localStorage kosong: ambil dari GitHub API (pertama kali buka situs)
+  showToast('\u23f3 Memuat data...', 'loading');
+  fetchFromGitHub(function(data) {
+    if (data) {
+      D = data;
+      // Simpan ke localStorage agar refresh berikutnya instan
+      localStorage.setItem(DATA_KEY, JSON.stringify(D));
+      renderAll();
+      showToast('', 'loading');
+    } else {
+      // 3. Fallback ke DEFAULT_DATA jika GitHub tidak bisa diakses
+      D = JSON.parse(JSON.stringify(DEFAULT_DATA));
+      localStorage.setItem(DATA_KEY, JSON.stringify(D));
+      renderAll();
+      showToast('', 'loading');
+    }
+  });
+}
+
+// Ambil data dari GitHub API (dengan auth jika token ada, tanpa auth jika tidak)
+function fetchFromGitHub(cb) {
+  var token = localStorage.getItem(TOK_KEY) || '';
+  var hdrs  = { 'Accept': 'application/vnd.github.v3+json' };
+  if (token) hdrs['Authorization'] = 'token ' + token;
+
+  fetch(GH_API + '?_=' + Date.now(), { cache: 'no-store', headers: hdrs })
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(meta) {
+      if (!meta || !meta.content) { cb(null); return; }
+      try {
+        var json = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g,'')))));
+        cb(json);
+      } catch(e) { cb(null); }
+    })
+    .catch(function() { cb(null); });
+}
+
+// Sinkronisasi background dari GitHub (jika ada perubahan dari device lain)
+function syncFromGitHub() {
+  var token = localStorage.getItem(TOK_KEY) || '';
+  if (!token) return; // tanpa token, skip sinkronisasi background
+  fetchFromGitHub(function(data) {
+    if (!data) return;
+    // Hanya update jika data GitHub berbeda dengan yang di localStorage
+    var localStr  = JSON.stringify(D);
+    var remoteStr = JSON.stringify(data);
+    if (localStr !== remoteStr) {
+      D = data;
+      localStorage.setItem(DATA_KEY, JSON.stringify(D));
+      renderAll();
+    }
   });
 }
 
 // ═══════════════════════════════════════════════════════
-//  SAVE DATA ke GitHub (PUT data.json)
-//  - SHA diambil fresh dari API setiap attempt
-//  - Retry 3x jika 422 SHA conflict
-//  - Setelah sukses, D sudah benar (tidak perlu reload)
+//  SAVE DATA
+//  Urutan:
+//  1. Simpan ke localStorage DULU (instan, tidak bisa gagal)
+//     → refresh setelah ini DIJAMIN menampilkan data baru
+//  2. Push ke GitHub di background (untuk permanen & backup)
+//     → jika gagal, data tetap aman di localStorage
 // ═══════════════════════════════════════════════════════
 function saveData() {
-  // 1. Pastikan token tersedia
-  var token = localStorage.getItem(TOK_KEY) || '';
-  if (!token) {
-    token = (prompt('🔑 Masukkan GitHub Personal Access Token\n(tersimpan di browser, tidak dikirim ke server lain):') || '').trim();
-    if (token.length < 10) { showToast('⚠ Token diperlukan', 'error'); return Promise.resolve(false); }
-    localStorage.setItem(TOK_KEY, token);
-  }
-
-  showToast('⏳ Menyimpan...', 'loading');
-
-  // 2. Encode D ke base64
-  var b64;
+  // LANGKAH 1: simpan ke localStorage — INSTAN, TIDAK BISA GAGAL
   try {
-    b64 = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2))));
+    localStorage.setItem(DATA_KEY, JSON.stringify(D));
   } catch(e) {
-    showToast('⚠ Encode error: ' + e.message, 'error');
+    showToast('\u26a0 Gagal simpan lokal: ' + e.message, 'error');
     return Promise.resolve(false);
   }
 
-  var authHdr = {
+  // Data sudah aman di localStorage. Tampilkan toast sukses segera.
+  showToast('\u2705 Tersimpan! Refresh aman.', 'success');
+
+  // LANGKAH 2: push ke GitHub di background (tidak perlu tunggu)
+  pushToGitHub();
+
+  return Promise.resolve(true);
+}
+
+// Push data ke GitHub secara background (tidak memblokir UI)
+function pushToGitHub() {
+  var token = localStorage.getItem(TOK_KEY) || '';
+  if (!token) {
+    token = (prompt('\ud83d\udd11 Masukkan GitHub Personal Access Token\n(disimpan di browser untuk backup permanen ke GitHub):') || '').trim();
+    if (token.length < 10) return; // skip GitHub push, data sudah aman di localStorage
+    localStorage.setItem(TOK_KEY, token);
+  }
+
+  var b64;
+  try { b64 = btoa(unescape(encodeURIComponent(JSON.stringify(D, null, 2)))); }
+  catch(e) { return; }
+
+  var hdrs = {
     'Authorization': 'token ' + token,
     'Accept': 'application/vnd.github.v3+json',
     'Content-Type': 'application/json'
   };
 
-  // 3. Fungsi satu attempt: ambil SHA baru → PUT
-  function attempt(n) {
-    // Langkah A: ambil SHA — WAJIB cache:no-store + timestamp agar tidak pernah stale
-    return fetch(GH_API + '?_=' + Date.now(), {
-      cache: 'no-store',
-      headers: {
-        'Authorization': 'token ' + token,
-        'Accept': 'application/vnd.github.v3+json',
-        'Cache-Control': 'no-cache, no-store, max-age=0'
-      }
-    })
-    .then(function(r) {
-      if (r.status === 401 || r.status === 403) {
-        localStorage.removeItem(TOK_KEY); throw new Error('TOKEN_INVALID');
-      }
-      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'SHA fetch HTTP '+r.status); });
-      return r.json();
-    })
-    .then(function(meta) {
-      if (!meta.sha) throw new Error('SHA tidak ada di response');
-      // Langkah B: PUT data baru dengan SHA yang baru saja didapat
-      return fetch(GH_API, {
-        method: 'PUT',
-        headers: authHdr,
-        body: JSON.stringify({
-          message: 'Update portfolio ' + new Date().toLocaleString('id-ID'),
-          content: b64,
-          sha: meta.sha   // SHA segar — tidak mungkin stale
-        })
+  function tryPush(attempt) {
+    fetch(GH_API + '?_=' + Date.now(), { cache: 'no-store', headers: hdrs })
+      .then(function(r) { return r.ok ? r.json() : Promise.reject('sha_fail'); })
+      .then(function(meta) {
+        if (!meta.sha) throw new Error('no_sha');
+        return fetch(GH_API, {
+          method: 'PUT', headers: hdrs,
+          body: JSON.stringify({
+            message: 'Update portfolio ' + new Date().toLocaleString('id-ID'),
+            content: b64,
+            sha: meta.sha
+          })
+        });
+      })
+      .then(function(r) {
+        if (r.status === 422 && attempt < 3) {
+          setTimeout(function() { tryPush(attempt + 1); }, 1000 * attempt);
+          return;
+        }
+        if (r.status === 401 || r.status === 403) {
+          localStorage.removeItem(TOK_KEY);
+          return;
+        }
+        // sukses — tidak perlu aksi apapun (data sudah aman di localStorage)
+      })
+      .catch(function() {
+        if (attempt < 3) setTimeout(function() { tryPush(attempt + 1); }, 1000 * attempt);
       });
-    })
-    .then(function(r) {
-      if (r.status === 422) {
-        // SHA conflict (sangat jarang karena SHA baru saja diambil) — retry
-        if (n < 3) return new Promise(function(ok) { setTimeout(function() { ok(attempt(n+1)); }, 800*n); });
-        return r.json().then(function(e) { throw new Error(e.message || 'SHA conflict setelah 3x retry'); });
-      }
-      if (r.status === 401 || r.status === 403) {
-        localStorage.removeItem(TOK_KEY); throw new Error('TOKEN_INVALID');
-      }
-      if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'PUT HTTP '+r.status); });
-      // SUKSES — D sudah berisi data terbaru (tidak perlu reload dari server)
-      showToast('✅ Tersimpan permanen! Data tidak akan balik setelah refresh.', 'success');
-      return true;
-    })
-    .catch(function(e) {
-      if (e.message === 'TOKEN_INVALID') {
-        showToast('⚠ Token tidak valid / expired. Coba lagi untuk memasukkan token baru.', 'error');
-        return false;
-      }
-      if (n < 3) return new Promise(function(ok) { setTimeout(function() { ok(attempt(n+1)); }, 700*n); });
-      showToast('⚠ Gagal simpan: ' + e.message, 'error');
-      return false;
-    });
   }
 
-  return attempt(1);
+  tryPush(1);
 }
 
 // ═══════════════════════════════════════════════════════
