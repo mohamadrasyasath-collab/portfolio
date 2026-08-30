@@ -209,7 +209,7 @@
     body.edit-mode .edit-mode-badge{display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:var(--accent);background:rgba(99,179,237,0.1);border:1px solid rgba(99,179,237,0.25);border-radius:100px;padding:3px 10px;}
   </style>
 </head>
-<body class="owner-logged-in edit-mode">
+<body class="owner-logged-in">
 
 <!-- NAV -->
 <nav>
@@ -221,7 +221,7 @@
     <a href="#contact" class="hide-mobile">Contact</a>
     <span class="edit-mode-badge">✏ Edit Mode ON</span>
     <button id="ownerLoginBtn" onclick="openLoginModal()" title="Login sebagai pemilik">🔐 Owner</button>
-    <button id="editToggleBtn" onclick="toggleEditMode()" class="active">✕ Selesai Edit</button>
+    <button id="editToggleBtn" onclick="toggleEditMode()" class="">✏ Edit Mode</button>
   </div>
 </nav>
 
@@ -235,7 +235,7 @@
     <div class="hero-contact">
       <div class="contact-chip" data-editable="" data-key="heroPhone" onclick="editSimple(this,'Nomor Telepon','heroPhone')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.07 6.07l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg>
-        <span>+62 852 1555 1314</span>
+        <span><a href="tel:+62 852 1555 1314">+62 852 1555 1314</a></span>
       </div>
       <div class="contact-chip" data-editable="" data-key="heroEmail" onclick="editSimple(this,'Email','heroEmail')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -426,12 +426,12 @@
 </section>
 
 <footer>
-  <div class="footer-name" data-editable="" onclick="editSimple(this,'Footer Nama','footerName')">© 2026 Mohamad Rasya Sathia</div>
+  <div class="footer-name" data-editable="" onclick="editSimple(this,'Footer Nama','footerName')">© 2025 Mohamad Rasya Sathia</div>
   <div class="footer-note" data-editable="" onclick="editSimple(this,'Footer Catatan','footerNote')">Built with ❤ · Teknologi Pendidikan UPI · Open to Opportunities</div>
 </footer>
 
 <!-- LOGIN MODAL -->
-<div id="loginOverlay">
+<div id="loginOverlay" class="">
   <div id="loginBox">
     <h3>🔐 Owner Login</h3>
     <p>Masukkan password untuk mengaktifkan mode edit</p>
@@ -446,10 +446,27 @@
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modalBox">
-    <h3><span id="modalIcon">✏</span> <span id="modalTitle">Footer Nama</span></h3>
-    <div id="modalFields"><div class="field-group"><label>Footer Nama</label><input type="text" id="simpleVal" value="© 2025 Mohamad Rasya Sathia"></div></div>
+    <h3><span id="modalIcon">💼</span> <span id="modalTitle">Edit Pengalaman Kerja</span></h3>
+    <div id="modalFields"><div class="field-group"><label>Jabatan / Role</label><input type="text" id="expRole" value="Sekretaris"></div><div class="field-group"><label>Periode (e.g. Jan 2024 – Sekarang)</label><input type="text" id="expPeriod" value="Feb 2025 – Juni 2025"></div><div class="field-group"><label>Nama Perusahaan / Instansi</label><input type="text" id="expCompany" value="CV. Dwi Aksara Mandiri"></div><div class="field-group"><label>Deskripsi Tugas</label><div id="expDutiesContainer">
+    <div class="list-editor-item">
+      <textarea id="expDuty0">Mengelola administrasi dan dokumentasi perusahaan, termasuk surat-menyurat &amp; arsip dokumen.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div>
+    <div class="list-editor-item">
+      <textarea id="expDuty1">Menyiapkan dokumen perusahaan untuk mendukung kegiatan operasional dan administrasi proyek.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div>
+    <div class="list-editor-item">
+      <textarea id="expDuty2">Menyusun laporan, proposal, dan kelengkapan administrasi proyek.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div>
+    <div class="list-editor-item">
+      <textarea id="expDuty3">Mengelola agenda, jadwal, dan kebutuhan administratif pimpinan.</textarea>
+      <button class="btn-remove-item" onclick="removeListItem(this)">✕</button>
+    </div></div>
+    <button class="btn-add-item" onclick="addDutyField('expDutiesContainer','expDuty')">+ Tambah Tugas</button></div></div>
     <div class="modal-actions">
-      <button class="btn-danger" id="modalDeleteBtn" style="display: none;" onclick="deleteCard()">Hapus</button>
+      <button class="btn-danger" id="modalDeleteBtn" style="display: inline-flex;" onclick="deleteCard()">Hapus</button>
       <button class="btn-cancel" onclick="closeModal()">Batal</button>
       <button class="btn-save" onclick="saveModal()">Simpan</button>
     </div>
@@ -460,7 +477,7 @@
 <div id="publishBar" class="show">
   <p><strong>Ada perubahan belum dipublish.</strong> Klik Publish untuk update portfolio online.</p>
   <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-    <span id="publishStatus" style="color: rgb(104, 211, 145);"></span>
+    <span id="publishStatus"></span>
     <button class="btn-publish" id="publishBtn" onclick="publishToGitHub()" disabled="">⏳ Mengirim...</button>
   </div>
 </div>
@@ -1009,44 +1026,6 @@ document.querySelectorAll('.fade-in').forEach((el, i) => {
   el.style.transitionDelay = (i % 5) * 0.07 + 's';
   observer.observe(el);
 });
-</script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
 </script>
 
 
